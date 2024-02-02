@@ -171,12 +171,4 @@ public class Player : MonoBehaviour
         timeWalk = walkKooldown;
         animatorContoller.Play("Walk_Left");
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Sand_Surface")
-        {
-            
-        }
-    }
 }

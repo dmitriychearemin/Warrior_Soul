@@ -23,13 +23,21 @@ public class HitPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
        // if (HP <= 0)
+=======
+        //if (HP <= 0)
+>>>>>>> Stashed changes
             //LoadSceneLose();
         Debug.Log($"{count_Cycles} and {Take_Damage}");
         if (Take_Damage == false)
         {
             count_Cycles++;
+<<<<<<< Updated upstream
             if (count_Cycles >= 80)
+=======
+            if (count_Cycles >= 90)
+>>>>>>> Stashed changes
             {
                 Take_Damage = true;
                 count_Cycles = 0;
@@ -41,10 +49,14 @@ public class HitPoint : MonoBehaviour
     {
         /*if (collision.gameObject.CompareTag("DieSpace"))
             StartCoroutine(DamageSpace());*/
+<<<<<<< Updated upstream
         //Debug.Log("Text" + count_Cycles);
+=======
+>>>>>>> Stashed changes
         if (Take_Damage)
         {
-            if (collision.gameObject.CompareTag("Enemy"))
+            //if (collision.gameObject.CompareTag("Enemy"))
+            if(collision.transform.tag == "Enemy")
             {
                 HP -= 35;
                 HealphBar.fillAmount = HP / MaxHP;
