@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 617172616947086559}
   - component: {fileID: 8144337146194542845}
-  - component: {fileID: -564391860010598233}
+  - component: {fileID: -2491597642251233942}
   m_Layer: 0
   m_Name: Sand 1
   m_TagString: Sand_Surface
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &-564391860010598233
+--- !u!61 &-2491597642251233942
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
