@@ -23,13 +23,13 @@ public class HitPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (HP <= 0)
-            LoadSceneLose();
+       // if (HP <= 0)
+            //LoadSceneLose();
         Debug.Log($"{count_Cycles} and {Take_Damage}");
         if (Take_Damage == false)
         {
             count_Cycles++;
-            if (count_Cycles >= 150)
+            if (count_Cycles >= 80)
             {
                 Take_Damage = true;
                 count_Cycles = 0;
