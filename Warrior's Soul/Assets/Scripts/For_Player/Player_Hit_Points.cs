@@ -9,7 +9,7 @@ public class HitPoint : MonoBehaviour
     public Image HealphBar;
     public Image HealphBarBackground;
     public float MaxHP = 100;
-    private float HP;
+    public float HP;
 
     public GameObject Player;
     private bool Take_Damage = true;
@@ -24,7 +24,7 @@ public class HitPoint : MonoBehaviour
     void Update()
     {
         if (HP <= 0)
-            LoadSceneLose();
+            //LoadSceneLose();
 
         if (Take_Damage == false)
         {
@@ -39,9 +39,9 @@ public class HitPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("DieSpace"))
-            StartCoroutine(DamageSpace());
-
+        /*if (collision.gameObject.CompareTag("DieSpace"))
+            StartCoroutine(DamageSpace());*/
+        Debug.Log("Text" + count_Cycles);
         if (Take_Damage)
         {
             if (collision.gameObject.CompareTag("Enemy"))
@@ -51,14 +51,14 @@ public class HitPoint : MonoBehaviour
                 Take_Damage = false;
             }
         }
-        if (collision.CompareTag("Finish"))
-            LoadSceneWin();
+       // if (collision.CompareTag("Finish"))
+            //LoadSceneWin();
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    /*private void OnTriggerExit2D(Collider2D collision)
     {
         StopAllCoroutines();
-    }
+    }*/
 
     private IEnumerator DamageSpace()
     {
@@ -70,7 +70,7 @@ public class HitPoint : MonoBehaviour
         }
     }
 
-    void LoadSceneLose()
+    /*void LoadSceneLose()
     {
         SceneManager.LoadScene(1);
     }
@@ -78,5 +78,7 @@ public class HitPoint : MonoBehaviour
     void LoadSceneWin()
     {
         SceneManager.LoadScene(2);
-    }
+    }*/
+
+
 }
