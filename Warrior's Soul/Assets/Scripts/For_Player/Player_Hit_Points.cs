@@ -24,8 +24,8 @@ public class HitPoint : MonoBehaviour
     void Update()
     {
         if (HP <= 0)
-            //LoadSceneLose();
-
+            LoadSceneLose();
+        Debug.Log($"{count_Cycles} and {Take_Damage}");
         if (Take_Damage == false)
         {
             count_Cycles++;
@@ -41,7 +41,7 @@ public class HitPoint : MonoBehaviour
     {
         /*if (collision.gameObject.CompareTag("DieSpace"))
             StartCoroutine(DamageSpace());*/
-        Debug.Log("Text" + count_Cycles);
+        //Debug.Log("Text" + count_Cycles);
         if (Take_Damage)
         {
             if (collision.gameObject.CompareTag("Enemy"))
@@ -70,7 +70,7 @@ public class HitPoint : MonoBehaviour
         }
     }
 
-    /*void LoadSceneLose()
+    void LoadSceneLose()
     {
         SceneManager.LoadScene(1);
     }
@@ -78,7 +78,7 @@ public class HitPoint : MonoBehaviour
     void LoadSceneWin()
     {
         SceneManager.LoadScene(2);
-    }*/
+    }
 
 
 }
