@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Sand_Surface
+  - Enemy
+  - DieSpace
   layers:
   - Default
   - TransparentFX
