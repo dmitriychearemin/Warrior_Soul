@@ -23,8 +23,8 @@ public class HitPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (HP <= 0)
-            LoadSceneLose();
+        //if (HP <= 0)
+           // LoadSceneLose();
 
         if (Take_Damage == false)
         {
