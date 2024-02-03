@@ -10,6 +10,10 @@ public class Spawn_Tracks : MonoBehaviour
     public GameObject Track;
     public Player player;
 
+    [HideInInspector]
+    public static int trackCount = 0;
+    private List<GameObject> tracks = new List<GameObject>();
+
     private bool can_track=true;
     private int cooldown_track = 0;
 
@@ -18,7 +22,7 @@ public class Spawn_Tracks : MonoBehaviour
         if(can_track == false)
         {
             cooldown_track++;
-            if (cooldown_track >= 1500*Time.deltaTime)
+            if (cooldown_track >= 1500 * Time.deltaTime)
             {
                 can_track = true;
                 cooldown_track = 0;
@@ -34,24 +38,6 @@ public class Spawn_Tracks : MonoBehaviour
             var viewSide = player.viewSide;
             var cur_pos = new Vector3(SpawnTracks.transform.position.x, SpawnTracks.transform.position.y, 1f);
 
-            //if (viewSide == Player.ViewSide.Down_Left || viewSide == Player.ViewSide.Up_Left 
-            //    || viewSide == Player.ViewSide.Left)
-            //{
-            //    Instantiate(Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 180)));
-            //}
-            //else if (viewSide == Player.ViewSide.Down_Right || viewSide == Player.ViewSide.Up_Right 
-            //    || viewSide == Player.ViewSide.Right)
-            //{
-            //    Instantiate(Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 0)));
-            //}
-            //else if (viewSide == Player.ViewSide.OnScreen) // от нас
-            //{
-            //    Instantiate(Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 90)));
-            //}
-            //else if (viewSide == Player.ViewSide.OnMe)   // к нам
-            //{
-            //    Instantiate(Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 270)));
-            //}
             switch (viewSide)
             {
                 case Player.ViewSide.Left:
@@ -79,6 +65,7 @@ public class Spawn_Tracks : MonoBehaviour
                     Instantiate(Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 225)));
                     break;
             }
+            trackCount++;
         }
     }
 }

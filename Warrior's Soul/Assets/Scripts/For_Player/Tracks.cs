@@ -11,7 +11,7 @@ public class Tracks : MonoBehaviour
     {
         if (count_cycles>=30000* Time.deltaTime)
             StartCoroutine(FadeTracks());
-
+        
         count_cycles++;
         
         /*if(player_Rb.transform.position.x + 50 >= pos.x || player_Rb.transform.position.x - 50 <= pos.x)
