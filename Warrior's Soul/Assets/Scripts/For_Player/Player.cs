@@ -16,13 +16,15 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     Animator animatorContoller;
     float timeWalk = 0, walkKooldown = 0.08f;
+    Vector3 Default_State;
+
 
     void Start()
     {
         transform = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         animatorContoller = GetComponent<Animator>();
-
+        Default_State = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     // Update is called once per frame
@@ -152,26 +154,28 @@ public class Player : MonoBehaviour
 
    public void Walk_Move_Left()
     {
+        transform.localScale = Default_State;
         moveState = MoveState.Walk;
         //if (viewSide == ViewSide.Right)
         //{
-           // transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            viewSide = ViewSide.Left;
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+           
         //}
+        viewSide = ViewSide.Left;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Walk_Left");
+        animatorContoller.Play("Walk_Right");
+        
     }
 
    public void Walk_Move_Right()
     {
+
+        transform.localScale = Default_State;
         moveState = MoveState.Walk;
-       // if (viewSide == ViewSide.Left)
-        //{
-            //transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            viewSide = ViewSide.Right;
-       // }
+        viewSide = ViewSide.Right;
         timeWalk = walkKooldown;
         animatorContoller.Play("Walk_Right");
+       
     }
 
    public void Walk_Move_Up()
@@ -185,6 +189,7 @@ public class Player : MonoBehaviour
 
    public void Walk_Move_Down()
     {
+
         moveState = MoveState.Walk;
         viewSide = ViewSide.OnMe;
         timeWalk = walkKooldown;
@@ -193,38 +198,48 @@ public class Player : MonoBehaviour
 
     public void Walk_Move_Down_Right()
     {
+        transform.localScale = Default_State;
         moveState = MoveState.Walk;
         viewSide = ViewSide.Down_Right;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Walk_Right");
+        animatorContoller.Play("Walk_Down_Right");
+        transform.localScale = Default_State;
+
     }
 
     public void Walk_Move_Down_Left()
     {
+        transform.localScale = Default_State;
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         moveState = MoveState.Walk;
         viewSide = ViewSide.Down_Left;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Walk_Left");
+        animatorContoller.Play("Walk_Down_Right");
     }
 
     public void Walk_Move_Up_Right()
     {
+        transform.localScale = Default_State;
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         moveState = MoveState.Walk;
         viewSide = ViewSide.Up_Right;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Walk_Right");
+        animatorContoller.Play("Walk_Up_Left");
     }
 
     public void Walk_Move_Up_Left()
     {
+        transform.localScale = Default_State;
         moveState = MoveState.Walk;
         viewSide = ViewSide.Up_Left;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Walk_Left");
+        animatorContoller.Play("Walk_Up_Left");
     }
 
     public void Run_Move_Left()
     {
+        transform.localScale = Default_State;
+
         moveState = MoveState.Run;
         viewSide = ViewSide.Left;
         timeWalk = walkKooldown;
