@@ -16,45 +16,92 @@ public class Keyboard_control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        /////////////////// медленная ходьба
+
         if(Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
         {
-            player.Move_Up_Left();
+            player.Walk_Move_Up_Left();
         }
 
         else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
         {
-            player.Move_Up_Right();
+            player.Walk_Move_Up_Right();
         }
 
         else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
         {
-            player.Move_Down_Right();
+            player.Walk_Move_Down_Right();
         }
 
         else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
         {
-            player.Move_Down_Left();
+            player.Walk_Move_Down_Left();
         }
 
         else if (Input.GetKey(KeyCode.W))
         {
-            player.Move_Up();
+            player.Walk_Move_Up();
         }
 
         else if (Input.GetKey(KeyCode.A))
         {
-            player.Move_Left();
+            player.Walk_Move_Left();
         }
 
         else if (Input.GetKey(KeyCode.S))
         {
-            player.Move_Down();
+            player.Walk_Move_Down();
         }
 
         else if (Input.GetKey(KeyCode.D))
         {
-            player.Move_Right();
+            player.Walk_Move_Right();
         }
+
+        //////////////////////////////////////////////
+        /// Направление бега
+
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift))
+        {
+            player.Run_Move_Up_Left();
+        }
+
+        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift))
+        {
+            player.Run_Move_Up_Right();
+        }
+
+        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift))
+        {
+            player.Run_Move_Down_Right();
+        }
+
+        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift))
+        {
+            player.Run_Move_Down_Left();
+        }
+
+        else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
+        {
+            player.Run_Move_Up();
+        }
+
+        else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.LeftShift))
+        {
+            player.Run_Move_Left();
+        }
+
+        else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.LeftShift))
+        {
+            player.Run_Move_Down();
+        }
+
+        else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.LeftShift))
+        {
+            player.Run_Move_Right();
+        }
+
     }
 
 
