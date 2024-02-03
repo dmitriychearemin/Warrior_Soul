@@ -9,7 +9,7 @@ public class HitPoint : MonoBehaviour
     public Image HealphBar;
     public Image HealphBarBackground;
     public float MaxHP = 100;
-    private float HP;
+    public float HP;
 
     public GameObject Player;
     private bool Take_Damage = true;
@@ -29,7 +29,7 @@ public class HitPoint : MonoBehaviour
         if (Take_Damage == false)
         {
             count_Cycles++;
-            if (count_Cycles >= 150)
+            if (count_Cycles >= 80)
             {
                 Take_Damage = true;
                 count_Cycles = 0;
@@ -39,26 +39,26 @@ public class HitPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("DieSpace"))
-            StartCoroutine(DamageSpace());
+        /*if (collision.gameObject.CompareTag("DieSpace"))
+            StartCoroutine(DamageSpace());*/
 
         if (Take_Damage)
         {
-            if (collision.gameObject.CompareTag("Enemy"))
+            if(collision.gameObject.CompareTag("Enemy"))
             {
                 HP -= 35;
                 HealphBar.fillAmount = HP / MaxHP;
                 Take_Damage = false;
             }
         }
-        if (collision.CompareTag("Finish"))
-            LoadSceneWin();
+       // if (collision.CompareTag("Finish"))
+            //LoadSceneWin();
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    /*private void OnTriggerExit2D(Collider2D collision)
     {
         StopAllCoroutines();
-    }
+    }*/
 
     private IEnumerator DamageSpace()
     {
@@ -79,4 +79,6 @@ public class HitPoint : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+
+
 }

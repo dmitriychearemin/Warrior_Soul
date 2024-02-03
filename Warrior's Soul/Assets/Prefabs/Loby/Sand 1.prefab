@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -2491597642251233942}
   m_Layer: 0
   m_Name: Sand 1
-  m_TagString: Sand_Surface
+  m_TagString: Sand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

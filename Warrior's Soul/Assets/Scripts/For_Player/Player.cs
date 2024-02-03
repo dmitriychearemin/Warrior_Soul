@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     
 
     private MoveState moveState = MoveState.Idle;
-    private ViewSide viewSide = ViewSide.Right;
+    public ViewSide viewSide = ViewSide.Right;
     Transform transform;
     Rigidbody2D rb;
     Animator animatorContoller;
@@ -80,13 +80,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    enum MoveState
+    public enum MoveState
     {
         Idle,
         Walk
     }
 
-    enum ViewSide
+    public enum ViewSide
     {
         Left,
         Right,
@@ -170,13 +170,5 @@ public class Player : MonoBehaviour
         viewSide = ViewSide.Up_Left;
         timeWalk = walkKooldown;
         animatorContoller.Play("Walk_Left");
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Sand_Surface")
-        {
-            Debug.Log("Text: ");
-        }
     }
 }
