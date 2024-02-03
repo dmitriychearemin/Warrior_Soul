@@ -18,7 +18,7 @@ public class Spawn_Tracks : MonoBehaviour
         if(can_track == false)
         {
             cooldown_track++;
-            if (cooldown_track >= 1200*Time.deltaTime)
+            if (cooldown_track >= 1500*Time.deltaTime)
             {
                 can_track = true;
                 cooldown_track = 0;
@@ -58,7 +58,7 @@ public class Spawn_Tracks : MonoBehaviour
                     Instantiate(Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 180)));
                     break;
                 case Player.ViewSide.Right:
-                    Instantiate(Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 180)));
+                    Instantiate(Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 0)));
                     break;
                 case Player.ViewSide.OnScreen:
                     Instantiate(Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 90)));
