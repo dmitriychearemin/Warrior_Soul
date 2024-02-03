@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Hierarchy
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 64
+  controlID: 68
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 65
+  controlID: 69
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 66
+  controlID: 70
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -367,9 +367,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 689e413f93ea8ae488ae0eddfce49722, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 8c07d346ce8a8dd4ba75a63f0835c239, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -6916788104592851675, guid: 689e413f93ea8ae488ae0eddfce49722, type: 2}
+  - m_Target: {fileID: 6224349911905865815, guid: 8c07d346ce8a8dd4ba75a63f0835c239, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -418,7 +418,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 28270
+  m_LastSelectedObjectID: 31386
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -464,7 +464,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Loby
+    - Assets/Scripts/For_Player
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/Loby
+  - Assets/Scripts/For_Player
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "C:\\Users\\ivanr\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439
     \u0441\u0442\u043E\u043B\\\u041F\u0440\u043E\u0435\u043A\u0442\u044B \u043F\u043E
@@ -481,10 +481,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: fa7e0000
-    m_LastClickedID: 32506
-    m_ExpandedIDs: 000000004a7d00004c7d00004e7d0000507d0000527d0000547d0000567d000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 180}
+    m_SelectedIDs: 22800000
+    m_LastClickedID: 32802
+    m_ExpandedIDs: 000000006a7e00006c7e00006e7e0000707e0000727e0000747e0000767e000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -512,7 +512,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004a7d00004c7d00004e7d0000507d0000527d0000547d0000567d0000
+    m_ExpandedIDs: 000000006a7e00006c7e00006e7e0000707e0000727e0000747e0000767e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -654,7 +654,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: daecfffffaecffff92edffff14eeffff6cf0ffff74f1ffffc0f1ffff50f3ffffb6f4ffffeaf5ffff28f6ffffe2f6ffff12f7ffff98f7ffffa0f7ffffe8f8ffff1af9ffff2efaffffacfaffff16fbffff
+      m_ExpandedIDs: a4f5ffff0af6ffff40f9ffffecf9ffff16fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1034,9 +1034,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 36.847893, y: -10.606492, z: -0.22026834}
+    m_Target: {x: 26.90354, y: -11.491083, z: -0.06479965}
     speed: 2
-    m_Value: {x: 36.847893, y: -10.606492, z: -0.22026834}
+    m_Value: {x: 27.2405, y: -11.343234, z: -0.073808156}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1086,9 +1086,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 34.664917
+    m_Target: 19.118053
     speed: 2
-    m_Value: 34.664917
+    m_Value: 20.018904
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1161,7 +1161,7 @@ MonoBehaviour:
   m_UseMipMap: 0
   m_VSyncEnabled: 0
   m_Gizmos: 0
-  m_Stats: 1
+  m_Stats: 0
   m_SelectedSizes: 03000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_ZoomArea:
     m_HRangeLocked: 0

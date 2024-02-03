@@ -7,8 +7,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public float Speed_Walk=400f;
-    
+    float Speed_Walk=250f;
+    public float Default_Speed = 250;
 
     private MoveState moveState = MoveState.Idle;
     public ViewSide viewSide = ViewSide.Right;
@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
 
         if (moveState == MoveState.Walk)
         {
-         
             if(viewSide == ViewSide.Up_Right)
             {
                 rb.velocity = new Vector2(1,1) * Time.deltaTime * Speed_Walk;
@@ -70,6 +69,7 @@ public class Player : MonoBehaviour
             }
 
             timeWalk -= Time.deltaTime;
+
             if (timeWalk <= 0)
             {
                 rb.velocity = new Vector2(0,0);
@@ -78,12 +78,63 @@ public class Player : MonoBehaviour
             }
             
         }
+
+        if (moveState == MoveState.Run)
+        {
+            if (viewSide == ViewSide.Up_Right)
+            {
+                rb.velocity = new Vector2(1, 1) * Time.deltaTime * Speed_Walk*2;
+            }
+
+            if (viewSide == ViewSide.Up_Left)
+            {
+                rb.velocity = new Vector2(-1, 1) * Time.deltaTime * Speed_Walk*2;
+            }
+
+            if (viewSide == ViewSide.Down_Left)
+            {
+                rb.velocity = new Vector2(-1, -1) * Time.deltaTime * Speed_Walk*2;
+            }
+
+            if (viewSide == ViewSide.Down_Right)
+            {
+                rb.velocity = new Vector2(1, -1) * Time.deltaTime * Speed_Walk*2;
+            }
+
+            if (viewSide == ViewSide.Right)
+            {
+                rb.velocity = Vector2.right * Time.deltaTime * Speed_Walk * 2;
+            }
+            if (viewSide == ViewSide.Left)
+            {
+                rb.velocity = Vector2.left * Time.deltaTime * Speed_Walk * 2;
+            }
+            if (viewSide == ViewSide.OnMe)
+            {
+                rb.velocity = Vector2.down * Time.deltaTime * Speed_Walk * 2;
+            }
+            if (viewSide == ViewSide.OnScreen)
+            {
+                rb.velocity = Vector2.up * Time.deltaTime * Speed_Walk * 2;
+            }
+
+            timeWalk -= Time.deltaTime;
+
+            if (timeWalk <= 0)
+            {
+                rb.velocity = new Vector2(0, 0);
+                moveState = MoveState.Idle;
+                animatorContoller.Play("Idol_Animation");
+            }
+
+        }
     }
 
     public enum MoveState
     {
         Idle,
-        Walk
+        Walk,
+        Run
     }
 
     public enum ViewSide
@@ -99,7 +150,7 @@ public class Player : MonoBehaviour
 
     }
 
-   public void Move_Left()
+   public void Walk_Move_Left()
     {
         moveState = MoveState.Walk;
         //if (viewSide == ViewSide.Right)
@@ -111,7 +162,7 @@ public class Player : MonoBehaviour
         animatorContoller.Play("Walk_Left");
     }
 
-   public void Move_Right()
+   public void Walk_Move_Right()
     {
         moveState = MoveState.Walk;
        // if (viewSide == ViewSide.Left)
@@ -123,7 +174,7 @@ public class Player : MonoBehaviour
         animatorContoller.Play("Walk_Right");
     }
 
-   public void Move_Up()
+   public void Walk_Move_Up()
     {
         moveState = MoveState.Walk;
         viewSide = ViewSide.OnScreen;
@@ -132,7 +183,7 @@ public class Player : MonoBehaviour
 
     }
 
-   public void Move_Down()
+   public void Walk_Move_Down()
     {
         moveState = MoveState.Walk;
         viewSide = ViewSide.OnMe;
@@ -140,7 +191,7 @@ public class Player : MonoBehaviour
         animatorContoller.Play("Move_Down");
     }
 
-    public void Move_Down_Right()
+    public void Walk_Move_Down_Right()
     {
         moveState = MoveState.Walk;
         viewSide = ViewSide.Down_Right;
@@ -148,7 +199,7 @@ public class Player : MonoBehaviour
         animatorContoller.Play("Walk_Right");
     }
 
-    public void Move_Down_Left()
+    public void Walk_Move_Down_Left()
     {
         moveState = MoveState.Walk;
         viewSide = ViewSide.Down_Left;
@@ -156,7 +207,7 @@ public class Player : MonoBehaviour
         animatorContoller.Play("Walk_Left");
     }
 
-    public void Move_Up_Right()
+    public void Walk_Move_Up_Right()
     {
         moveState = MoveState.Walk;
         viewSide = ViewSide.Up_Right;
@@ -164,9 +215,74 @@ public class Player : MonoBehaviour
         animatorContoller.Play("Walk_Right");
     }
 
-    public void Move_Up_Left()
+    public void Walk_Move_Up_Left()
     {
         moveState = MoveState.Walk;
+        viewSide = ViewSide.Up_Left;
+        timeWalk = walkKooldown;
+        animatorContoller.Play("Walk_Left");
+    }
+
+    public void Run_Move_Left()
+    {
+        moveState = MoveState.Run;
+        viewSide = ViewSide.Left;
+        timeWalk = walkKooldown;
+        animatorContoller.Play("Walk_Left");
+    }
+
+    public void Run_Move_Right()
+    {
+        moveState = MoveState.Run;
+        viewSide = ViewSide.Right;
+        timeWalk = walkKooldown;
+        animatorContoller.Play("Walk_Right");
+    }
+
+    public void Run_Move_Up()
+    {
+        moveState = MoveState.Run;
+        viewSide = ViewSide.OnScreen;
+        timeWalk = walkKooldown;
+        animatorContoller.Play("Move_Up");
+
+    }
+
+    public void Run_Move_Down()
+    {
+        moveState = MoveState.Run;
+        viewSide = ViewSide.OnMe;
+        timeWalk = walkKooldown;
+        animatorContoller.Play("Move_Down");
+    }
+
+    public void Run_Move_Down_Right()
+    {
+        moveState = MoveState.Run;
+        viewSide = ViewSide.Down_Right;
+        timeWalk = walkKooldown;
+        animatorContoller.Play("Walk_Right");
+    }
+
+    public void Run_Move_Down_Left()
+    {
+        moveState = MoveState.Run;
+        viewSide = ViewSide.Down_Left;
+        timeWalk = walkKooldown;
+        animatorContoller.Play("Walk_Left");
+    }
+
+    public void Run_Move_Up_Right()
+    {
+        moveState = MoveState.Run;
+        viewSide = ViewSide.Up_Right;
+        timeWalk = walkKooldown;
+        animatorContoller.Play("Walk_Right");
+    }
+
+    public void Run_Move_Up_Left()
+    {
+        moveState = MoveState.Run;
         viewSide = ViewSide.Up_Left;
         timeWalk = walkKooldown;
         animatorContoller.Play("Walk_Left");
