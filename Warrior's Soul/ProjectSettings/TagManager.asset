@@ -9,6 +9,7 @@ TagManager:
   - Spawn_Track
   - Sand
   - Grace
+  - Loby_Portal
   layers:
   - Default
   - TransparentFX

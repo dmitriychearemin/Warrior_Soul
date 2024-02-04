@@ -313,4 +313,7 @@ public class Player : MonoBehaviour
         timeWalk = walkKooldown;
         animatorContoller.Play("Run_Up_Left");
     }
+
+
+
 }

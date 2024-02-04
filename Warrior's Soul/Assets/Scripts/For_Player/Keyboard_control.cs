@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Keyboard_control : MonoBehaviour
 {
-    public Player player;
+    //public 
+    Player player;
 
     // Start is called before the first frame update
     void Start()
