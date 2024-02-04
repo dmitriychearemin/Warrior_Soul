@@ -8,6 +8,7 @@ TagManager:
   - DieSpace
   - Spawn_Track
   - Sand
+  - Grace
   layers:
   - Default
   - TransparentFX
