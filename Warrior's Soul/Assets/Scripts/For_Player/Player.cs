@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
             
         }
 
-        if (moveState == MoveState.Run)
+        else if (moveState == MoveState.Run)
         {
             if (viewSide == ViewSide.Up_Right)
             {
@@ -239,67 +239,76 @@ public class Player : MonoBehaviour
     public void Run_Move_Left()
     {
         transform.localScale = Default_State;
-
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         moveState = MoveState.Run;
         viewSide = ViewSide.Left;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Walk_Left");
+        animatorContoller.Play("Run_Right");
     }
 
     public void Run_Move_Right()
     {
+        transform.localScale = Default_State;
         moveState = MoveState.Run;
         viewSide = ViewSide.Right;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Walk_Right");
+        animatorContoller.Play("Run_Right");
     }
 
     public void Run_Move_Up()
     {
+        transform.localScale = Default_State;
         moveState = MoveState.Run;
         viewSide = ViewSide.OnScreen;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Move_Up");
+        animatorContoller.Play("Run_Up");
 
     }
 
     public void Run_Move_Down()
     {
+        transform.localScale = Default_State;
         moveState = MoveState.Run;
         viewSide = ViewSide.OnMe;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Move_Down");
+        animatorContoller.Play("Run_Down");
     }
 
     public void Run_Move_Down_Right()
     {
+        transform.localScale = Default_State;
         moveState = MoveState.Run;
         viewSide = ViewSide.Down_Right;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Walk_Right");
+        animatorContoller.Play("Run_Down_Right");
     }
 
     public void Run_Move_Down_Left()
     {
+        transform.localScale = Default_State;
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         moveState = MoveState.Run;
         viewSide = ViewSide.Down_Left;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Walk_Left");
+        animatorContoller.Play("Run_Down_Right");
     }
 
     public void Run_Move_Up_Right()
     {
+        transform.localScale = Default_State;
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         moveState = MoveState.Run;
         viewSide = ViewSide.Up_Right;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Walk_Right");
+        animatorContoller.Play("Run_Up_Left");
     }
 
     public void Run_Move_Up_Left()
     {
+        transform.localScale = Default_State;
         moveState = MoveState.Run;
         viewSide = ViewSide.Up_Left;
         timeWalk = walkKooldown;
-        animatorContoller.Play("Walk_Left");
+        animatorContoller.Play("Run_Up_Left");
     }
 }
