@@ -6,18 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class HitPoint : MonoBehaviour
 {
-    public Image HealphBar;
+    [Header("UI")]
     public Image HealphBarBackground;
-    public float MaxHP = 100;
-    public float HP;
+    public Image HealphBar;
+    public Image StaminaBar;
+    public Image MagicBar;
 
-    public GameObject Player;
+    [Header("Player Stats")]
+    public float MaxHP = 100;
+    private static float HP;
+    public float MaxStamina = 100;
+    private static float Stamina;
+    private static float consumptionStamina = 35;
+    private static float replenishmentStamina = 5;
+    public Player player;
+
     private bool Take_Damage = true;
     private int count_Cycles = 0;
 
     void Start()
     {
         HP = MaxHP;
+        Stamina = MaxStamina;
+        StartCoroutine(ActionsStamina());
     }
 
     // Update is called once per frame
@@ -39,8 +50,8 @@ public class HitPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*if (collision.gameObject.CompareTag("DieSpace"))
-            StartCoroutine(DamageSpace());*/
+        if (collision.gameObject.CompareTag("DieSpace"))
+            StartCoroutine(DamageSpace());
 
         if (Take_Damage)
         {
@@ -55,10 +66,20 @@ public class HitPoint : MonoBehaviour
             //LoadSceneWin();
     }
 
-    /*private void OnTriggerExit2D(Collider2D collision)
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    StopAllCoroutines();
+    //}
+
+    public static float GetHP()
     {
-        StopAllCoroutines();
-    }*/
+        return HP;
+    }
+
+    public static float GetStamina()
+    {
+        return Stamina;
+    }
 
     private IEnumerator DamageSpace()
     {
@@ -66,6 +87,46 @@ public class HitPoint : MonoBehaviour
         {
             HP -= 5 * Time.deltaTime;
             HealphBar.fillAmount = HP / MaxHP;
+            yield return new WaitForSeconds(0.01f);
+        }
+        StopCoroutine(DamageSpace());
+    }
+
+    private IEnumerator ActionsStamina()
+    {
+        while(true) 
+        {
+            switch (player.moveState)
+            {
+                case Player.MoveState.Idle:
+                    {
+                        if (Stamina < 100 && !Input.GetKey(KeyCode.LeftShift))
+                        {
+                            Stamina += replenishmentStamina * Time.deltaTime;
+                            StaminaBar.fillAmount = Stamina / MaxStamina;
+                        }
+                        break;
+                    }
+                case Player.MoveState.Walk:
+                    {
+                        if (Stamina < 100 && !Input.GetKey(KeyCode.LeftShift))
+                        {
+                            Stamina += replenishmentStamina * Time.deltaTime;
+                            StaminaBar.fillAmount = Stamina / MaxStamina;
+                        }
+                        break;
+                    }
+                case Player.MoveState.Run:
+                    {
+                        if (Stamina > 0)
+                        {
+                            Stamina -= consumptionStamina * Time.deltaTime;
+                            StaminaBar.fillAmount = Stamina / MaxStamina;
+                            yield return new WaitForSeconds(0.01f);
+                        }
+                        break;
+                    }
+            }
             yield return new WaitForSeconds(0.01f);
         }
     }

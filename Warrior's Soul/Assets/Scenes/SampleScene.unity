@@ -60257,6 +60257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Default_Speed: 250
+  moveState: 0
   viewSide: 1
 --- !u!114 &1814768296
 MonoBehaviour:
@@ -60295,11 +60296,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b3c114181763aa4b88a718e0de13507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealphBar: {fileID: 971609688}
   HealphBarBackground: {fileID: 845573415}
+  HealphBar: {fileID: 971609688}
+  StaminaBar: {fileID: 7192005080107585231}
   MaxHP: 100
   HP: 0
-  Player: {fileID: 1814768288}
+  MaxStamina: 100
+  Stamina: 0
+  player: {fileID: 1814768295}
 --- !u!1001 &1817914530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73191,6 +73195,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 610998743}
     m_Modifications:
+    - target: {fileID: 1005787663742517486, guid: 34dc14279e754e14a9e884e24237e4ad, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005787663742517486, guid: 34dc14279e754e14a9e884e24237e4ad, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4748949926080562324, guid: 34dc14279e754e14a9e884e24237e4ad, type: 3}
       propertyPath: m_Name
       value: Stamina_Bar
@@ -73280,6 +73292,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34dc14279e754e14a9e884e24237e4ad, type: 3}
+--- !u!114 &7192005080107585231 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1005787663742517486, guid: 34dc14279e754e14a9e884e24237e4ad, type: 3}
+  m_PrefabInstance: {fileID: 7192005080107585230}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8656279979772985448
 PrefabInstance:
   m_ObjectHideFlags: 0
