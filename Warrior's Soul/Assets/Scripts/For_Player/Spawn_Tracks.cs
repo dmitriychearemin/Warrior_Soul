@@ -18,7 +18,7 @@ public class Spawn_Tracks : MonoBehaviour
     private bool can_track = true;
     private int cooldown_track = 0;
 
-    //private float count_cycles = 0; // Для будущего создания лайфтайма объектов
+    //private float count_cycles = 0; // Г„Г«Гї ГЎГіГ¤ГіГ№ГҐГЈГ® Г±Г®Г§Г¤Г Г­ГЁГї Г«Г Г©ГґГІГ Г©Г¬Г  Г®ГЎГєГҐГЄГІГ®Гў
     private const float dissapearTime = 5f;
 
     private void Update()
@@ -85,10 +85,8 @@ public class Spawn_Tracks : MonoBehaviour
                     break;
             }
             trackCount++;
-
         }
-
-        if (collision.transform.CompareTag("Grace") && can_track)
+        else if (collision.transform.CompareTag("Grace") && can_track)
         {
             can_track = false;
             var viewSide = player.viewSide;
@@ -131,10 +129,9 @@ public class Spawn_Tracks : MonoBehaviour
                     break;
             }
             trackCount++;
-
         }
     }
-
+    
     IEnumerator FadeTracks(GameObject obj)
     {
         var timer = 0f;
