@@ -83852,7 +83852,11 @@ PrefabInstance:
     - target: {fileID: 7909686150951964843, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: Menu
       value: 
+<<<<<<< HEAD
       objectReference: {fileID: 7425334111326657963, guid: cdbd3ccdc0263db4baacea864af5b5b7, type: 3}
+=======
+      objectReference: {fileID: 1746297553379778289, guid: 4194822319b3a0040a8209ee674a8633, type: 3}
+>>>>>>> b0764b5f67df99d7e67d770ebb9702e4b016dc5c
     - target: {fileID: 7909686150951964843, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: Portal
       value: 
