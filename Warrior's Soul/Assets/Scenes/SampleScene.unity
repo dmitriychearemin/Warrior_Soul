@@ -82523,19 +82523,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3975536527938919783, guid: 8d0b964df664ee14a880b420598249f0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.1163654
+      value: 1.7215985
       objectReference: {fileID: 0}
     - target: {fileID: 3975536527938919783, guid: 8d0b964df664ee14a880b420598249f0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.978093
+      value: 2.018085
       objectReference: {fileID: 0}
     - target: {fileID: 3975536527938919783, guid: 8d0b964df664ee14a880b420598249f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 128.2416
+      value: 127.06
       objectReference: {fileID: 0}
     - target: {fileID: 3975536527938919783, guid: 8d0b964df664ee14a880b420598249f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.7718
+      value: -20.85
       objectReference: {fileID: 0}
     - target: {fileID: 3975536527938919783, guid: 8d0b964df664ee14a880b420598249f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -83849,6 +83849,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7909686150951964843, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: Menu
+      value: 
+      objectReference: {fileID: 7425334111326657963, guid: cdbd3ccdc0263db4baacea864af5b5b7, type: 3}
     - target: {fileID: 7909686150951964843, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: Portal
       value: 
