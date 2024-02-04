@@ -54241,6 +54241,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 115749242619464809, guid: 403adb6b8d8c59c478230045666f7040, type: 3}
   m_PrefabInstance: {fileID: 386727664}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1410098699 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2112811101938472027, guid: 45de07da6f04b894089a7110bd367df1, type: 3}
+  m_PrefabInstance: {fileID: 2005084860610838849}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1414660260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69029,26 +69040,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6064702493452717854, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
   m_PrefabInstance: {fileID: 8957579099485799619}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1814768298
+--- !u!114 &1814768301 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1075663873814742159, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+  m_PrefabInstance: {fileID: 8957579099485799619}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1814768288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6738423f257c50146a8f6657b4c936b7, type: 3}
+  m_Script: {fileID: 11500000, guid: eae68f365a9039b4c8eb00e83da95427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealphBarBackground: {fileID: 845573415}
-  HealphBar: {fileID: 971609688}
-  StaminaBar: {fileID: 7192005080107585231}
-  MaxHP: 100
-  HP: 0
-  MaxStamina: 100
-  Stamina: 0
-  player: {fileID: 1814768295}
 --- !u!1001 &1817914530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83824,9 +83826,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4684375197335866495, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1814768301}
+    - target: {fileID: 4684375197335866495, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: MagicBar
+      value: 
+      objectReference: {fileID: 1410098699}
+    - target: {fileID: 4684375197335866495, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: HealphBar
       value: 
       objectReference: {fileID: 971609688}
+    - target: {fileID: 4684375197335866495, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: StaminaBar
+      value: 
+      objectReference: {fileID: 7192005080107585231}
     - target: {fileID: 4684375197335866495, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: HealphBarBackground
       value: 
@@ -83835,13 +83849,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7909686150951964843, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: Portal
+      value: 
+      objectReference: {fileID: 1043178906}
+    - target: {fileID: 7909686150951964843, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 610998743}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6064702493452717854, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1814768298}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
 --- !u!1001 &9060960744544366315
 PrefabInstance:

@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 1075663873814742159}
   - component: {fileID: 3503765047140263381}
   - component: {fileID: 4684375197335866495}
+  - component: {fileID: 7909686150951964843}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -291,7 +292,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7ac400d4f4ccb43b1932162b224de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &1075663873814742159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Default_Speed: 250
+  moveState: 0
   viewSide: 1
 --- !u!114 &3503765047140263381
 MonoBehaviour:
@@ -330,8 +331,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b3c114181763aa4b88a718e0de13507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealphBar: {fileID: 0}
   HealphBarBackground: {fileID: 0}
+  HealphBar: {fileID: 0}
+  StaminaBar: {fileID: 0}
+  MagicBar: {fileID: 0}
   MaxHP: 100
-  HP: 0
-  Player: {fileID: 6064702493452717854}
+  MaxStamina: 100
+  player: {fileID: 0}
+--- !u!114 &7909686150951964843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064702493452717854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6738423f257c50146a8f6657b4c936b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Menu: {fileID: 0}
+  canvas: {fileID: 0}
+  can_Create: 1
+  Portal: {fileID: 0}
