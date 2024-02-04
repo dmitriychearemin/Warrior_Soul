@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
     float Speed_Walk=250f;
     public float Default_Speed = 250;
 
-    private MoveState moveState = MoveState.Idle;
+    [HideInInspector]
+    public MoveState moveState = MoveState.Idle;
+    [HideInInspector]
     public ViewSide viewSide = ViewSide.Right;
     Transform transform;
     Rigidbody2D rb;
