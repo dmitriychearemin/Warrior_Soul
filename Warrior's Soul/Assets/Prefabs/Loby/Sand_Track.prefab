@@ -92,9 +92,8 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4854082033429241252}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb8d516d511495d4db57918121b55706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_Rb: {fileID: 0}
