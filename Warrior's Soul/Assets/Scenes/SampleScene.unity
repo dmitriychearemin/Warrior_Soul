@@ -83787,11 +83787,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2258370627443732907, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 122.75
+      value: 122.97
       objectReference: {fileID: 0}
     - target: {fileID: 2258370627443732907, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.71
+      value: -20.12
       objectReference: {fileID: 0}
     - target: {fileID: 2258370627443732907, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -83845,6 +83845,10 @@ PrefabInstance:
       propertyPath: HealphBarBackground
       value: 
       objectReference: {fileID: 845573415}
+    - target: {fileID: 5651131816522823838, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6064702493452717854, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: m_Name
       value: Player
