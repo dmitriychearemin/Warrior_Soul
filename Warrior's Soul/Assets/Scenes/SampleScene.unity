@@ -82523,19 +82523,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3975536527938919783, guid: 8d0b964df664ee14a880b420598249f0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.1163654
+      value: 1.7215985
       objectReference: {fileID: 0}
     - target: {fileID: 3975536527938919783, guid: 8d0b964df664ee14a880b420598249f0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.978093
+      value: 2.018085
       objectReference: {fileID: 0}
     - target: {fileID: 3975536527938919783, guid: 8d0b964df664ee14a880b420598249f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 128.2416
+      value: 127.06
       objectReference: {fileID: 0}
     - target: {fileID: 3975536527938919783, guid: 8d0b964df664ee14a880b420598249f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.7718
+      value: -20.85
       objectReference: {fileID: 0}
     - target: {fileID: 3975536527938919783, guid: 8d0b964df664ee14a880b420598249f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -83787,11 +83787,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2258370627443732907, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 122.75
+      value: 122.97
       objectReference: {fileID: 0}
     - target: {fileID: 2258370627443732907, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.71
+      value: -20.12
       objectReference: {fileID: 0}
     - target: {fileID: 2258370627443732907, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -83845,10 +83845,18 @@ PrefabInstance:
       propertyPath: HealphBarBackground
       value: 
       objectReference: {fileID: 845573415}
+    - target: {fileID: 5651131816522823838, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6064702493452717854, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7909686150951964843, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: Menu
+      value: 
+      objectReference: {fileID: 7425334111326657963, guid: cdbd3ccdc0263db4baacea864af5b5b7, type: 3}
     - target: {fileID: 7909686150951964843, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: Portal
       value: 
