@@ -102,7 +102,11 @@ public class HitPoint : MonoBehaviour
                     {
                         if (Stamina < 100 && !Input.GetKey(KeyCode.LeftShift))
                         {
+<<<<<<< Updated upstream
                             Stamina += replenishmentStamina * Time.deltaTime;
+=======
+                            Stamina += replenishmentStamina * 4 * Time.deltaTime;
+>>>>>>> Stashed changes
                             StaminaBar.fillAmount = Stamina / MaxStamina;
                         }
                         break;
@@ -116,6 +120,18 @@ public class HitPoint : MonoBehaviour
                         }
                         break;
                     }
+
+                case Player.MoveState.Attack:
+                    {
+                        if (Stamina > 0)
+                        {
+                            Stamina -= consumptionStamina*Time.deltaTime;
+                            StaminaBar.fillAmount = Stamina / MaxStamina;
+                            yield return new WaitForSeconds(0.01f);
+                        }
+                        break;
+                    }
+
                 case Player.MoveState.Run:
                     {
                         if (Stamina > 0)
@@ -125,6 +141,8 @@ public class HitPoint : MonoBehaviour
                             yield return new WaitForSeconds(0.01f);
                         }
                         break;
+
+                
                     }
             }
             yield return new WaitForSeconds(0.01f);

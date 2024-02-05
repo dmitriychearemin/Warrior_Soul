@@ -128,9 +128,19 @@ public class Player : MonoBehaviour
             {
                 rb.velocity = new Vector2(0, 0);
                 moveState = MoveState.Idle;
+
                 animatorContoller.Play("Idol_Animation");
             }
 
+<<<<<<< Updated upstream
+=======
+            if (timeWalk <= 0)
+            {
+                moveState = MoveState.Idle;
+                rb.velocity = new Vector2(0, 0);
+                animatorContoller.Play("Idol_Animation");
+            }
+>>>>>>> Stashed changes
         }
     }
 
@@ -316,4 +326,70 @@ public class Player : MonoBehaviour
 
 
 
+<<<<<<< Updated upstream
+=======
+    public void Attack_Up()
+    {
+        moveState = MoveState.Attack;
+        viewSide = ViewSide.OnScreen;
+        timeWalk = attackCooldown;
+        animatorContoller.Play("Attack_Up");
+    }
+
+    public void Attack_Down() 
+    {
+        moveState = MoveState.Attack;
+        viewSide = ViewSide.OnMe;
+        timeWalk = attackCooldown;
+        animatorContoller.Play("Attack_Down");
+    }
+
+    public void Attack_Up_Left()
+    {
+        transform.localScale = Default_State;
+        moveState = MoveState.Attack;
+        viewSide = ViewSide.Up_Left;
+        timeWalk = attackCooldown;
+        animatorContoller.Play("Attack_Up_Left");
+    }
+
+    public void Attack_Down_Right()
+    {
+        transform.localScale = Default_State;
+        moveState = MoveState.Attack;
+        viewSide = ViewSide.Down_Right;
+        timeWalk = attackCooldown;
+        animatorContoller.Play("Attack_Down_Right");
+        transform.localScale = Default_State;
+    }
+
+    // Some issues with viewing
+    public void Attack_Up_Right()
+    {
+        transform.localScale = Default_State;
+        transform.localScale = 
+            new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        moveState = MoveState.Attack;
+        viewSide = ViewSide.Up_Right;
+        timeWalk = attackCooldown;
+        animatorContoller.Play("Attack_Up_Left");
+    }
+
+    public void Attack_Down_Left()
+    {
+        transform.localScale = Default_State;
+        transform.localScale = 
+            new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        moveState = MoveState.Attack;
+        viewSide = ViewSide.Down_Left;
+        timeWalk = attackCooldown;
+        animatorContoller.Play("Attack_Down_Right");
+    }
+
+    public void DeadAnimation()
+    {
+        transform.localScale = Default_State;
+        animatorContoller.Play("Die_Player");
+    }
+>>>>>>> Stashed changes
 }
