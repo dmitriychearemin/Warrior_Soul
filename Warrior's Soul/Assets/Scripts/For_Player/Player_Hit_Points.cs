@@ -102,7 +102,7 @@ public class HitPoint : MonoBehaviour
                     {
                         if (Stamina < 100 && !Input.GetKey(KeyCode.LeftShift))
                         {
-                            Stamina += replenishmentStamina * Time.deltaTime;
+                            Stamina += replenishmentStamina * 2 * Time.deltaTime;
                             StaminaBar.fillAmount = Stamina / MaxStamina;
                         }
                         break;
@@ -126,6 +126,8 @@ public class HitPoint : MonoBehaviour
                         }
                         break;
                     }
+                default:
+                    break;
             }
             yield return new WaitForSeconds(0.01f);
         }
