@@ -136,6 +136,7 @@ public class Player : MonoBehaviour
 =======
             if (timeWalk <= 0)
             {
+                rb.velocity = new Vector2(0, 0);
                 moveState = MoveState.Idle;
                 rb.velocity = new Vector2(0, 0);
                 animatorContoller.Play("Idol_Animation");
