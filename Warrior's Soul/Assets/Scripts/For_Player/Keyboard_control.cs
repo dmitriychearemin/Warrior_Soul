@@ -19,6 +19,8 @@ public class Keyboard_control : MonoBehaviour
     {
         if(HitPoint.GetStamina() > 0)
         {
+            if (Input.GetKey(KeyCode.Delete))
+                player.DeadAnimation();
             //////////////////////////////////////////////
             /// Направление бега
 
@@ -102,6 +104,38 @@ public class Keyboard_control : MonoBehaviour
             else if (Input.GetKey(KeyCode.D))
             {
                 player.Walk_Move_Right();
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.UpArrow))
+            {
+                player.Attack_Up_Left();
+            }
+            else if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.UpArrow))
+            {
+                player.Attack_Up_Right();
+            }
+            else if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.LeftArrow))
+            {
+                player.Attack_Down_Left();
+            }
+            else if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow))
+            {
+                player.Attack_Down_Right();
+            }
+            else if (Input.GetKey(KeyCode.UpArrow))
+            {
+                player.Attack_Up();
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                player.Attack_Left();
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                player.Attack_Right();
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                player.Attack_Down();
             }
         }
         else
