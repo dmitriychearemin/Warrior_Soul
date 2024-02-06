@@ -11,6 +11,7 @@ TagManager:
   - Grace
   - Loby_Portal
   - Dunjeons_Doors
+  - Room
   layers:
   - Default
   - TransparentFX
