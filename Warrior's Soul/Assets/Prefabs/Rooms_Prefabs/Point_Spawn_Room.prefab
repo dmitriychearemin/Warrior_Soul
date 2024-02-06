@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8654001250837764126}
   - component: {fileID: -2269599189731619374}
+  - component: {fileID: 1704963184456745460}
   m_Layer: 0
   m_Name: Point_Spawn_Room
-  m_TagString: Untagged
+  m_TagString: Point_Spawn_Room
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,3 +78,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1704963184456745460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5439711481463633475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db205d486d2761c40ba4ca7f368bec9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 0

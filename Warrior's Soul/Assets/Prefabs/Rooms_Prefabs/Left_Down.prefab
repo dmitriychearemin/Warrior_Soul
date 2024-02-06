@@ -24889,6 +24889,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1452139076743026253}
     m_Modifications:
+    - target: {fileID: 1704963184456745460, guid: 3ccbfb9fdf4224e41a42861a87a53fe3, type: 3}
+      propertyPath: direction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5439711481463633475, guid: 3ccbfb9fdf4224e41a42861a87a53fe3, type: 3}
       propertyPath: m_Name
       value: Point_Spawn_Room
@@ -24951,6 +24955,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1452139076743026253}
     m_Modifications:
+    - target: {fileID: 1704963184456745460, guid: 3ccbfb9fdf4224e41a42861a87a53fe3, type: 3}
+      propertyPath: direction
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5439711481463633475, guid: 3ccbfb9fdf4224e41a42861a87a53fe3, type: 3}
       propertyPath: m_Name
       value: Point_Spawn_Room (1)
