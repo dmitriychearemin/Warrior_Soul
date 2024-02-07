@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     Animator animatorContoller;
     float timeWalk = 0, walkKooldown = 0.08f; 
-    private const float attackCooldown = 1.6f;
+    private const float attackCooldown = 1.4f;
     Vector3 Default_State;
 
 
