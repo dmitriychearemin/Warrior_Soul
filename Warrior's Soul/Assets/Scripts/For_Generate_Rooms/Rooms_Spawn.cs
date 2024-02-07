@@ -17,7 +17,7 @@ public class Rooms_Spawn : MonoBehaviour
     }
 
     private Rooms_Variants variants;
-    private bool Can_Spawn = true;
+    private bool Spawned = false;
     private int rand;
     private float waitTime = 3f;
 
@@ -25,7 +25,7 @@ public class Rooms_Spawn : MonoBehaviour
     {
         variants = GameObject.FindGameObjectWithTag("Room").GetComponent<Rooms_Variants>();
         Destroy(gameObject,waitTime);
-        Invoke("Spawn_Room", 0.1f);
+        Invoke("Spawn_Room", 0.2f);
     }
 
     void Update()
@@ -35,7 +35,7 @@ public class Rooms_Spawn : MonoBehaviour
 
     void Spawn_Room()
     {
-        if (Can_Spawn==true) {
+        if (Spawned==false) {
             if(direction == Direction.Up)
             {
                 rand = Random.Range(0, variants.Rooms_Up.Length);
@@ -62,30 +62,17 @@ public class Rooms_Spawn : MonoBehaviour
                 Instantiate(variants.Rooms_Right[rand], transform.position, variants.Rooms_Right[rand].transform.rotation);
 
             }
-            Can_Spawn = false;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Point_Spawn_Room") && collision.GetComponent<Rooms_Spawn>().Can_Spawn)
-        {
-            Destroy(gameObject);
-        }
-
-        if (collision.tag == "Floor1")
-        {
-            Destroy(gameObject);
+            Spawned = true;
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Point_Spawn_Room") && collision.GetComponent<Rooms_Spawn>().Can_Spawn)
+        if (collision.CompareTag("Point_Spawn_Room") && collision.GetComponent<Rooms_Spawn>().Spawned)
         {
             Destroy(gameObject);
         }
-
+            
         if (collision.tag == "Floor1")
         {
             Destroy(gameObject);
