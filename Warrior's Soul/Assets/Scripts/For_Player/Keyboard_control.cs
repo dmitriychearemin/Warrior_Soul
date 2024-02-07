@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,26 +6,25 @@ using UnityEngine;
 
 public class Keyboard_control : MonoBehaviour
 {
-    //public 
     Player player;
-    float halfScreenX = Screen.width / 2, halfScreenY = Screen.height / 2;
-    float thirdScreenX = Screen.width / 3, thirdScreenY = Screen.height / 3;
+    private float halfScreenX = Screen.width / 2, halfScreenY = Screen.height / 2;
+    private int angleCoeff = 30;
 
     // Start is called before the first frame update
     void Start()
     {
-       player = GetComponent<Player>();
+        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(HitPoint.GetStamina() > 0)
+        if (HitPoint.GetStamina() > 0)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 var mousePos = Input.mousePosition;
-                switch (GetScreenArea(Input.mousePosition)) 
+                switch (GetScreenArea(Input.mousePosition))
                 {
                     case Player.ViewSide.Up_Left:
                         player.Attack_Up_Left();
@@ -33,7 +33,7 @@ public class Keyboard_control : MonoBehaviour
                         player.Attack_Up_Right();
                         break;
                     case Player.ViewSide.OnMe:
-                        player.Attack_Up(); 
+                        player.Attack_Up();
                         break;
                     case Player.ViewSide.Left:
                         player.Attack_Left();
@@ -41,7 +41,7 @@ public class Keyboard_control : MonoBehaviour
                     case Player.ViewSide.Right:
                         player.Attack_Right();
                         break;
-                    case Player.ViewSide.Down_Left: 
+                    case Player.ViewSide.Down_Left:
                         player.Attack_Down_Left();
                         break;
                     case Player.ViewSide.Down_Right:
@@ -175,7 +175,7 @@ public class Keyboard_control : MonoBehaviour
         }
         else
         {
-             /////////////////// медленная ходьба
+            /////////////////// медленная ходьба
 
             if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
             {
@@ -221,49 +221,51 @@ public class Keyboard_control : MonoBehaviour
 
     private Player.ViewSide GetScreenArea(Vector3 mousePos)
     {
-        if(mousePos.x > 0 && mousePos.x < Screen.width 
-            && mousePos.y > 0 && mousePos.y < Screen.height)
+        float x = mousePos.x;
+        float y = mousePos.y;
+
+        float angle = (float)Math.Atan2(y - halfScreenY, x - halfScreenX) * (float)(180 / Math.PI);
+        if (angle > 0)
         {
-            if (mousePos.x <= halfScreenX && mousePos.y > halfScreenY)
+            if (angle <= 90)
             {
-                if (mousePos.x <= thirdScreenX && mousePos.y > thirdScreenY * 2)
-                    return Player.ViewSide.Up_Left;
-                else if (mousePos.y <= thirdScreenY * 2)
-                    return Player.ViewSide.Left;
-                else
+                if (angle < 45 - angleCoeff)
+                    return Player.ViewSide.Right;
+                else if (angle > 45 + angleCoeff)
                     return Player.ViewSide.OnMe;
-            }
-            else if (mousePos.x > halfScreenX && mousePos.y > halfScreenY)
-            {
-                if (mousePos.x > thirdScreenX * 2 && mousePos.y > thirdScreenY * 2)
+                else
                     return Player.ViewSide.Up_Right;
-                else if (mousePos.y <= thirdScreenY * 2)
-                    return Player.ViewSide.Right;
-                else
-                    return Player.ViewSide.OnMe;
-            }
-            else if (mousePos.x <= halfScreenX && mousePos.y <= halfScreenY)
-            {
-                if (mousePos.x <= thirdScreenX && mousePos.y <= thirdScreenY)
-                    return Player.ViewSide.Down_Left;
-                else if (mousePos.y > thirdScreenY)
-                    return Player.ViewSide.Left;
-                else
-                    return Player.ViewSide.OnScreen;
-            }
-            else if (mousePos.x > halfScreenX && mousePos.y <= halfScreenY)
-            {
-                if (mousePos.x > thirdScreenX * 2 && mousePos.y <= thirdScreenY)
-                    return Player.ViewSide.Down_Right;
-                else if (mousePos.y > thirdScreenY)
-                    return Player.ViewSide.Right;
-                else
-                    return Player.ViewSide.OnScreen;
             }
             else
-                return (Player.ViewSide)8;
+            {
+                if (angle > 135 + angleCoeff)
+                    return Player.ViewSide.Left;
+                else if (angle < 135 - 10)
+                    return Player.ViewSide.OnMe;
+                else
+                    return Player.ViewSide.Up_Left;
+            }
         }
         else
-            return (Player.ViewSide)8;
+        {
+            if (angle > -90)
+            {
+                if (angle > -45 + angleCoeff)
+                    return Player.ViewSide.Right;
+                else if (angle < -45 - angleCoeff)
+                    return Player.ViewSide.OnScreen;
+                else
+                    return Player.ViewSide.Down_Right;
+            }
+            else
+            {
+                if (angle < -135 - angleCoeff)
+                    return Player.ViewSide.Left;
+                else if (angle > -135 + angleCoeff)
+                    return Player.ViewSide.OnScreen;
+                else
+                    return Player.ViewSide.Down_Left;
+            }
+        }
     }
 }
