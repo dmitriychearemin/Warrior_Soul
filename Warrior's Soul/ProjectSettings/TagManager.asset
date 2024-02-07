@@ -13,6 +13,8 @@ TagManager:
   - Dunjeons_Doors
   - Room
   - Point_Spawn_Room
+  - Floor1
+  - Block_Wall
   layers:
   - Default
   - TransparentFX
