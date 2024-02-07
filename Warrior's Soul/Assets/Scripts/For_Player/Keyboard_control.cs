@@ -226,40 +226,42 @@ public class Keyboard_control : MonoBehaviour
         {
             if (mousePos.x <= halfScreenX && mousePos.y > halfScreenY)
             {
-                if (mousePos.x <= thirdScreenX && mousePos.y > thirdScreenY)
+                if (mousePos.x <= thirdScreenX && mousePos.y > thirdScreenY * 2)
                     return Player.ViewSide.Up_Left;
-                else if (mousePos.y <= thirdScreenY)
+                else if (mousePos.y <= thirdScreenY * 2)
                     return Player.ViewSide.Left;
                 else
                     return Player.ViewSide.OnMe;
             }
             else if (mousePos.x > halfScreenX && mousePos.y > halfScreenY)
             {
-                if (mousePos.x > thirdScreenX * 2 && mousePos.y > thirdScreenY)
+                if (mousePos.x > thirdScreenX * 2 && mousePos.y > thirdScreenY * 2)
                     return Player.ViewSide.Up_Right;
-                else if (mousePos.y <= thirdScreenY)
+                else if (mousePos.y <= thirdScreenY * 2)
                     return Player.ViewSide.Right;
                 else
                     return Player.ViewSide.OnMe;
             }
             else if (mousePos.x <= halfScreenX && mousePos.y <= halfScreenY)
             {
-                if (mousePos.x <= thirdScreenX && mousePos.y <= thirdScreenY * 2)
+                if (mousePos.x <= thirdScreenX && mousePos.y <= thirdScreenY)
                     return Player.ViewSide.Down_Left;
-                else if (mousePos.y > thirdScreenY * 2)
+                else if (mousePos.y > thirdScreenY)
                     return Player.ViewSide.Left;
                 else
                     return Player.ViewSide.OnScreen;
             }
-            else
+            else if (mousePos.x > halfScreenX && mousePos.y <= halfScreenY)
             {
-                if (mousePos.x > thirdScreenX * 2 && mousePos.y <= thirdScreenY * 2)
+                if (mousePos.x > thirdScreenX * 2 && mousePos.y <= thirdScreenY)
                     return Player.ViewSide.Down_Right;
-                else if (mousePos.y > thirdScreenY * 2)
+                else if (mousePos.y > thirdScreenY)
                     return Player.ViewSide.Right;
                 else
                     return Player.ViewSide.OnScreen;
             }
+            else
+                return (Player.ViewSide)8;
         }
         else
             return (Player.ViewSide)8;
