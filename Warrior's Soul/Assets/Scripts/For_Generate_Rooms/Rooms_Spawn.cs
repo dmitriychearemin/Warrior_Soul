@@ -17,6 +17,7 @@ public class Rooms_Spawn : MonoBehaviour
     }
 
     private Rooms_Variants variants;
+    
     private bool Spawned = false;
     private int rand;
     private float waitTime = 3f;
@@ -30,7 +31,6 @@ public class Rooms_Spawn : MonoBehaviour
 
     void Update()
     {
-        
     }
 
     void Spawn_Room()
@@ -38,31 +38,60 @@ public class Rooms_Spawn : MonoBehaviour
         if (Spawned==false) {
             if(direction == Direction.Up)
             {
-                rand = Random.Range(0, variants.Rooms_Up.Length);
+                if (variants.Counts_Room <= 2)
+                {
+                    rand = Random.Range(1, variants.Rooms_Up.Length);
+                }
+                if(variants.Counts_Room >= variants.Max_Rooms)
+                {
+                    rand = 0;
+                }
                 Instantiate(variants.Rooms_Up[rand], transform.position, variants.Rooms_Up[rand].transform.rotation);            
             }
 
             else if (direction == Direction.Down)
             {
-                rand = Random.Range(0, variants.Rooms_Down.Length);
+                if (variants.Counts_Room <= 2)
+                {
+                    rand = Random.Range(1, variants.Rooms_Down.Length);
+                }
+                if (variants.Counts_Room >= variants.Max_Rooms)
+                {
+                    rand = 0;
+                }
                 Instantiate(variants.Rooms_Down[rand], transform.position, variants.Rooms_Down[rand].transform.rotation);
 
             }
 
             else if (direction == Direction.Left)
             {
-                rand = Random.Range(0, variants.Rooms_Left.Length);
+                if (variants.Counts_Room <= 2)
+                {
+                    rand = Random.Range(1, variants.Rooms_Left.Length);
+                }
+                if (variants.Counts_Room >= variants.Max_Rooms)
+                {
+                    rand = 0;
+                }
                 Instantiate(variants.Rooms_Left[rand], transform.position, variants.Rooms_Left[rand].transform.rotation);
 
             }
 
             else if (direction == Direction.Right)
             {
-                rand = Random.Range(0, variants.Rooms_Right.Length);
+                if (variants.Counts_Room <= 2)
+                {
+                    rand = Random.Range(1, variants.Rooms_Right.Length);
+                }
+                if (variants.Counts_Room >= variants.Max_Rooms)
+                {
+                    rand = 0;
+                }
                 Instantiate(variants.Rooms_Right[rand], transform.position, variants.Rooms_Right[rand].transform.rotation);
 
             }
             Spawned = true;
+            variants.Counts_Room++;
         }
     }
 
