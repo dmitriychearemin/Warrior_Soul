@@ -35,7 +35,7 @@ public class Blocks_Spawn : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Point_Spawn_Blocks") || collision.CompareTag("Point_Spawn_Room"))
+        if (collision.CompareTag("Point_Spawn_Room"))
         {
             Destroy(gameObject);
         }
