@@ -26,7 +26,7 @@ public class Conrol_Button : MonoBehaviour
 
     public void Load_Scene_Raid()
     {
-        SceneManager.LoadScene("HP");
+        SceneManager.LoadScene("Raid_Mode");
     }
 
     public void Load_Scene_Level()
@@ -41,5 +41,10 @@ public class Conrol_Button : MonoBehaviour
         //menu.can_Create = true;
     }
 
+    public void Load_Scene_Go_To_Loby()
+    {
+        SceneManager.LoadScene("SampleScene");
 
+        //menu.can_Create = true;
+    }
 }

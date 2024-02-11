@@ -21,7 +21,7 @@ public class Keyboard_control : MonoBehaviour
     {
         if (HitPoint.GetStamina() > 0)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && player.moveState!=Player.MoveState.Menu_Open)
             {
                 var mousePos = Input.mousePosition;
                 switch (GetScreenArea(Input.mousePosition))
