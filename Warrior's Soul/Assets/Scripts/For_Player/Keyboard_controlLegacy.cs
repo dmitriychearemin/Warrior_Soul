@@ -2,18 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-
-public class Keyboard_control : MonoBehaviour
+public class Keyboard_controlLegacy : MonoBehaviour
 {
     Player player;
+    private InputHandler input;
+
     private float halfScreenX = Screen.width / 2, halfScreenY = Screen.height / 2;
     private int angleCoeff = 30;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         player = GetComponent<Player>();
+    }
+
+    void Start()
+    {
+        input = InputHandler.Instance;
     }
 
     // Update is called once per frame
