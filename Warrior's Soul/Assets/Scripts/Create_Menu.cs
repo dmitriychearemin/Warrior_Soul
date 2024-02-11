@@ -10,21 +10,23 @@ public class Create_Menu : MonoBehaviour
     public Transform canvas;
     public bool can_Create = true;
     public GameObject Portal;
-    
-
+    public Player player;
+    private float waittime=0.3f;
     void Start()
     {
-        
+        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-    if (Input.GetKey(KeyCode.Mouse0))
+    if (Input.GetKey(KeyCode.Mouse0) && can_Create==false)
        {
            can_Create = true;
-       }
+           Invoke("Change_MoveState", waittime);
+          
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,9 +35,13 @@ public class Create_Menu : MonoBehaviour
         {
             Instantiate(Menu,canvas);
             can_Create = false;
+            player.Get_Move_State(Player.MoveState.Menu_Open);
         }
     }
 
-
+    void Change_MoveState()
+    {
+        player.Get_Move_State(Player.MoveState.Idle);
+    }
 
 }

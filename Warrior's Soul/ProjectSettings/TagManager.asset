@@ -15,6 +15,9 @@ TagManager:
   - Point_Spawn_Room
   - Floor1
   - Block_Wall
+  - Point_Spawn_Blocks
+  - Break_Block
+  - Block_Ogranichitel
   layers:
   - Default
   - TransparentFX
