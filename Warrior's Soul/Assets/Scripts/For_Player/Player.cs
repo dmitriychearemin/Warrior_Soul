@@ -150,7 +150,13 @@ public class Player : MonoBehaviour
         Idle,
         Walk,
         Run,
-        Attack
+        Attack,
+        Menu_Open
+    }
+
+    public void Get_Move_State(MoveState state)
+    {
+        moveState = state;
     }
 
     public enum ViewSide
