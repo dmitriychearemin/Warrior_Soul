@@ -69051,20 +69051,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae68f365a9039b4c8eb00e83da95427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1814768310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814768288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c331fdcb124b545817865649eacfa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _action: {fileID: -944628639613478452, guid: 2ad61f6a475fed94680a7e2c43a1499c, type: 3}
-  actionMap: Player
 --- !u!1001 &1817914530
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83879,14 +83865,10 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 610998743}
-    m_RemovedComponents:
-    - {fileID: 9145339575600171440, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6064702493452717854, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1814768310}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
 --- !u!1001 &9060960744544366315
 PrefabInstance:

@@ -143,7 +143,7 @@ public class Spawn_Tracks : MonoBehaviour
         {
             sprite.material.color = new Color(1, 1, 1, Mathf.Lerp(1f, 0f, timer));
             timer += Time.deltaTime;
-            yield return null;
+            yield return new WaitForSeconds(0.01f);
         }
         Destroy(obj);
         StopCoroutine(FadeTracks(obj));
