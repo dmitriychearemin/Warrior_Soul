@@ -30,7 +30,7 @@ public class Break_Block : MonoBehaviour
 
     // Update is called once per frame
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (isClear == false)
         {
@@ -45,6 +45,8 @@ public class Break_Block : MonoBehaviour
             Destroy(gameObject);
         }
     }
+        
+    
 
 
     public void OnClick()
