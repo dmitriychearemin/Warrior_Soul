@@ -13,21 +13,20 @@ public class Player : MonoBehaviour
     private float halfScreenX = Screen.width / 2, halfScreenY = Screen.height / 2;
     private const int angleCoeff = 30;
 
-    [HideInInspector]
-    public MoveState moveState = MoveState.Idle;
-    [HideInInspector]
-    public ViewSide viewSide = ViewSide.Right;
+    private static MoveState moveState = MoveState.Idle;
+    private static ViewSide viewSide = ViewSide.Right;
 
     private InputHandler input;
     private new Transform transform;
     Rigidbody2D rb;
     Animator animatorContoller;
-    float timeWalk = 0, walkKooldown = 0.08f; 
-    private const float attackCooldown = 1.4f;
+    float animationTime = 0, walkDuration = 0.08f; 
+    private const float attackDuration = 1.2f;
     Vector3 Default_State;
 
     private void Awake()
     {
+        Speed_Walk = Default_Speed;
         transform = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         animatorContoller = GetComponent<Animator>();
@@ -46,13 +45,13 @@ public class Player : MonoBehaviour
         AnimateAttack();
     }
 
-    private void AnimateAttack() 
+    private void AnimateAttack()
     {
         if (input.AttackTriggered && HitPoint.GetStamina() > 0 
             && !(horizontalInput != 0 || verticalInput != 0))
         {
-            float x = input.MousePosInput.x;
-            float y = input.MousePosInput.y;
+            var x = input.MousePosInput.x;
+            var y = input.MousePosInput.y;
 
             float angle = (float)Math.Atan2(y - halfScreenY, x - halfScreenX) 
                 * (float)(180 / Math.PI);
@@ -210,7 +209,7 @@ public class Player : MonoBehaviour
                 default:
                     break;
             }
-            timeWalk = walkKooldown;
+            animationTime = walkDuration;
         }
         else if (input.AttackTriggered && !(horizontalInput != 0 || verticalInput != 0))
         {
@@ -244,7 +243,7 @@ public class Player : MonoBehaviour
                 default:
                     break;
             }
-            timeWalk = attackCooldown;
+            animationTime = attackDuration;
         }
         else
         {
@@ -278,7 +277,7 @@ public class Player : MonoBehaviour
                 default:
                     break;
             }
-            timeWalk = walkKooldown;
+            animationTime = walkDuration;
         }
     }
 
@@ -288,9 +287,9 @@ public class Player : MonoBehaviour
         horizontalInput = input.MoveInput.x;
         verticalInput = input.MoveInput.y;
 
-        timeWalk -= Time.deltaTime;
+        animationTime -= Time.deltaTime;
 
-        if (timeWalk <= 0)
+        if (animationTime <= 0)
         {
             rb.velocity = Vector2.zero;
             moveState = MoveState.Idle;
@@ -307,10 +306,13 @@ public class Player : MonoBehaviour
         Menu_Open
     }
 
-    public void Get_Move_State(MoveState state)
+    public void Set_Move_State(MoveState state)
     {
         moveState = state;
     }
+
+    public static MoveState GetMoveState() => moveState;
+    public static ViewSide GetViewSide() => viewSide;
 
     public enum ViewSide
     {

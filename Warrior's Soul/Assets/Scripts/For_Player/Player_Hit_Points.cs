@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class HitPoint : MonoBehaviour
 {
     [Header("UI")]
-    public Image HealphBarBackground;
     public Image HealphBar;
     public Image StaminaBar;
     public Image MagicBar;
@@ -19,9 +18,10 @@ public class HitPoint : MonoBehaviour
     private static float Stamina;
     private static float consumptionStamina = 35;
     private static float replenishmentStamina = 5;
-    public Player player;
+    //public Player player;
 
     private bool Take_Damage = true;
+    private bool damageSpace = false;
     private int count_Cycles = 0;
 
     void Start()
@@ -51,7 +51,10 @@ public class HitPoint : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("DieSpace"))
+        {
+            damageSpace = true;
             StartCoroutine(DamageSpace());
+        }
 
         if (Take_Damage)
         {
@@ -66,10 +69,11 @@ public class HitPoint : MonoBehaviour
             //LoadSceneWin();
     }
 
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    StopAllCoroutines();
-    //}
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("DieSpace"))
+            damageSpace = false;
+    }
 
     public static float GetHP()
     {
@@ -83,7 +87,7 @@ public class HitPoint : MonoBehaviour
 
     private IEnumerator DamageSpace()
     {
-        while (HP > 0)
+        while (HP > 0 && damageSpace)
         {
             HP -= 5 * Time.deltaTime;
             HealphBar.fillAmount = HP / MaxHP;
@@ -96,7 +100,7 @@ public class HitPoint : MonoBehaviour
     {
         while(true) 
         {
-            switch (player.moveState)
+            switch (Player.GetMoveState())
             {
                 case Player.MoveState.Idle:
                     {
