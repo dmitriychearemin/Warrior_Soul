@@ -11,7 +11,6 @@ public class Spawn_Tracks : MonoBehaviour
     public GameObject Grace_Track;
     public Player player;
 
-    [HideInInspector]
     private int trackCount = 0;
     private readonly Queue<GameObject> tracks = new();
 

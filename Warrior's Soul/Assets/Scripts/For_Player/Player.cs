@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     private static MoveState moveState = MoveState.Idle;
     private static ViewSide viewSide = ViewSide.Right;
 
+    [SerializeField]private Transform attackCollider;
+
     private InputHandler input;
     private new Transform transform;
     Rigidbody2D rb;
@@ -62,7 +64,7 @@ public class Player : MonoBehaviour
                     if (angle < 45 - angleCoeff)
                         FlipSprite(1f, 0f);
                     else if (angle > 45 + angleCoeff)
-                        FlipSprite(0f, -1f);
+                        FlipSprite(0f, 1f);
                     else
                         FlipSprite(1f, 1f);
                 }
@@ -71,7 +73,7 @@ public class Player : MonoBehaviour
                     if (angle > 135 + angleCoeff)
                         FlipSprite(-1f, 0f);
                     else if (angle < 135 - 10)
-                        FlipSprite(0f, -1f);
+                        FlipSprite(0f, 1f);
                     else
                         FlipSprite(-1f, 1f);
                 }
@@ -83,7 +85,7 @@ public class Player : MonoBehaviour
                     if (angle > -45 + angleCoeff)
                         FlipSprite(1f, 0f);
                     else if (angle < -45 - angleCoeff)
-                        FlipSprite(0f, 1f);
+                        FlipSprite(0f, -1f);
                     else
                         FlipSprite(1f, -1f);
                 }
@@ -92,7 +94,7 @@ public class Player : MonoBehaviour
                     if (angle < -135 - angleCoeff)
                         FlipSprite(-1f, 0f);
                     else if (angle > -135 + angleCoeff)
-                        FlipSprite(0f, 1f);
+                        FlipSprite(0f, -1f);
                     else
                         FlipSprite(-1f, -1f);
                 }
@@ -120,6 +122,8 @@ public class Player : MonoBehaviour
                 if (horizontalInput < 0) // Up_Left
                 {
                     transform.localScale = Default_State;
+                    attackCollider.SetLocalPositionAndRotation(new Vector3(-0.59f, 0.89f),
+                        Quaternion.Euler(new Vector3(0, 0, 50)));
                     viewSide = ViewSide.Up_Left;
                 }
                 else // Up_Right
@@ -127,6 +131,8 @@ public class Player : MonoBehaviour
                     transform.localScale = Default_State;
                     transform.localScale = 
                         new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    attackCollider.SetLocalPositionAndRotation(new Vector3(-0.61f, 0.88f),
+                        Quaternion.Euler(new Vector3(0, 0, 50)));
                     viewSide = ViewSide.Up_Right;
                 }
             }
@@ -137,11 +143,17 @@ public class Player : MonoBehaviour
                     transform.localScale = Default_State;
                     transform.localScale = 
                         new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    attackCollider.SetLocalPositionAndRotation(new Vector3(0.74f, -0.73f),
+                        Quaternion.Euler(new Vector3(0, 0, 50)));
+                    Debug.Log("Down_Left");
                     viewSide = ViewSide.Down_Left;
                 }
                 else // Down_right
                 {
                     transform.localScale = Default_State;
+                    attackCollider.SetLocalPositionAndRotation(new Vector3(0.986f, -0.65f),
+                        Quaternion.Euler(new Vector3(0, 0, 50)));
+                    Debug.Log("Down_right");
                     viewSide = ViewSide.Down_Right;
                 }
             }
@@ -150,10 +162,16 @@ public class Player : MonoBehaviour
         {
             if (verticalInput > 0) // OnScreen
             {
+                attackCollider.SetLocalPositionAndRotation(new Vector3(0.0073f, 0.93f),
+                        Quaternion.Euler(new Vector3(0, 0, 0)));
+                Debug.Log("Screen");
                 viewSide = ViewSide.OnScreen;
             }
             else // OnMe
             {
+                attackCollider.SetLocalPositionAndRotation(new Vector3(0.0073f, -1.08f),
+                        Quaternion.Euler(new Vector3(0, 0, 0)));
+                Debug.Log("OnME");
                 viewSide = ViewSide.OnMe;
             }
         }
@@ -162,6 +180,9 @@ public class Player : MonoBehaviour
             if (horizontalInput > 0) // Right
             {
                 transform.localScale = Default_State;
+                attackCollider.SetLocalPositionAndRotation(new Vector3(0.87f, 0.14f),
+                        Quaternion.Euler(new Vector3(0, 0, 90)));
+                Debug.Log("Rigth");
                 viewSide = ViewSide.Right;
             }
             else // Left
@@ -169,6 +190,9 @@ public class Player : MonoBehaviour
                 transform.localScale = Default_State;
                 transform.localScale =
                     new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                attackCollider.SetLocalPositionAndRotation(new Vector3(0.87f, 0.14f),
+                        Quaternion.Euler(new Vector3(0, 0, 90)));
+                Debug.Log("Left");
                 viewSide = ViewSide.Left;
             }
         }
@@ -223,7 +247,7 @@ public class Player : MonoBehaviour
                     animatorContoller.Play("Attack_Up_Left");
                     break;
                 case Player.ViewSide.OnMe:
-                    animatorContoller.Play("Attack_Up");
+                    animatorContoller.Play("Attack_Down");
                     break;
                 case Player.ViewSide.Left:
                     animatorContoller.Play("Attack_Right");
@@ -238,7 +262,7 @@ public class Player : MonoBehaviour
                     animatorContoller.Play("Attack_Down_Right");
                     break;
                 case Player.ViewSide.OnScreen:
-                    animatorContoller.Play("Attack_Down");
+                    animatorContoller.Play("Attack_Up");
                     break;
                 default:
                     break;
