@@ -701,6 +701,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894959722}
   m_CullTransparentMesh: 1
+--- !u!1 &935981490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 935981492}
+  - component: {fileID: 935981491}
+  m_Layer: 0
+  m_Name: Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &935981491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935981490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a65e7cfcb349641807917c56474803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealphBar: {fileID: 712526495}
+  StaminaBar: {fileID: 894959724}
+  MagicBar: {fileID: 322283031}
+  maxFPS: 60
+--- !u!4 &935981492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935981490}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &953765923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -973,6 +1021,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3340542644961767230, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340542644961767230, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 10.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4684375197335866495, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: player
       value: 
@@ -1106,3 +1162,4 @@ SceneRoots:
   - {fileID: 953765923}
   - {fileID: 640116582}
   - {fileID: 1416863061}
+  - {fileID: 935981492}

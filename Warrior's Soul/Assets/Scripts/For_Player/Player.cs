@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private CharacterStats playerStats;
     private float Speed_Walk=250f;
     [SerializeField]private float Default_Speed = 250f;
 
@@ -22,13 +23,14 @@ public class Player : MonoBehaviour
     private new Transform transform;
     Rigidbody2D rb;
     Animator animatorContoller;
-    float animationTime = 0, walkDuration = 0.08f; 
+    private float animationTime = 0, walkDuration = 0.08f; 
     private const float attackDuration = 1.2f;
     Vector3 Default_State;
 
     private void Awake()
     {
         Speed_Walk = Default_Speed;
+        playerStats = GetComponent<CharacterStats>();
         transform = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         animatorContoller = GetComponent<Animator>();
@@ -49,7 +51,7 @@ public class Player : MonoBehaviour
 
     private void AnimateAttack()
     {
-        if (input.AttackTriggered && HitPoint.GetStamina() > 0 
+        if (input.AttackTriggered && playerStats.Stamina > 0 
             && !(horizontalInput != 0 || verticalInput != 0))
         {
             var x = input.MousePosInput.x;
@@ -108,7 +110,7 @@ public class Player : MonoBehaviour
         {
             FlipSprite(horizontalInput, verticalInput);
             float speed = Speed_Walk 
-                * (input.RunTriggered && HitPoint.GetStamina() > 0 ? 2 : 1);
+                * (input.RunTriggered && playerStats.Stamina > 0 ? 2 : 1);
             rb.velocity = speed * Time.deltaTime * new Vector2(horizontalInput, verticalInput);
         }
     }
@@ -201,7 +203,7 @@ public class Player : MonoBehaviour
 
     private void ChangeAnimation()
     {
-        if (input.RunTriggered && HitPoint.GetStamina() > 0)
+        if (input.RunTriggered && playerStats.Stamina > 0)
         {
             moveState = MoveState.Run;
             switch (viewSide) 
