@@ -14,7 +14,7 @@ public class Blocks_Spawn : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject,waitTime);
+        //Destroy(gameObject,waitTime);
         Invoke("Spawn_Blocks", 0.6f);
 
     }
@@ -27,7 +27,7 @@ public class Blocks_Spawn : MonoBehaviour
     void Spawn_Blocks()
     {
         if (Spawned==false) {
-            Instantiate(block_Room,transform.position, transform.rotation);
+            //Instantiate(block_Room,transform.position, transform.rotation);
             Spawned = true;
             Destroy(gameObject);
         }
@@ -40,7 +40,7 @@ public class Blocks_Spawn : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (collision.tag == "Floor1" || collision.tag =="Break_Block")
+        if (collision.tag == "Floor1" || collision.tag =="Break_Block" )
         {
             Destroy(gameObject);
         }

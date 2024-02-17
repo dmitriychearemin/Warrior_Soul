@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Dunjeons_Doors
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &7595326882176385638
 Transform:
@@ -99,7 +99,7 @@ GameObject:
   m_TagString: Dunjeons_Doors
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &4080136614936263259
 Transform:
@@ -185,7 +185,7 @@ GameObject:
   m_TagString: Dunjeons_Doors
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &1213180657310174051
 Transform:
@@ -308,7 +308,7 @@ GameObject:
   m_TagString: Dunjeons_Doors
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &6818600922969200571
 Transform:
@@ -392,7 +392,7 @@ GameObject:
   m_TagString: Dunjeons_Doors
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &1543651172698928897
 Transform:
