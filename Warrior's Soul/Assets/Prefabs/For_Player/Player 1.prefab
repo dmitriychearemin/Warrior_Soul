@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4588649227542770327}
   - component: {fileID: 1426972827915296883}
   - component: {fileID: 5631521787845944931}
+  - component: {fileID: 6236746291615431618}
   m_Layer: 0
   m_Name: SpawnTrack
   m_TagString: Untagged
@@ -62,7 +63,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -94,6 +95,33 @@ MonoBehaviour:
   Sand_Track: {fileID: 4854082033429241252, guid: 34e82192bed4dc94fbd762c59d95c78d, type: 3}
   Grace_Track: {fileID: 4979000576747295974, guid: dc6f534199e28e94694e64f5792668b0, type: 3}
   player: {fileID: 1075663873814742159}
+--- !u!50 &6236746291615431618
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105412500908903146}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &611471249863195153
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,6 +132,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2658403080269334051}
   - component: {fileID: 3340542644961767230}
+  - component: {fileID: 7899093073448447194}
+  - component: {fileID: 5576049073208440313}
   m_Layer: 0
   m_Name: AttackCollider
   m_TagString: Attack
@@ -171,6 +201,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &7899093073448447194
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611471249863195153}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &5576049073208440313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611471249863195153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63a1aac86a61cb04cbbea87f662449a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6064702493452717854
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +253,6 @@ GameObject:
   - component: {fileID: 1437213365514306252}
   - component: {fileID: 7617521596980124304}
   - component: {fileID: 1075663873814742159}
-  - component: {fileID: 3503765047140263381}
   - component: {fileID: 4684375197335866495}
   - component: {fileID: 7909686150951964843}
   - component: {fileID: 4867692100301379704}
@@ -327,18 +395,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Default_Speed: 250
   attackCollider: {fileID: 2658403080269334051}
---- !u!114 &3503765047140263381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6064702493452717854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 250f77dd0d0f22f4bb1e04fddff78ce9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4684375197335866495
 MonoBehaviour:
   m_ObjectHideFlags: 0

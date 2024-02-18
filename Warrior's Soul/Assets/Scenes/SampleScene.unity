@@ -49136,7 +49136,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   Max_HitPoints: 200
-  Damage: 0
   Visibility_radius: 0
   Stopping_Distance: 5
   Distance_Retreat: 4

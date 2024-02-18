@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Просто для примера
         if (Current_HP <= 0) 
         {
             animatorControl.Play("Die_Player");
