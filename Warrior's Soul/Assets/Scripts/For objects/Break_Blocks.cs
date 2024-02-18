@@ -35,7 +35,7 @@ public class Break_Block : MonoBehaviour
         if (isClear == false)
         {
             // curColor = Color.Lerp(curColor, clear_color, Time.deltaTime);
-            spriteBlock.material = Dark_Material;
+           // spriteBlock.material = Dark_Material;
 
         }
         //spriteRenderer.color = curColor;
@@ -59,7 +59,7 @@ public class Break_Block : MonoBehaviour
     {
 
         isClear = true;
-        spriteBlock.material = defaultMaterial;
+       // spriteBlock.material = defaultMaterial;
     }
 
     public void OnEnter()
