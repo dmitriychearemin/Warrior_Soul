@@ -35,13 +35,13 @@ public class Create_Menu : MonoBehaviour
         {
             Instantiate(Menu,canvas);
             can_Create = false;
-            player.Get_Move_State(Player.MoveState.Menu_Open);
+            player.Set_Move_State(Player.MoveState.Menu_Open);
         }
     }
 
     void Change_MoveState()
     {
-        player.Get_Move_State(Player.MoveState.Idle);
+        player.Set_Move_State(Player.MoveState.Idle);
     }
 
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private CharacterStats playerStats;
     private float Speed_Walk=250f;
     [SerializeField]private float Default_Speed = 250f;
 
@@ -13,21 +14,23 @@ public class Player : MonoBehaviour
     private float halfScreenX = Screen.width / 2, halfScreenY = Screen.height / 2;
     private const int angleCoeff = 30;
 
-    [HideInInspector]
-    public MoveState moveState = MoveState.Idle;
-    [HideInInspector]
-    public ViewSide viewSide = ViewSide.Right;
+    private static MoveState moveState = MoveState.Idle;
+    private static ViewSide viewSide = ViewSide.Right;
+
+    [SerializeField]private Transform attackCollider;
 
     private InputHandler input;
     private new Transform transform;
     Rigidbody2D rb;
     Animator animatorContoller;
-    float timeWalk = 0, walkKooldown = 0.08f; 
-    private const float attackCooldown = 1.4f;
+    private float animationTime = 0, walkDuration = 0.08f; 
+    private const float attackDuration = 1.2f;
     Vector3 Default_State;
 
     private void Awake()
     {
+        Speed_Walk = Default_Speed;
+        playerStats = GetComponent<CharacterStats>();
         transform = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         animatorContoller = GetComponent<Animator>();
@@ -46,13 +49,13 @@ public class Player : MonoBehaviour
         AnimateAttack();
     }
 
-    private void AnimateAttack() 
+    private void AnimateAttack()
     {
-        if (input.AttackTriggered && HitPoint.GetStamina() > 0 
+        if (input.AttackTriggered && playerStats.Stamina > 0 
             && !(horizontalInput != 0 || verticalInput != 0))
         {
-            float x = input.MousePosInput.x;
-            float y = input.MousePosInput.y;
+            var x = input.MousePosInput.x;
+            var y = input.MousePosInput.y;
 
             float angle = (float)Math.Atan2(y - halfScreenY, x - halfScreenX) 
                 * (float)(180 / Math.PI);
@@ -63,7 +66,7 @@ public class Player : MonoBehaviour
                     if (angle < 45 - angleCoeff)
                         FlipSprite(1f, 0f);
                     else if (angle > 45 + angleCoeff)
-                        FlipSprite(0f, -1f);
+                        FlipSprite(0f, 1f);
                     else
                         FlipSprite(1f, 1f);
                 }
@@ -72,7 +75,7 @@ public class Player : MonoBehaviour
                     if (angle > 135 + angleCoeff)
                         FlipSprite(-1f, 0f);
                     else if (angle < 135 - 10)
-                        FlipSprite(0f, -1f);
+                        FlipSprite(0f, 1f);
                     else
                         FlipSprite(-1f, 1f);
                 }
@@ -84,7 +87,7 @@ public class Player : MonoBehaviour
                     if (angle > -45 + angleCoeff)
                         FlipSprite(1f, 0f);
                     else if (angle < -45 - angleCoeff)
-                        FlipSprite(0f, 1f);
+                        FlipSprite(0f, -1f);
                     else
                         FlipSprite(1f, -1f);
                 }
@@ -93,7 +96,7 @@ public class Player : MonoBehaviour
                     if (angle < -135 - angleCoeff)
                         FlipSprite(-1f, 0f);
                     else if (angle > -135 + angleCoeff)
-                        FlipSprite(0f, 1f);
+                        FlipSprite(0f, -1f);
                     else
                         FlipSprite(-1f, -1f);
                 }
@@ -107,7 +110,7 @@ public class Player : MonoBehaviour
         {
             FlipSprite(horizontalInput, verticalInput);
             float speed = Speed_Walk 
-                * (input.RunTriggered && HitPoint.GetStamina() > 0 ? 2 : 1);
+                * (input.RunTriggered && playerStats.Stamina > 0 ? 2 : 1);
             rb.velocity = speed * Time.deltaTime * new Vector2(horizontalInput, verticalInput);
         }
     }
@@ -121,6 +124,8 @@ public class Player : MonoBehaviour
                 if (horizontalInput < 0) // Up_Left
                 {
                     transform.localScale = Default_State;
+                    attackCollider.SetLocalPositionAndRotation(new Vector3(-0.59f, 0.89f),
+                        Quaternion.Euler(new Vector3(0, 0, 50)));
                     viewSide = ViewSide.Up_Left;
                 }
                 else // Up_Right
@@ -128,6 +133,8 @@ public class Player : MonoBehaviour
                     transform.localScale = Default_State;
                     transform.localScale = 
                         new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    attackCollider.SetLocalPositionAndRotation(new Vector3(-0.61f, 0.88f),
+                        Quaternion.Euler(new Vector3(0, 0, 50)));
                     viewSide = ViewSide.Up_Right;
                 }
             }
@@ -138,11 +145,17 @@ public class Player : MonoBehaviour
                     transform.localScale = Default_State;
                     transform.localScale = 
                         new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                    attackCollider.SetLocalPositionAndRotation(new Vector3(0.74f, -0.73f),
+                        Quaternion.Euler(new Vector3(0, 0, 50)));
+                    //Debug.Log("Down_Left");
                     viewSide = ViewSide.Down_Left;
                 }
                 else // Down_right
                 {
                     transform.localScale = Default_State;
+                    attackCollider.SetLocalPositionAndRotation(new Vector3(0.986f, -0.65f),
+                        Quaternion.Euler(new Vector3(0, 0, 50)));
+                    //Debug.Log("Down_right");
                     viewSide = ViewSide.Down_Right;
                 }
             }
@@ -151,10 +164,16 @@ public class Player : MonoBehaviour
         {
             if (verticalInput > 0) // OnScreen
             {
+                attackCollider.SetLocalPositionAndRotation(new Vector3(0.0073f, 0.93f),
+                        Quaternion.Euler(new Vector3(0, 0, 0)));
+                //Debug.Log("Screen");
                 viewSide = ViewSide.OnScreen;
             }
             else // OnMe
             {
+                attackCollider.SetLocalPositionAndRotation(new Vector3(0.0073f, -1.08f),
+                        Quaternion.Euler(new Vector3(0, 0, 0)));
+               // Debug.Log("OnME");
                 viewSide = ViewSide.OnMe;
             }
         }
@@ -163,6 +182,9 @@ public class Player : MonoBehaviour
             if (horizontalInput > 0) // Right
             {
                 transform.localScale = Default_State;
+                attackCollider.SetLocalPositionAndRotation(new Vector3(0.87f, 0.14f),
+                        Quaternion.Euler(new Vector3(0, 0, 90)));
+                //Debug.Log("Rigth");
                 viewSide = ViewSide.Right;
             }
             else // Left
@@ -170,6 +192,9 @@ public class Player : MonoBehaviour
                 transform.localScale = Default_State;
                 transform.localScale =
                     new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                attackCollider.SetLocalPositionAndRotation(new Vector3(0.87f, 0.14f),
+                        Quaternion.Euler(new Vector3(0, 0, 90)));
+                //Debug.Log("Left");
                 viewSide = ViewSide.Left;
             }
         }
@@ -178,7 +203,7 @@ public class Player : MonoBehaviour
 
     private void ChangeAnimation()
     {
-        if (input.RunTriggered && HitPoint.GetStamina() > 0)
+        if (input.RunTriggered && playerStats.Stamina > 0)
         {
             moveState = MoveState.Run;
             switch (viewSide) 
@@ -210,7 +235,7 @@ public class Player : MonoBehaviour
                 default:
                     break;
             }
-            timeWalk = walkKooldown;
+            animationTime = walkDuration;
         }
         else if (input.AttackTriggered && !(horizontalInput != 0 || verticalInput != 0))
         {
@@ -224,7 +249,7 @@ public class Player : MonoBehaviour
                     animatorContoller.Play("Attack_Up_Left");
                     break;
                 case Player.ViewSide.OnMe:
-                    animatorContoller.Play("Attack_Up");
+                    animatorContoller.Play("Attack_Down");
                     break;
                 case Player.ViewSide.Left:
                     animatorContoller.Play("Attack_Right");
@@ -239,12 +264,12 @@ public class Player : MonoBehaviour
                     animatorContoller.Play("Attack_Down_Right");
                     break;
                 case Player.ViewSide.OnScreen:
-                    animatorContoller.Play("Attack_Down");
+                    animatorContoller.Play("Attack_Up");
                     break;
                 default:
                     break;
             }
-            timeWalk = attackCooldown;
+            animationTime = attackDuration;
         }
         else
         {
@@ -278,7 +303,7 @@ public class Player : MonoBehaviour
                 default:
                     break;
             }
-            timeWalk = walkKooldown;
+            animationTime = walkDuration;
         }
     }
 
@@ -288,9 +313,9 @@ public class Player : MonoBehaviour
         horizontalInput = input.MoveInput.x;
         verticalInput = input.MoveInput.y;
 
-        timeWalk -= Time.deltaTime;
+        animationTime -= Time.deltaTime;
 
-        if (timeWalk <= 0)
+        if (animationTime <= 0)
         {
             rb.velocity = Vector2.zero;
             moveState = MoveState.Idle;
@@ -307,10 +332,13 @@ public class Player : MonoBehaviour
         Menu_Open
     }
 
-    public void Get_Move_State(MoveState state)
+    public void Set_Move_State(MoveState state)
     {
         moveState = state;
     }
+
+    public static MoveState GetMoveState() => moveState;
+    public static ViewSide GetViewSide() => viewSide;
 
     public enum ViewSide
     {

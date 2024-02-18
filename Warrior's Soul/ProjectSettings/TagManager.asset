@@ -18,6 +18,7 @@ TagManager:
   - Point_Spawn_Blocks
   - Break_Block
   - Block_Ogranichitel
+  - Attack
   layers:
   - Default
   - TransparentFX

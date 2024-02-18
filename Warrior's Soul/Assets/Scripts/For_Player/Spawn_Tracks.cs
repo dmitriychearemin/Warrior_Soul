@@ -11,7 +11,6 @@ public class Spawn_Tracks : MonoBehaviour
     public GameObject Grace_Track;
     public Player player;
 
-    [HideInInspector]
     private int trackCount = 0;
     private readonly Queue<GameObject> tracks = new();
 
@@ -45,7 +44,7 @@ public class Spawn_Tracks : MonoBehaviour
         if (collision.transform.CompareTag("Sand") && can_track)
         {
             can_track = false;
-            var viewSide = player.viewSide;
+            var viewSide = Player.GetViewSide();
             var cur_pos = new Vector3(
                 SpawnTracks.transform.position.x, SpawnTracks.transform.position.y, 1f);
 
@@ -91,7 +90,7 @@ public class Spawn_Tracks : MonoBehaviour
         if (collision.transform.CompareTag("Grace") && can_track)
         {
             can_track = false;
-            var viewSide = player.viewSide;
+            var viewSide = Player.GetViewSide();
             var cur_pos = new Vector3(
                 SpawnTracks.transform.position.x, SpawnTracks.transform.position.y, 1f);
 
