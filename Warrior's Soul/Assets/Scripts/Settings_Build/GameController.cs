@@ -36,15 +36,14 @@ public class GameController : MonoBehaviour
         Application.targetFrameRate = maxFPS;
     }
 
-    // Метод для обновления интерфейса выносливости игрока
     private void UpdatePlayerStaminaBar(float currentStamina, float maxStamina)
     {
         StaminaBar.fillAmount = currentStamina / maxStamina;
     }
 
-    public void UpdateHealthBar(float currentStamina, float maxStamina)
+    public void UpdateHealthBar(float currentHP, float maxHP)
     {
-        HealphBar.fillAmount = currentStamina / maxStamina;
+        HealphBar.fillAmount = currentHP / maxHP;
     }
 
     // Update is called once per frame

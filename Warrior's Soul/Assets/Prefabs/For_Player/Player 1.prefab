@@ -62,7 +62,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -351,9 +351,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b3c114181763aa4b88a718e0de13507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealphBar: {fileID: 0}
-  StaminaBar: {fileID: 0}
-  MagicBar: {fileID: 0}
   MaxHP: 100
   MaxStamina: 100
 --- !u!114 &7909686150951964843

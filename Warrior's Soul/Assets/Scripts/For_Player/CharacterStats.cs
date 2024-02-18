@@ -5,11 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
-public delegate void OnStaminaUpdate(float currentStamina, float maxStamina);
-public delegate void OnHPUpdate(float currentStamina, float maxStamina);
 
 public class CharacterStats : MonoBehaviour
 {
+    public delegate void OnStaminaUpdate(float currentStamina, float maxStamina);
+    public delegate void OnHPUpdate(float currentHP, float maxHP);
+
     public static event OnStaminaUpdate StaminaUpdate;
     public static event OnStaminaUpdate HPUpdate;
    
@@ -26,6 +27,7 @@ public class CharacterStats : MonoBehaviour
 
     public float Stamina { get; private set; }
     public float HP { get; private set; }
+
     private void Awake()
     {
         HP = MaxHP;
@@ -62,15 +64,15 @@ public class CharacterStats : MonoBehaviour
             StartCoroutine(DamageArea());
         }
 
-        if (Take_Damage)
-        {
-            if(collision.gameObject.CompareTag("Enemy"))
-            {
-                HP -= 35;
-                HPUpdate?.Invoke(HP, MaxHP);
-                Take_Damage = false;
-            }
-        }
+        //if (Take_Damage)
+        //{
+        //    if(collision.gameObject.CompareTag("Enemy"))
+        //    {
+        //        HP -= 35;
+        //        HPUpdate?.Invoke(HP, MaxHP);
+        //        Take_Damage = false;
+        //    }
+        //}
        // if (collision.CompareTag("Finish"))
             //LoadSceneWin();
     }

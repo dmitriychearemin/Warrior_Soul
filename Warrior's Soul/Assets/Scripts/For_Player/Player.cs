@@ -147,7 +147,7 @@ public class Player : MonoBehaviour
                         new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
                     attackCollider.SetLocalPositionAndRotation(new Vector3(0.74f, -0.73f),
                         Quaternion.Euler(new Vector3(0, 0, 50)));
-                    Debug.Log("Down_Left");
+                    //Debug.Log("Down_Left");
                     viewSide = ViewSide.Down_Left;
                 }
                 else // Down_right
@@ -155,7 +155,7 @@ public class Player : MonoBehaviour
                     transform.localScale = Default_State;
                     attackCollider.SetLocalPositionAndRotation(new Vector3(0.986f, -0.65f),
                         Quaternion.Euler(new Vector3(0, 0, 50)));
-                    Debug.Log("Down_right");
+                    //Debug.Log("Down_right");
                     viewSide = ViewSide.Down_Right;
                 }
             }
@@ -166,14 +166,14 @@ public class Player : MonoBehaviour
             {
                 attackCollider.SetLocalPositionAndRotation(new Vector3(0.0073f, 0.93f),
                         Quaternion.Euler(new Vector3(0, 0, 0)));
-                Debug.Log("Screen");
+                //Debug.Log("Screen");
                 viewSide = ViewSide.OnScreen;
             }
             else // OnMe
             {
                 attackCollider.SetLocalPositionAndRotation(new Vector3(0.0073f, -1.08f),
                         Quaternion.Euler(new Vector3(0, 0, 0)));
-                Debug.Log("OnME");
+               // Debug.Log("OnME");
                 viewSide = ViewSide.OnMe;
             }
         }
@@ -184,7 +184,7 @@ public class Player : MonoBehaviour
                 transform.localScale = Default_State;
                 attackCollider.SetLocalPositionAndRotation(new Vector3(0.87f, 0.14f),
                         Quaternion.Euler(new Vector3(0, 0, 90)));
-                Debug.Log("Rigth");
+                //Debug.Log("Rigth");
                 viewSide = ViewSide.Right;
             }
             else // Left
@@ -194,7 +194,7 @@ public class Player : MonoBehaviour
                     new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
                 attackCollider.SetLocalPositionAndRotation(new Vector3(0.87f, 0.14f),
                         Quaternion.Euler(new Vector3(0, 0, 90)));
-                Debug.Log("Left");
+                //Debug.Log("Left");
                 viewSide = ViewSide.Left;
             }
         }
