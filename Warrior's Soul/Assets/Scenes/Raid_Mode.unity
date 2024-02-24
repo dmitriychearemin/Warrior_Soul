@@ -1050,13 +1050,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b3c114181763aa4b88a718e0de13507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealphBarBackground: {fileID: 896690932}
-  HealphBar: {fileID: 1595498219}
-  StaminaBar: {fileID: 1452600900}
-  MagicBar: {fileID: 1457859153}
   MaxHP: 100
   MaxStamina: 100
-  player: {fileID: 1863787434}
 --- !u!1001 &1457859151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1642,8 +1637,7 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1863787434}
-    m_RemovedComponents:
-    - {fileID: 4684375197335866495, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
