@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
-
 
 public class CharacterStats : MonoBehaviour
 {
@@ -56,6 +53,11 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
+    public void ChangeHealth(float damage)
+    {
+        HP += damage;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("DieSpace"))
@@ -83,9 +85,6 @@ public class CharacterStats : MonoBehaviour
             damageArea = false;
     }
 
-    public float GetHP()
-    { return HP; }
-
     private IEnumerator DamageArea()
     {
         while (HP > 0 && damageArea)
@@ -105,29 +104,20 @@ public class CharacterStats : MonoBehaviour
             case Player.MoveState.Idle:
                 {
                     if (Stamina < 100 && !Input.GetKey(KeyCode.LeftShift))
-                    {
                         Stamina += replenishmentStamina * Time.deltaTime * 2;
-                        //StaminaBar.fillAmount = Stamina / MaxStamina;
-                    }
                     break;
                 }
             case Player.MoveState.Walk:
                 {
                     if (Stamina < 100 && !Input.GetKey(KeyCode.LeftShift))
-                    {
                         Stamina += replenishmentStamina * Time.deltaTime;
-                        //StaminaBar.fillAmount = Stamina / MaxStamina;
-                    }
                     break;
                 }
             case Player.MoveState.Attack:
             case Player.MoveState.Run:
                 {
                     if (Stamina > 0)
-                    {
                         Stamina -= consumptionStamina * Time.deltaTime;
-                        //StaminaBar.fillAmount = Stamina / MaxStamina;
-                    }
                     break;
                 }
             default:

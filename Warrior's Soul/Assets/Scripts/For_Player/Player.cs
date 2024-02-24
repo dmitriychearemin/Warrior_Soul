@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Speed_Walk = Default_Speed;
-        playerStats = GetComponent<CharacterStats>();
+        //playerStats = GetComponent<CharacterStats>();
         transform = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         animatorContoller = GetComponent<Animator>();
@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        playerStats = GetComponent<CharacterStats>();
         input = InputHandler.Instance;
     }
 
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour
 
     private void AnimateAttack()
     {
-        if (input.AttackTriggered && playerStats.Stamina > 0 
+        if (input.AttackTriggered && playerStats.Stamina > 0
             && !(horizontalInput != 0 || verticalInput != 0))
         {
             var x = input.MousePosInput.x;
