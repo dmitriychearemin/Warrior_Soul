@@ -10,9 +10,8 @@ public class Enemy : MonoBehaviour
 
     public float speed;
     private CharacterStats stats;
-    //public float Damage;
-    public float Visibility_radius;
 
+    public float Visibility_radius;
     public float Stopping_Distance;
     public float Distance_Retreat;
 
@@ -41,7 +40,7 @@ public class Enemy : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
-        stats.ChangeHealth(-damage);
+        stats.TakeDamage(-damage);
         Debug.Log(stats.HP);
     }
 

@@ -6,21 +6,21 @@ using UnityEngine.InputSystem;
 
 public class Keyboard_controlLegacy : MonoBehaviour
 {
-    Player player;
-    private InputHandler input;
+    //Player player;
+    //private InputHandler input;
 
-    private float halfScreenX = Screen.width / 2, halfScreenY = Screen.height / 2;
-    private int angleCoeff = 30;
+    //private float halfScreenX = Screen.width / 2, halfScreenY = Screen.height / 2;
+    //private int angleCoeff = 30;
 
-    void Awake()
-    {
-        player = GetComponent<Player>();
-    }
+    //void Awake()
+    //{
+    //    player = GetComponent<Player>();
+    //}
 
-    void Start()
-    {
-        input = InputHandler.Instance;
-    }
+    //void Start()
+    //{
+    //    input = InputHandler.Instance;
+    //}
 
     // Update is called once per frame
     //void Update()
@@ -225,53 +225,53 @@ public class Keyboard_controlLegacy : MonoBehaviour
     //    }
     //}
 
-    private Player.ViewSide GetScreenArea(Vector3 mousePos)
-    {
-        float x = mousePos.x;
-        float y = mousePos.y;
+    //private ViewSide GetScreenArea(Vector3 mousePos)
+    //{
+    //    float x = mousePos.x;
+    //    float y = mousePos.y;
 
-        float angle = (float)Math.Atan2(y - halfScreenY, x - halfScreenX) * (float)(180 / Math.PI);
-        if (angle > 0)
-        {
-            if (angle <= 90)
-            {
-                if (angle < 45 - angleCoeff)
-                    return Player.ViewSide.Right;
-                else if (angle > 45 + angleCoeff)
-                    return Player.ViewSide.OnMe;
-                else
-                    return Player.ViewSide.Up_Right;
-            }
-            else
-            {
-                if (angle > 135 + angleCoeff)
-                    return Player.ViewSide.Left;
-                else if (angle < 135 - 10)
-                    return Player.ViewSide.OnMe;
-                else
-                    return Player.ViewSide.Up_Left;
-            }
-        }
-        else
-        {
-            if (angle > -90)
-            {
-                if (angle > -45 + angleCoeff)
-                    return Player.ViewSide.Right;
-                else if (angle < -45 - angleCoeff)
-                    return Player.ViewSide.OnScreen;
-                else
-                    return Player.ViewSide.Down_Right;
-            }
-            else
-            {
-                if (angle < -135 - angleCoeff)
-                    return Player.ViewSide.Left;
-                else if (angle > -135 + angleCoeff)
-                    return Player.ViewSide.OnScreen;
-                else
-                    return Player.ViewSide.Down_Left;
-            }
-        }
-    }
+    //    float angle = (float)Math.Atan2(y - halfScreenY, x - halfScreenX) * (float)(180 / Math.PI);
+    //    if (angle > 0)
+    //    {
+    //        if (angle <= 90)
+    //        {
+    //            if (angle < 45 - angleCoeff)
+    //                return Player.ViewSide.Right;
+    //            else if (angle > 45 + angleCoeff)
+    //                return Player.ViewSide.OnMe;
+    //            else
+    //                return Player.ViewSide.Up_Right;
+    //        }
+    //        else
+    //        {
+    //            if (angle > 135 + angleCoeff)
+    //                return Player.ViewSide.Left;
+    //            else if (angle < 135 - 10)
+    //                return Player.ViewSide.OnMe;
+    //            else
+    //                return Player.ViewSide.Up_Left;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (angle > -90)
+    //        {
+    //            if (angle > -45 + angleCoeff)
+    //                return Player.ViewSide.Right;
+    //            else if (angle < -45 - angleCoeff)
+    //                return Player.ViewSide.OnScreen;
+    //            else
+    //                return Player.ViewSide.Down_Right;
+    //        }
+    //        else
+    //        {
+    //            if (angle < -135 - angleCoeff)
+    //                return Player.ViewSide.Left;
+    //            else if (angle > -135 + angleCoeff)
+    //                return Player.ViewSide.OnScreen;
+    //            else
+    //                return Player.ViewSide.Down_Left;
+    //        }
+    //    }
+    //}
 }

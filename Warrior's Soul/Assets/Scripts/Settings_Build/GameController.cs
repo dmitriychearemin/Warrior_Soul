@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] private static CharacterStats player;
+    [SerializeField] private GameObject player;
+    private CharacterStats playerStats;
 
     [Header("UI")]
     public Image HealphBar;
@@ -16,18 +17,23 @@ public class GameController : MonoBehaviour
     [Header("Quality")]
     [SerializeField]private int maxFPS = 60;
 
+    private void Awake()
+    {
+        playerStats = player.GetComponent<CharacterStats>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        CharacterStats.StaminaUpdate += UpdatePlayerStaminaBar;
-        CharacterStats.HPUpdate += UpdateHealthBar;
+        playerStats.StaminaUpdate += UpdateStaminaBar;
+        playerStats.HPUpdate += UpdateHealthBar;
         Application.targetFrameRate = maxFPS;
     }
 
     private void OnDestroy()
     {
-        CharacterStats.StaminaUpdate -= UpdatePlayerStaminaBar;
-        CharacterStats.HPUpdate -= UpdateHealthBar;
+        playerStats.StaminaUpdate -= UpdateStaminaBar;
+        playerStats.HPUpdate -= UpdateHealthBar;
     }
 
     public void SetFPS(int fps)
@@ -36,19 +42,15 @@ public class GameController : MonoBehaviour
         Application.targetFrameRate = maxFPS;
     }
 
-    private void UpdatePlayerStaminaBar(float currentStamina, float maxStamina)
+    private void UpdateStaminaBar(GameObject obj, float currentStamina)
     {
-        StaminaBar.fillAmount = currentStamina / maxStamina;
+        if (ReferenceEquals(player, obj)) 
+            StaminaBar.fillAmount = currentStamina / playerStats.MaxStamina;
     }
 
-    public void UpdateHealthBar(float currentHP, float maxHP)
+    public void UpdateHealthBar(GameObject obj, float currentHP)
     {
-        HealphBar.fillAmount = currentHP / maxHP;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (ReferenceEquals(obj, player))
+            HealphBar.fillAmount = currentHP / playerStats.MaxHP;
     }
 }

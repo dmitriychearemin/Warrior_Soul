@@ -756,6 +756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a65e7cfcb349641807917c56474803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1906065224}
   HealphBar: {fileID: 712526495}
   StaminaBar: {fileID: 894959724}
   MagicBar: {fileID: 322283031}
@@ -941,7 +942,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2202979, y: 1.7500001}
+    oldSize: {x: 0.87021244, y: 1.81}
     newSize: {x: 12.15, y: 9.58}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -991,7 +992,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1010465370, guid: 4157e3e0dcf13ac429fd9c9042766dc8, type: 3}
+  m_Sprite: {fileID: 1324667828, guid: 4157e3e0dcf13ac429fd9c9042766dc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
