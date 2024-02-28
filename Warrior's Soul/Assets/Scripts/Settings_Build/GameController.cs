@@ -48,9 +48,9 @@ public class GameController : MonoBehaviour
             StaminaBar.fillAmount = currentStamina / playerStats.MaxStamina;
     }
 
-    public void UpdateHealthBar(GameObject obj, float currentHP)
+    private void UpdateHealthBar(GameObject obj, float currentHP)
     {
-        if (ReferenceEquals(obj, player))
+        if (ReferenceEquals(player, obj))
             HealphBar.fillAmount = currentHP / playerStats.MaxHP;
     }
 }

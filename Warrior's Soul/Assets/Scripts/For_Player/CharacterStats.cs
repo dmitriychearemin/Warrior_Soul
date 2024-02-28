@@ -9,7 +9,8 @@ public class CharacterStats : MonoBehaviour
     public delegate void OnHPUpdate(GameObject obj, float currentHP);
 
     public event OnStaminaUpdate StaminaUpdate;
-    public event OnStaminaUpdate HPUpdate;
+    public event OnHPUpdate HPUpdate;
+
     private Character character;
 
     [Header("Stats")]
@@ -57,10 +58,11 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        HP += damage;
+        HP -= damage;
 
         if (HP <= 0)
             HP = 0;
+        HPUpdate?.Invoke(gameObject, HP);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -71,15 +73,15 @@ public class CharacterStats : MonoBehaviour
             StartCoroutine(DamageArea());
         }
 
-        if (Take_Damage)
-        {
-            if (collision.gameObject.CompareTag("Enemy"))
-            {
-                HP -= 35;
-                HPUpdate?.Invoke(gameObject, HP);
-                Take_Damage = false;
-            }
-        }
+        //if (Take_Damage)
+        //{
+        //    if (collision.gameObject.CompareTag("Enemy"))
+        //    {
+        //        HP -= 35;
+        //        HPUpdate?.Invoke(gameObject, HP);
+        //        Take_Damage = false;
+        //    }
+        //}
         // if (collision.CompareTag("Finish"))
         //LoadSceneWin();
     }

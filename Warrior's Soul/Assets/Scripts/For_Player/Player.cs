@@ -28,7 +28,7 @@ public class Player : Character
     private void Awake()
     {
         Speed_Walk = Default_Speed;
-        playerStats = GetComponent<CharacterStats>();
+        stats = GetComponent<CharacterStats>();
         transform = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         animatorContoller = GetComponent<Animator>();
@@ -38,8 +38,13 @@ public class Player : Character
 
     void Start()
     {
-        playerStats = GetComponent<CharacterStats>();
         input = InputHandler.Instance;
+        EnemyAttack.EnemyDamage += TakeDamage;
+    }
+
+    private void OnDestroy()
+    {
+        EnemyAttack.EnemyDamage -= TakeDamage;
     }
 
     private void FixedUpdate()
@@ -50,7 +55,7 @@ public class Player : Character
 
     protected override void AnimateAttack()
     {
-        if (input.AttackTriggered && playerStats.Stamina > 0
+        if (input.AttackTriggered && stats.Stamina > 0
             && !(horizontalInput != 0 || verticalInput != 0))
         {
             var x = input.MousePosInput.x;
@@ -109,7 +114,7 @@ public class Player : Character
         {
             FlipSprite(horizontalInput, verticalInput);
             float speed = Speed_Walk 
-                * (input.RunTriggered && playerStats.Stamina > 0 ? 2 : 1);
+                * (input.RunTriggered && stats.Stamina > 0 ? 2 : 1);
             rb.velocity = speed * Time.deltaTime * new Vector2(horizontalInput, verticalInput);
         }
     }
@@ -202,7 +207,7 @@ public class Player : Character
 
     protected override void ChangeAnimation()
     {
-        if (input.RunTriggered && playerStats.Stamina > 0)
+        if (input.RunTriggered && stats.Stamina > 0)
         {
             MoveState = MoveState.Run;
             switch (ViewSide) 
@@ -305,6 +310,8 @@ public class Player : Character
             animationTime = walkDuration;
         }
     }
+    //private void TakeDamage(float damage) =>
+    //    stats.TakeDamage(-damage);
 
     // Update is called once per frame
     void Update()

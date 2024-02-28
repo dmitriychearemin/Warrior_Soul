@@ -41,7 +41,6 @@ public class Enemy : MonoBehaviour
     private void TakeDamage(float damage)
     {
         stats.TakeDamage(-damage);
-        Debug.Log(stats.HP);
     }
 
     // Update is called once per frame
