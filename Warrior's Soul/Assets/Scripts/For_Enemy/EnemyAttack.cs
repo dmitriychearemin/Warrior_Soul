@@ -16,6 +16,6 @@ public class EnemyAttack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-            EnemyDamage?.Invoke(100);
+            EnemyDamage?.Invoke(25);
     }
 }

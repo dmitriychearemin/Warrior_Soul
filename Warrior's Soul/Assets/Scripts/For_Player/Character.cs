@@ -10,7 +10,6 @@ public abstract class Character: MonoBehaviour
     public MoveState MoveState { get; set; } = MoveState.Idle;
     public ViewSide ViewSide { get; set; } = ViewSide.OnMe;
 
-    protected abstract void AnimateAttack();
     protected abstract void AnimateMovement();
     protected abstract void FlipSprite(float horizontalInput, float verticalInput);
     protected abstract void ChangeAnimation();

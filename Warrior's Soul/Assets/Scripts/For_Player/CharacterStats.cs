@@ -110,14 +110,18 @@ public class CharacterStats : MonoBehaviour
         {
             case MoveState.Idle:
                 {
-                    if (Stamina < 100 && !Input.GetKey(KeyCode.LeftShift))
+                    if (Stamina < 100)
                         Stamina += replenishmentStamina * Time.deltaTime * 2;
+                    else if (Stamina > 100)
+                        Stamina = 100;
                     break;
                 }
             case MoveState.Walk:
                 {
-                    if (Stamina < 100 && !Input.GetKey(KeyCode.LeftShift))
+                    if (Stamina < 100 && !InputHandler.RunTriggered)
                         Stamina += replenishmentStamina * Time.deltaTime;
+                    else if (Stamina > 100)
+                        Stamina = 100;
                     break;
                 }
             case MoveState.Attack:

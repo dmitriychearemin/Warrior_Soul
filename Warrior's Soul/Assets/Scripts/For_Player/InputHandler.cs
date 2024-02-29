@@ -15,7 +15,7 @@ public class InputHandler : MonoBehaviour
 
     public Vector2 MoveInput { get; private set; }
     public Vector2 MousePosInput { get; private set; }
-    public bool RunTriggered { get; private set; }
+    public static bool RunTriggered { get; private set; }
     public bool AttackTriggered { get; private set; }
     public static InputHandler Instance { get; private set; }
 

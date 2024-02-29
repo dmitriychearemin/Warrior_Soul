@@ -53,7 +53,7 @@ public class Player : Character
         AnimateAttack();
     }
 
-    protected override void AnimateAttack()
+    private void AnimateAttack()
     {
         if (input.AttackTriggered && stats.Stamina > 0
             && !(horizontalInput != 0 || verticalInput != 0))
@@ -114,7 +114,7 @@ public class Player : Character
         {
             FlipSprite(horizontalInput, verticalInput);
             float speed = Speed_Walk 
-                * (input.RunTriggered && stats.Stamina > 0 ? 2 : 1);
+                * (InputHandler.RunTriggered && stats.Stamina > 0 ? 2 : 1);
             rb.velocity = speed * Time.deltaTime * new Vector2(horizontalInput, verticalInput);
         }
     }
@@ -207,7 +207,7 @@ public class Player : Character
 
     protected override void ChangeAnimation()
     {
-        if (input.RunTriggered && stats.Stamina > 0)
+        if (InputHandler.RunTriggered && stats.Stamina > 0)
         {
             MoveState = MoveState.Run;
             switch (ViewSide) 
@@ -310,8 +310,6 @@ public class Player : Character
             animationTime = walkDuration;
         }
     }
-    //private void TakeDamage(float damage) =>
-    //    stats.TakeDamage(-damage);
 
     // Update is called once per frame
     void Update()
