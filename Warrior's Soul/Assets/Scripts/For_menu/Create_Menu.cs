@@ -25,7 +25,6 @@ public class Create_Menu : MonoBehaviour
        {
            can_Create = true;
            Invoke("Change_MoveState", waittime);
-          
         }
     }
 
@@ -35,13 +34,13 @@ public class Create_Menu : MonoBehaviour
         {
             Instantiate(Menu,canvas);
             can_Create = false;
-            player.Set_Move_State(Player.MoveState.Menu_Open);
+            player.MoveState = MoveState.Menu_Open;
         }
     }
 
     void Change_MoveState()
     {
-        player.Set_Move_State(Player.MoveState.Idle);
+        player.MoveState = MoveState.Menu_Open;
     }
 
 }

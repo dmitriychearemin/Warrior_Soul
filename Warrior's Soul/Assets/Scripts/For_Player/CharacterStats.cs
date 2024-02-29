@@ -1,19 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
-
 public class CharacterStats : MonoBehaviour
 {
-    public delegate void OnStaminaUpdate(float currentStamina, float maxStamina);
-    public delegate void OnHPUpdate(float currentHP, float maxHP);
+    public delegate void OnStaminaUpdate(GameObject obj, float currentStamina);
+    public delegate void OnHPUpdate(GameObject obj, float currentHP);
 
-    public static event OnStaminaUpdate StaminaUpdate;
-    public static event OnStaminaUpdate HPUpdate;
-   
+    public event OnStaminaUpdate StaminaUpdate;
+    public event OnHPUpdate HPUpdate;
+
+    private Character character;
+
     [Header("Stats")]
     public float MaxHP = 100;
     public float MaxStamina = 100;
@@ -23,6 +22,8 @@ public class CharacterStats : MonoBehaviour
 
     private bool Take_Damage = true;
     private bool damageArea = false;
+    public bool HoldShift { get; private set; }
+    private float staminaCoolDown = 0f;
     private int count_Cycles = 0;
 
     public float Stamina { get; private set; }
@@ -30,6 +31,7 @@ public class CharacterStats : MonoBehaviour
 
     private void Awake()
     {
+        character = GetComponent<Character>();
         HP = MaxHP;
         Stamina = MaxStamina;
     }
@@ -54,6 +56,22 @@ public class CharacterStats : MonoBehaviour
                 count_Cycles = 0;
             }
         }
+
+        staminaCoolDown -= Time.deltaTime;
+        if (staminaCoolDown <= 0)
+            staminaCoolDown = 0;
+
+        if (HoldShift && !InputHandler.RunTriggered)
+            HoldShift = false;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        HP -= damage;
+
+        if (HP <= 0)
+            HP = 0;
+        HPUpdate?.Invoke(gameObject, HP);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -66,15 +84,15 @@ public class CharacterStats : MonoBehaviour
 
         //if (Take_Damage)
         //{
-        //    if(collision.gameObject.CompareTag("Enemy"))
+        //    if (collision.gameObject.CompareTag("Enemy"))
         //    {
         //        HP -= 35;
-        //        HPUpdate?.Invoke(HP, MaxHP);
+        //        HPUpdate?.Invoke(gameObject, HP);
         //        Take_Damage = false;
         //    }
         //}
-       // if (collision.CompareTag("Finish"))
-            //LoadSceneWin();
+        // if (collision.CompareTag("Finish"))
+        //LoadSceneWin();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -83,15 +101,12 @@ public class CharacterStats : MonoBehaviour
             damageArea = false;
     }
 
-    public float GetHP()
-    { return HP; }
-
     private IEnumerator DamageArea()
     {
         while (HP > 0 && damageArea)
         {
             HP -= 5 * Time.deltaTime;
-            HPUpdate?.Invoke(HP, MaxHP);
+            HPUpdate?.Invoke(gameObject, HP);
             yield return new WaitForSeconds(0.01f);
         }
         StopCoroutine(DamageArea());
@@ -100,40 +115,41 @@ public class CharacterStats : MonoBehaviour
     private async Task UpdateStaminaAsync()
     {
         await Task.Yield();
-        switch (Player.GetMoveState())
+        switch (character.MoveState)
         {
-            case Player.MoveState.Idle:
+            case MoveState.Idle:
                 {
-                    if (Stamina < 100 && !Input.GetKey(KeyCode.LeftShift))
-                    {
+                    if (Stamina < 100 && staminaCoolDown <= 0)
                         Stamina += replenishmentStamina * Time.deltaTime * 2;
-                        //StaminaBar.fillAmount = Stamina / MaxStamina;
-                    }
+                    else if (Stamina > 100)
+                        Stamina = 100;
                     break;
                 }
-            case Player.MoveState.Walk:
+            case MoveState.Walk:
                 {
-                    if (Stamina < 100 && !Input.GetKey(KeyCode.LeftShift))
-                    {
+                    if (Stamina < 100 && staminaCoolDown <= 0)
                         Stamina += replenishmentStamina * Time.deltaTime;
-                        //StaminaBar.fillAmount = Stamina / MaxStamina;
-                    }
+                    else if (Stamina > 100)
+                        Stamina = 100;
                     break;
                 }
-            case Player.MoveState.Attack:
-            case Player.MoveState.Run:
+            case MoveState.Attack:
+            case MoveState.Run:
                 {
-                    if (Stamina > 0)
-                    {
+                    if (Stamina - consumptionStamina * Time.deltaTime > 0)
                         Stamina -= consumptionStamina * Time.deltaTime;
-                        //StaminaBar.fillAmount = Stamina / MaxStamina;
+                    else
+                    {
+                        Stamina = 0;
+                        staminaCoolDown = 1.5f;
+                        HoldShift = true;
                     }
                     break;
                 }
             default:
                 break;
         }
-        StaminaUpdate?.Invoke(Stamina, MaxStamina);
+        StaminaUpdate?.Invoke(gameObject, Stamina);
     }
 
     private IEnumerator StaminaUpdateLoop()
@@ -153,6 +169,4 @@ public class CharacterStats : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
-
-
 }

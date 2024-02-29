@@ -9,19 +9,21 @@ public class Enemy : MonoBehaviour
     private Animator animatorControl;
 
     public float speed;
-    public float Max_HitPoints = 100;
-    float Current_HP;
-    //public float Damage;
-    public float Visibility_radius;
+    private CharacterStats stats;
 
+    public float Visibility_radius;
     public float Stopping_Distance;
     public float Distance_Retreat;
+
+    private void Awake()
+    {
+        animatorControl = GetComponent<Animator>();
+        stats = GetComponent<CharacterStats>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        animatorControl = GetComponent<Animator>();
-        Current_HP = Max_HitPoints;
         PlayerAttack.PlayerDamage += TakeDamage;
     }
 
@@ -38,17 +40,16 @@ public class Enemy : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
-        Current_HP -= damage;
-        Debug.Log(Current_HP);
+        stats.TakeDamage(-damage);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Просто для примера
-        if (Current_HP <= 0) 
-        {
-            animatorControl.Play("Die_Player");
-        }
+        //// Просто для примера
+        //if (Current_HP <= 0) 
+        //{
+        //    animatorControl.Play("Die_Player");
+        //}
     }
 }

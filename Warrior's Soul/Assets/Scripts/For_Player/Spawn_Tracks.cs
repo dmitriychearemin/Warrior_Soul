@@ -6,10 +6,11 @@ using UnityEngine.UIElements;
 
 public class Spawn_Tracks : MonoBehaviour
 {
-    public GameObject SpawnTracks;
-    public GameObject Sand_Track;
-    public GameObject Grace_Track;
-    public Player player;
+    [SerializeField] private GameObject SpawnTracks;
+    [SerializeField] private GameObject Sand_Track;
+    [SerializeField] private GameObject Grace_Track;
+    [SerializeField] private Player player;
+    private Character character;
 
     private int trackCount = 0;
     private readonly Queue<GameObject> tracks = new();
@@ -20,12 +21,17 @@ public class Spawn_Tracks : MonoBehaviour
     //private float count_cycles = 0; // Для будущего создания лайфтайма объектов
     private const float dissapearTime = 5f;
 
+    private void Awake()
+    {
+        character = player.GetComponent<Character>();
+    }
+
     private void Update()
     {
         if(can_track == false)
         {
             cooldown_track++;
-            if (cooldown_track >= 1500 * Time.deltaTime)
+            if (cooldown_track >= 10000 * Time.deltaTime)
             {
                 can_track = true;
                 cooldown_track = 0;
@@ -44,41 +50,41 @@ public class Spawn_Tracks : MonoBehaviour
         if (collision.transform.CompareTag("Sand") && can_track)
         {
             can_track = false;
-            var viewSide = Player.GetViewSide();
+            var viewSide = character.ViewSide;
             var cur_pos = new Vector3(
                 SpawnTracks.transform.position.x, SpawnTracks.transform.position.y, 1f);
 
             switch (viewSide)
             {
-                case Player.ViewSide.Left:
+                case ViewSide.Left:
                     tracks.Enqueue(
                         Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 180))));
                     break;
-                case Player.ViewSide.Right:
+                case ViewSide.Right:
                     tracks.Enqueue(
                         Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 0))));
                     break;
-                case Player.ViewSide.OnScreen:
+                case ViewSide.OnScreen:
                     tracks.Enqueue(
                         Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 90))));
                     break;
-                case Player.ViewSide.OnMe:
+                case ViewSide.OnMe:
                     tracks.Enqueue(
                         Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 270))));
                     break;
-                case Player.ViewSide.Down_Right:
+                case ViewSide.Down_Right:
                     tracks.Enqueue(
                         Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 315))));
                     break;
-                case Player.ViewSide.Up_Right:
+                case ViewSide.Up_Right:
                     tracks.Enqueue(
                         Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 45))));
                     break;
-                case Player.ViewSide.Up_Left:
+                case ViewSide.Up_Left:
                     tracks.Enqueue(
                         Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 135))));
                     break;
-                case Player.ViewSide.Down_Left:
+                case ViewSide.Down_Left:
                     tracks.Enqueue(
                         Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 225))));
                     break;
@@ -90,41 +96,41 @@ public class Spawn_Tracks : MonoBehaviour
         if (collision.transform.CompareTag("Grace") && can_track)
         {
             can_track = false;
-            var viewSide = Player.GetViewSide();
+            var viewSide = character.ViewSide;
             var cur_pos = new Vector3(
                 SpawnTracks.transform.position.x, SpawnTracks.transform.position.y, 1f);
 
             switch (viewSide)
             {
-                case Player.ViewSide.Left:
+                case ViewSide.Left:
                     tracks.Enqueue(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 180))));
                     break;
-                case Player.ViewSide.Right:
+                case ViewSide.Right:
                     tracks.Enqueue(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 0))));
                     break;
-                case Player.ViewSide.OnScreen:
+                case ViewSide.OnScreen:
                     tracks.Enqueue(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 90))));
                     break;
-                case Player.ViewSide.OnMe:
+                case ViewSide.OnMe:
                     tracks.Enqueue(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 270))));
                     break;
-                case Player.ViewSide.Down_Right:
+                case ViewSide.Down_Right:
                     tracks.Enqueue(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 315))));
                     break;
-                case Player.ViewSide.Up_Right:
+                case ViewSide.Up_Right:
                     tracks.Enqueue(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 45))));
                     break;
-                case Player.ViewSide.Up_Left:
+                case ViewSide.Up_Left:
                     tracks.Enqueue(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 135))));
                     break;
-                case Player.ViewSide.Down_Left:
+                case ViewSide.Down_Left:
                     tracks.Enqueue(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 225))));
                     break;
