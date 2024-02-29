@@ -22,6 +22,8 @@ public class CharacterStats : MonoBehaviour
 
     private bool Take_Damage = true;
     private bool damageArea = false;
+    public bool HoldShift { get; private set; }
+    private float staminaCoolDown = 0f;
     private int count_Cycles = 0;
 
     public float Stamina { get; private set; }
@@ -54,6 +56,13 @@ public class CharacterStats : MonoBehaviour
                 count_Cycles = 0;
             }
         }
+
+        staminaCoolDown -= Time.deltaTime;
+        if (staminaCoolDown <= 0)
+            staminaCoolDown = 0;
+
+        if (HoldShift && !InputHandler.RunTriggered)
+            HoldShift = false;
     }
 
     public void TakeDamage(float damage)
@@ -110,7 +119,7 @@ public class CharacterStats : MonoBehaviour
         {
             case MoveState.Idle:
                 {
-                    if (Stamina < 100)
+                    if (Stamina < 100 && staminaCoolDown <= 0)
                         Stamina += replenishmentStamina * Time.deltaTime * 2;
                     else if (Stamina > 100)
                         Stamina = 100;
@@ -118,7 +127,7 @@ public class CharacterStats : MonoBehaviour
                 }
             case MoveState.Walk:
                 {
-                    if (Stamina < 100 && !InputHandler.RunTriggered)
+                    if (Stamina < 100 && staminaCoolDown <= 0)
                         Stamina += replenishmentStamina * Time.deltaTime;
                     else if (Stamina > 100)
                         Stamina = 100;
@@ -127,10 +136,14 @@ public class CharacterStats : MonoBehaviour
             case MoveState.Attack:
             case MoveState.Run:
                 {
-                    if (Stamina > 0)
+                    if (Stamina - consumptionStamina * Time.deltaTime > 0)
                         Stamina -= consumptionStamina * Time.deltaTime;
                     else
+                    {
                         Stamina = 0;
+                        staminaCoolDown = 1.5f;
+                        HoldShift = true;
+                    }
                     break;
                 }
             default:

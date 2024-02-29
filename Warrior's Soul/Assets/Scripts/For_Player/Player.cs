@@ -114,7 +114,7 @@ public class Player : Character
         {
             FlipSprite(horizontalInput, verticalInput);
             float speed = Speed_Walk 
-                * (InputHandler.RunTriggered && stats.Stamina > 0 ? 2 : 1);
+                * (InputHandler.RunTriggered && !stats.HoldShift ? 2 : 1);
             rb.velocity = speed * Time.deltaTime * new Vector2(horizontalInput, verticalInput);
         }
     }
@@ -207,7 +207,7 @@ public class Player : Character
 
     protected override void ChangeAnimation()
     {
-        if (InputHandler.RunTriggered && stats.Stamina > 0)
+        if (InputHandler.RunTriggered && !stats.HoldShift)
         {
             MoveState = MoveState.Run;
             switch (ViewSide) 
