@@ -19,6 +19,7 @@ TagManager:
   - Break_Block
   - Block_Ogranichitel
   - Attack
+  - Loot_Item
   layers:
   - Default
   - TransparentFX

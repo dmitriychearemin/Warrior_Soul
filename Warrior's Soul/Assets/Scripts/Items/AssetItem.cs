@@ -7,14 +7,19 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "Item")]
-public class AssetItem: ScriptableObject, IItem
+public class AssetItem: ScriptableObject
 {
     public string Name => _name;
     public Sprite UIICON => _UIIcon;
 
 
-    [SerializeField] private string _name;
-    [SerializeField] private Sprite _UIIcon;
+   // string IItem.Name { get => _name; set => _name}
+   // Sprite IItem.UIICON { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    public int count_Element = 1;
+
+    [SerializeField] public string _name;
+    [SerializeField] public Sprite _UIIcon;
 
 
 }

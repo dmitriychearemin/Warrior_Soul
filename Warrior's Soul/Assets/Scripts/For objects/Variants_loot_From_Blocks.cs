@@ -54,9 +54,8 @@ public class Variants_loot_From_Blocks: MonoBehaviour
                 // спавн гема
                 Instantiate(Gem);
             }
-
         }
-        
+
 
     }
 
