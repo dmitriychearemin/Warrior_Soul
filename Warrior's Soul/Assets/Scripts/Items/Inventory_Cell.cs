@@ -10,9 +10,8 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
 {
     [SerializeField] public Text _namefield;
     [SerializeField] private Image _iconField;
-    [SerializeField] private String _count_items;
-    public int _count_items_in_cell=1;
-    //[SerializeField] private GameObject _emptycell;
+    [SerializeField] public Text _count_items;
+   
   
 
 
@@ -23,15 +22,15 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     {
         _dragingParrent = draggingparent;
         _originalparent = transform.parent;
+        Debug.Log("sdfgsdg");
     }
 
-    public void Render(IItem item)
+    public void Render(AssetItem item)
     {
+      
         _namefield.text = item.Name;
         _iconField.sprite = item.UIICON;
-        _count_items = _count_items_in_cell.ToString();
-        
-
+        _count_items.text = item.count_Element.ToString();
 
     }
 
@@ -58,21 +57,18 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
 
         for(int i =0; i< _originalparent.transform.childCount; i++)
         {
-            if(_originalparent.transform.GetChild(i).transform.position == Input.mousePosition)
-            {
-                closestindex = i;
-            }
+         
 
-            /*if(Vector3.Distance(transform.position,_originalparent.transform.GetChild(i).transform.position) < 
+            if(Vector3.Distance(transform.position,_originalparent.transform.GetChild(i).transform.position) < 
                 Vector3.Distance(transform.position, _originalparent.transform.GetChild(closestindex).transform.position))
             {
                 closestindex = i;
-            }*/
+            }
         }
 
         transform.parent = _originalparent;
         transform.SetSiblingIndex(closestindex);
-       // Destroy(_emptycell);
+       
     }
 }
 

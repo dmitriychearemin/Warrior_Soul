@@ -8,6 +8,8 @@ public class Player : Character
 {
     [SerializeField]private float Default_Speed = 250f;
 
+    [SerializeField] Inventory _inventory;
+
     private float horizontalInput = 0, verticalInput = 0;
     private float halfScreenX = Screen.width / 2, halfScreenY = Screen.height / 2;
     private const int angleCoeff = 30;
@@ -326,9 +328,23 @@ public class Player : Character
             animatorContoller.Play("Idol_Animation");
         }
     }
+
     public void DeadAnimation()
     {
         transform.localScale = Default_State;
         animatorContoller.Play("Die_Player");
     }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Loot_Item")
+        {
+
+            string _nameobject = collision.gameObject.name;
+            Sprite _sptriteobject = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
+            _inventory.Add_Element_In_Cell(_nameobject,_sptriteobject);
+        }
+    }
+
 }
