@@ -212,14 +212,10 @@ public class Inventory: MonoBehaviour
 
     public void Clear_Inventory()
     {
-        Debug.Log(Items.Count);
-
         foreach (Transform child in _container)
         {
             Destroy(child.gameObject);
         }
-
-        Debug.Log(Items.Count);
     }
 
     public void Add_Element_In_Cell(String name, Sprite sprite){
