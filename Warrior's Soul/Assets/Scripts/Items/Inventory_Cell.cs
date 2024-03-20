@@ -22,7 +22,7 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     {
         _dragingParrent = draggingparent;
         _originalparent = transform.parent;
-        Debug.Log("sdfgsdg");
+        
     }
 
     public void Render(AssetItem item)
