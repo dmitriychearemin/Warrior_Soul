@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class AI_For_Move_Atack : MonoBehaviour
 {
-
     public Transform PlayerTransform;
-    Enemy enemy;
+    NPC enemy;
 
     // Start is called before the first frame update
     void Start()
     {
         PlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        enemy = GetComponent<Enemy>();
+        enemy = GetComponent<NPC>();
     }
 
     // Update is called once per frame
@@ -20,7 +19,8 @@ public class AI_For_Move_Atack : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, PlayerTransform.position) > enemy.Stopping_Distance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, PlayerTransform.position, enemy.speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, PlayerTransform.position, 
+                enemy.speed * Time.deltaTime);
           
         }
 

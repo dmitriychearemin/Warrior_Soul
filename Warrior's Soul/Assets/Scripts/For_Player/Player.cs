@@ -17,7 +17,7 @@ public class Player : Character
     [SerializeField]private Transform attackCollider;
 
     private InputHandler input;
-    private new Transform transform;
+    //private new Transform transform;
     private Rigidbody2D rb;
     private Animator animatorContoller;
 
@@ -25,7 +25,7 @@ public class Player : Character
     private const float walkDuration = 0.08f; 
     private const float attackDuration = 1.2f;
 
-    private Vector3 Default_State;
+    //private Vector3 Default_State;
 
     private void Awake()
     {
@@ -121,94 +121,50 @@ public class Player : Character
         }
     }
 
-    protected override void FlipSprite(float horizontalInput, float verticalInput)
+    private void FlipAttackCollider()
     {
-        if (horizontalInput != 0 && verticalInput != 0)
+        switch (ViewSide)
         {
-            if (verticalInput > 0)
-            {
-                if (horizontalInput < 0) // Up_Left
-                {
-                    transform.localScale = Default_State;
-                    attackCollider.SetLocalPositionAndRotation(new Vector3(-0.59f, 0.89f),
+            case ViewSide.Up_Left:
+                attackCollider.SetLocalPositionAndRotation(new Vector3(-0.59f, 0.89f),
                         Quaternion.Euler(new Vector3(0, 0, 50)));
-                    ViewSide = ViewSide.Up_Left;
-                }
-                else // Up_Right
-                {
-                    transform.localScale = Default_State;
-                    transform.localScale = 
-                        new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                    attackCollider.SetLocalPositionAndRotation(new Vector3(-0.61f, 0.88f),
+                break;
+            case ViewSide.Up_Right:
+                attackCollider.SetLocalPositionAndRotation(new Vector3(-0.61f, 0.88f),
                         Quaternion.Euler(new Vector3(0, 0, 50)));
-                    ViewSide = ViewSide.Up_Right;
-                }
-            }
-            else
-            {
-                if (horizontalInput < 0) // Down_Left
-                {
-                    transform.localScale = Default_State;
-                    transform.localScale = 
-                        new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                    attackCollider.SetLocalPositionAndRotation(new Vector3(0.74f, -0.73f),
-                        Quaternion.Euler(new Vector3(0, 0, 50)));
-                    //Debug.Log("Down_Left");
-                    ViewSide = ViewSide.Down_Left;
-                }
-                else // Down_right
-                {
-                    transform.localScale = Default_State;
-                    attackCollider.SetLocalPositionAndRotation(new Vector3(0.986f, -0.65f),
-                        Quaternion.Euler(new Vector3(0, 0, 50)));
-                    //Debug.Log("Down_right");
-                    ViewSide = ViewSide.Down_Right;
-                }
-            }
-        }
-        else if (verticalInput != 0)
-        {
-            if (verticalInput > 0) // OnScreen
-            {
-                attackCollider.SetLocalPositionAndRotation(new Vector3(0.0073f, 0.93f),
-                        Quaternion.Euler(new Vector3(0, 0, 0)));
-                //Debug.Log("Screen");
-                ViewSide = ViewSide.OnScreen;
-            }
-            else // OnMe
-            {
+                break;
+            case ViewSide.OnMe:
                 attackCollider.SetLocalPositionAndRotation(new Vector3(0.0073f, -1.08f),
                         Quaternion.Euler(new Vector3(0, 0, 0)));
-               // Debug.Log("OnME");
-                ViewSide = ViewSide.OnMe;
-            }
-        }
-        else
-        {
-            if (horizontalInput > 0) // Right
-            {
-                transform.localScale = Default_State;
+                break;
+            case ViewSide.Left:
                 attackCollider.SetLocalPositionAndRotation(new Vector3(0.87f, 0.14f),
                         Quaternion.Euler(new Vector3(0, 0, 90)));
-                //Debug.Log("Rigth");
-                ViewSide = ViewSide.Right;
-            }
-            else // Left
-            {
-                transform.localScale = Default_State;
-                transform.localScale =
-                    new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                break;
+            case ViewSide.Right:
                 attackCollider.SetLocalPositionAndRotation(new Vector3(0.87f, 0.14f),
                         Quaternion.Euler(new Vector3(0, 0, 90)));
-                //Debug.Log("Left");
-                ViewSide = ViewSide.Left;
-            }
+                break;
+            case ViewSide.Down_Left:
+                attackCollider.SetLocalPositionAndRotation(new Vector3(0.74f, -0.73f),
+                        Quaternion.Euler(new Vector3(0, 0, 50)));
+                break;
+            case ViewSide.Down_Right:
+                attackCollider.SetLocalPositionAndRotation(new Vector3(0.986f, -0.65f),
+                        Quaternion.Euler(new Vector3(0, 0, 50)));
+                break;
+            case ViewSide.OnScreen:
+                attackCollider.SetLocalPositionAndRotation(new Vector3(0.0073f, 0.93f),
+                        Quaternion.Euler(new Vector3(0, 0, 0)));
+                break;
+            default:
+                break;
         }
-        ChangeAnimation();
     }
 
     protected override void ChangeAnimation()
     {
+        FlipAttackCollider();
         if (InputHandler.RunTriggered && !stats.HoldShift)
         {
             MoveState = MoveState.Run;
