@@ -855,6 +855,7 @@ GameObject:
   - component: {fileID: 1037814147}
   - component: {fileID: 1037814155}
   - component: {fileID: 1037814152}
+  - component: {fileID: 1037814156}
   - component: {fileID: 1037814151}
   - component: {fileID: 1037814153}
   m_Layer: 0
@@ -1053,10 +1054,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cc113f9bf881c43939a8948a60db86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  Visibility_radius: 0
-  Stopping_Distance: 0
-  Distance_Retreat: 0
+  <Type>k__BackingField: 0
+  speed: 5
+  <Visibility_radius>k__BackingField: 10
+  <Stopping_Distance>k__BackingField: 10
+  <Distance_Retreat>k__BackingField: 5
+--- !u!114 &1037814156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037814145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7abcbb69145bb954380d53eccdae883b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTransform: {fileID: 0}
 --- !u!1 &1316698413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,10 +1501,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cc113f9bf881c43939a8948a60db86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Type>k__BackingField: 0
   speed: 50
-  Visibility_radius: 0
-  Stopping_Distance: 0
-  Distance_Retreat: 0
+  <Visibility_radius>k__BackingField: 0
+  <Stopping_Distance>k__BackingField: 0
+  <Distance_Retreat>k__BackingField: 0
 --- !u!50 &1714574239
 Rigidbody2D:
   serializedVersion: 4

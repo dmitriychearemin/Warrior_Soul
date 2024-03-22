@@ -10,6 +10,8 @@ public class NPC : Character
     private Animator animatorContoller;
     private Rigidbody2D rb;
 
+    [field: SerializeField] public AI_Type Type { get; private set; }
+
     public float speed;
     //private CharacterStats stats;
 
@@ -17,14 +19,12 @@ public class NPC : Character
     private const float walkDuration = 0.08f;
     private const float attackDuration = 1.2f;
 
-    public float Visibility_radius;
-    public float Stopping_Distance;
-    public float Distance_Retreat;
+    [field: SerializeField]public float Visibility_radius { get; private set; }
+    [field: SerializeField]public float Stopping_Distance { get; private set; }
+    [field: SerializeField]public float Distance_Retreat { get; private set; }
     // Заглушки
     private bool runTriggered;
     private bool attackTriggered;
-
-    [SerializeField]public AI_Type Type { get; private set; }
 
     public enum AI_Type
     {
@@ -37,6 +37,9 @@ public class NPC : Character
         animatorContoller = GetComponent<Animator>();
         stats = GetComponent<CharacterStats>();
         rb = GetComponent<Rigidbody2D>();
+        transform = GetComponent<Transform>();
+        Default_State =
+            new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     private void FixedUpdate()
@@ -55,6 +58,11 @@ public class NPC : Character
             MoveState = MoveState.Idle;
             animatorContoller.Play("Idol_Animation");
         }
+    }
+
+    public void Animate(Vector2 origin, Vector2 target)
+    {
+        DefineAngle(origin, target, 20);
     }
 
     protected override void AnimateMovement()

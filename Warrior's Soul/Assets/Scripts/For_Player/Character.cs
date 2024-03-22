@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,53 @@ public abstract class Character: MonoBehaviour
     public ViewSide ViewSide { get; set; } = ViewSide.OnMe;
 
     protected abstract void AnimateMovement();
+    protected void DefineAngle(Vector2 origin, Vector2 target, float angleCoeff)
+    {
+        float angle = (float)Math.Atan2(target.y - origin.y, 
+            target.x - origin.x) * (float)(180 / Math.PI);
+        if (angle > 0)
+        {
+            if (angle <= 90)
+            {
+                if (angle < 45 - angleCoeff)
+                    FlipSprite(1f, 0f);
+                else if (angle > 45 + angleCoeff)
+                    FlipSprite(0f, 1f);
+                else
+                    FlipSprite(1f, 1f);
+            }
+            else
+            {
+                if (angle > 135 + angleCoeff)
+                    FlipSprite(-1f, 0f);
+                else if (angle < 135 - 10)
+                    FlipSprite(0f, 1f);
+                else
+                    FlipSprite(-1f, 1f);
+            }
+        }
+        else
+        {
+            if (angle > -90)
+            {
+                if (angle > -45 + angleCoeff)
+                    FlipSprite(1f, 0f);
+                else if (angle < -45 - angleCoeff)
+                    FlipSprite(0f, -1f);
+                else
+                    FlipSprite(1f, -1f);
+            }
+            else
+            {
+                if (angle < -135 - angleCoeff)
+                    FlipSprite(-1f, 0f);
+                else if (angle > -135 + angleCoeff)
+                    FlipSprite(0f, -1f);
+                else
+                    FlipSprite(-1f, -1f);
+            }
+        }
+    }
     protected void FlipSprite(float horizontalInput, float verticalInput)
     {
         if (horizontalInput != 0 && verticalInput != 0)
