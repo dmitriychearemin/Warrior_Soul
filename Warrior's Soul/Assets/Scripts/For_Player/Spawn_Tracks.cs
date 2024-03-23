@@ -16,7 +16,7 @@ public class Spawn_Tracks : MonoBehaviour
     private readonly Queue<GameObject> tracks = new();
 
     private bool can_track = true;
-    private int cooldown_track = 0;
+    private float cooldown_track = 0;
 
     //private float count_cycles = 0; // Для будущего создания лайфтайма объектов
     private const float dissapearTime = 5f;
@@ -28,10 +28,10 @@ public class Spawn_Tracks : MonoBehaviour
 
     private void Update()
     {
-        if(can_track == false)
+        if(!can_track)
         {
-            cooldown_track++;
-            if (cooldown_track >= 10000 * Time.deltaTime)
+            cooldown_track += Time.deltaTime;
+            if (cooldown_track >= 0.43f )
             {
                 can_track = true;
                 cooldown_track = 0;
