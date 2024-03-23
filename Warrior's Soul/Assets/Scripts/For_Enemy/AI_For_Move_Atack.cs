@@ -1,3 +1,4 @@
+using NavMeshPlus.Components;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,8 +7,7 @@ using UnityEngine.AI;
 
 public class AI_For_Move_Atack : MonoBehaviour
 {
-    //public Transform PlayerTransform;
-    private Vector2 target;
+    [SerializeField] private NavMeshSurface surface;
     private NavMeshAgent agent;
     private NPC enemy;
 
@@ -19,21 +19,17 @@ public class AI_For_Move_Atack : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         enemy = GetComponent<NPC>();
+        surface.BuildNavMeshAsync();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButton(0))
-        {
-            agent.SetDestination(target = Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            //enemy.Animate(transform.position, target);
-        }
-
-        if (!agent.destination.Equals(target)) 
-        {
+            agent.SetDestination(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        
+        if (agent.remainingDistance > agent.stoppingDistance)
             enemy.Animate(transform.position, agent.steeringTarget);
-        }
         //Debug.Log((float)Math.Atan2(PlayerTransform.position.y - transform.position.y, 
         //    PlayerTransform.position.x - transform.position.x) * (float)(180 / Math.PI));
 
