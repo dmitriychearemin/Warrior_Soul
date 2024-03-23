@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class AI_For_Move_Atack : MonoBehaviour
 {
     //public Transform PlayerTransform;
-    private Vector2 target;
+    private Vector3 target;
     private NavMeshAgent agent;
     private NPC enemy;
 
@@ -24,13 +24,14 @@ public class AI_For_Move_Atack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(target);
         if (Input.GetMouseButton(0))
         {
             agent.SetDestination(target = Camera.main.ScreenToWorldPoint(Input.mousePosition));
             //enemy.Animate(transform.position, target);
         }
 
-        if (!agent.destination.Equals(target)) 
+        if (agent.remainingDistance > agent.stoppingDistance)
         {
             enemy.Animate(transform.position, agent.steeringTarget);
         }
