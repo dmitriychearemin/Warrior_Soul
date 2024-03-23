@@ -1,3 +1,4 @@
+using NavMeshPlus.Components;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
@@ -27,6 +28,7 @@ public class Rooms_Spawn : MonoBehaviour
         variants = GameObject.FindGameObjectWithTag("Room").GetComponent<Rooms_Variants>();
         Destroy(gameObject,waitTime);
         Invoke("Spawn_Room", 0.2f);
+        FindObjectOfType<NavMeshSurface>().BuildNavMesh();
     }
 
     void Update()

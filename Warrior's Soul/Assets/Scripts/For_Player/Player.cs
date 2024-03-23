@@ -63,50 +63,7 @@ public class Player : Character
             var x = input.MousePosInput.x;
             var y = input.MousePosInput.y;
 
-            float angle = (float)Math.Atan2(y - halfScreenY, x - halfScreenX) 
-                * (float)(180 / Math.PI);
-            if (angle > 0)
-            {
-                if (angle <= 90)
-                {
-                    if (angle < 45 - angleCoeff)
-                        FlipSprite(1f, 0f);
-                    else if (angle > 45 + angleCoeff)
-                        FlipSprite(0f, 1f);
-                    else
-                        FlipSprite(1f, 1f);
-                }
-                else
-                {
-                    if (angle > 135 + angleCoeff)
-                        FlipSprite(-1f, 0f);
-                    else if (angle < 135 - 10)
-                        FlipSprite(0f, 1f);
-                    else
-                        FlipSprite(-1f, 1f);
-                }
-            }
-            else
-            {
-                if (angle > -90)
-                {
-                    if (angle > -45 + angleCoeff)
-                        FlipSprite(1f, 0f);
-                    else if (angle < -45 - angleCoeff)
-                        FlipSprite(0f, -1f);
-                    else
-                        FlipSprite(1f, -1f);
-                }
-                else
-                {
-                    if (angle < -135 - angleCoeff)
-                        FlipSprite(-1f, 0f);
-                    else if (angle > -135 + angleCoeff)
-                        FlipSprite(0f, -1f);
-                    else
-                        FlipSprite(-1f, -1f);
-                }
-            }
+            DefineAngle(new Vector2(halfScreenX, halfScreenY), new Vector2(x, y), angleCoeff);
         }
     }
 
