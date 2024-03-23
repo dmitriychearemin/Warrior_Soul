@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class Spawn_Tracks : MonoBehaviour
 {
@@ -16,9 +14,10 @@ public class Spawn_Tracks : MonoBehaviour
     private readonly Queue<GameObject> tracks = new();
 
     private bool can_track = true;
-    private int cooldown_track = 0;
+    private float cooldown_track = 0;
+    private float lifeTimer = 0f;
 
-    //private float count_cycles = 0; // Для будущего создания лайфтайма объектов
+    private readonly float lifeTimeTrack = 60f; // Для будущего создания лайфтайма объектов
     private const float dissapearTime = 5f;
 
     private void Awake()
@@ -28,21 +27,23 @@ public class Spawn_Tracks : MonoBehaviour
 
     private void Update()
     {
-        if(can_track == false)
+        if(!can_track)
         {
-            cooldown_track++;
-            if (cooldown_track >= 10000 * Time.deltaTime)
+            cooldown_track += Time.deltaTime;
+            if (cooldown_track >= 0.43f )
             {
                 can_track = true;
                 cooldown_track = 0;
             }
         }
 
-        if (trackCount >= 45)
+        if (trackCount >= 45 || lifeTimer >= lifeTimeTrack)
         {
             StartCoroutine(FadeTracks(tracks.Dequeue()));
+            lifeTimer = 0;
             trackCount--;
         }
+        lifeTimer += Time.deltaTime;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
