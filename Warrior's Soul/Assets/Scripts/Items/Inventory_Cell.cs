@@ -11,9 +11,6 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     [SerializeField] public Text _namefield;
     [SerializeField] private Image _iconField;
     [SerializeField] public Text _count_items;
-   
-  
-
 
     private Transform _dragingParrent;
     private Transform _originalparent;
@@ -40,7 +37,10 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         
     }
 
-
+    public Text getName()
+    {
+        return _namefield;
+    }
 
 
     public void OnDrag(PointerEventData eventData)

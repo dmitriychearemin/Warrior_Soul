@@ -10,7 +10,7 @@ public class Spawn_Loot : MonoBehaviour
     private Loot_Variants _loot_variant;
     private int _current_count_loot;
     private int _level_player = 0;          //получение через геткомпонент из скрипта
-    [SerializeField] int _max_count_spawn_item = 3;
+    [SerializeField] int _max_count_spawn_item=6;
     
 
 
@@ -21,7 +21,7 @@ public class Spawn_Loot : MonoBehaviour
     }
     
 
-    void Spawn_Loot_Item()
+    public void Spawn_Loot_Item()
     {
         _max_count_spawn_item += _level_player;
         _current_count_loot = Random.Range(0,_max_count_spawn_item);
@@ -36,13 +36,6 @@ public class Spawn_Loot : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            Spawn_Loot_Item();
-            Destroy(gameObject);
-        }
-    }
+   
 
 }
