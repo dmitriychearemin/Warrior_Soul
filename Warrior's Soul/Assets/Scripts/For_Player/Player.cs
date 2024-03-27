@@ -26,7 +26,9 @@ public class Player : Character
     private const float attackDuration = 1.2f;
 
     //private Vector3 Default_State;
+    bool _menuactive = true;
 
+    GameObject inventory;
     private void Awake()
     {
         Speed_Walk = Default_Speed;
@@ -42,6 +44,7 @@ public class Player : Character
     {
         input = InputHandler.Instance;
         EnemyAttack.EnemyDamage += TakeDamage;
+        inventory = GameObject.Find("Inventory");
     }
 
     private void OnDestroy()
@@ -240,6 +243,20 @@ public class Player : Character
             MoveState = MoveState.Idle;
             animatorContoller.Play("Idol_Animation");
         }
+
+        if (Input.GetKeyDown(KeyCode.Tab) && _menuactive == true)
+        {
+            inventory.SetActive(false);
+            Debug.Log("Turn_Off");
+            _menuactive = false;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Tab) && _menuactive == false)
+        {
+            inventory.SetActive(true);
+            Debug.Log("Turn_On");
+            _menuactive = true;
+        }
     }
 
     public void DeadAnimation()
@@ -258,6 +275,8 @@ public class Player : Character
             Sprite _sptriteobject = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
             _inventory.Add_Element_In_Cell(_nameobject,_sptriteobject);
         }
+
+
     }
 
 }

@@ -394,6 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Default_Speed: 250
+  _inventory: {fileID: 0}
   attackCollider: {fileID: 2658403080269334051}
 --- !u!114 &4684375197335866495
 MonoBehaviour:
