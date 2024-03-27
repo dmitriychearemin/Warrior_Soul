@@ -275,6 +275,8 @@ public class Player : Character
             Sprite _sptriteobject = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
             _inventory.Add_Element_In_Cell(_nameobject,_sptriteobject);
         }
+
+
     }
 
 }

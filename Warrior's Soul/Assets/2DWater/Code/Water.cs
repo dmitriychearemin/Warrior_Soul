@@ -43,12 +43,17 @@ namespace Bundos.WaterSystem
         Vector2[] uvs;
 
 
+        bool can_spawn_splash = true;
+        float timer_spawn_splash = 0f;
+
         private void Start()
         {
             Initialize();
             InitializeSprings();
             CreateShape();
         }
+
+        
 
         public void Initialize()
         {
@@ -138,6 +143,16 @@ namespace Bundos.WaterSystem
             UpdateSpringPositions();
             UpdateMeshVerticePositions();
             UpdateMesh();
+
+            if(can_spawn_splash == false)
+            {
+                timer_spawn_splash += 1f * Time.deltaTime;
+                if(timer_spawn_splash > 1f)
+                {
+                    timer_spawn_splash = 0f;
+                    can_spawn_splash = true;
+                }
+            }
         }
 
         private void UpdateMeshVerticePositions()
@@ -205,24 +220,25 @@ namespace Bundos.WaterSystem
                 }
             }
 
-            springs[index].weightPosition = (sink ? Vector2.down : Vector2.up) * waveHeight;
+            //springs[index].weightPosition = (sink ? Vector2.down : Vector2.up) * waveHeight;
         }
 
-        void OnTriggerEnter2D(Collider2D other)
+        void OnTriggerStay2D(Collider2D other)
         {
-            if (!interactive)
-                return;
+            /*if (!interactive)
+                return;*/
 
             Rigidbody2D otherRigidbody = other.GetComponent<Rigidbody2D>();
-            if (otherRigidbody != null)
+            if (other.tag == "Player" && can_spawn_splash)
             {
-                Vector2 contactPoint = other.ClosestPoint(transform.position);
-
+            
+                Vector2 contactPoint = other.transform.position;
                 Ripple(contactPoint, false);
+                can_spawn_splash = false;
             }
         }
 
-        void OnTriggerExit2D(Collider2D other)
+        /*void OnTriggerExit2D(Collider2D other)
         {
             if (!interactive)
                 return;
@@ -233,6 +249,6 @@ namespace Bundos.WaterSystem
                 Vector2 contactPoint = other.ClosestPoint(transform.position);
                 Ripple(contactPoint, true);
             }
-        }
+        }*/
     }
 }

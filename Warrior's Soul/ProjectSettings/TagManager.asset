@@ -20,6 +20,7 @@ TagManager:
   - Block_Ogranichitel
   - Attack
   - Loot_Item
+  - Water
   layers:
   - Default
   - TransparentFX

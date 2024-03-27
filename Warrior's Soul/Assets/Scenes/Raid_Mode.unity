@@ -868,14 +868,6 @@ PrefabInstance:
       value: Bonfire
       objectReference: {fileID: 0}
     - target: {fileID: 5424041542442597781, guid: 3940673c23f3bd541a6ada6200bee5f3, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.71908873
-      objectReference: {fileID: 0}
-    - target: {fileID: 5424041542442597781, guid: 3940673c23f3bd541a6ada6200bee5f3, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.72972506
-      objectReference: {fileID: 0}
-    - target: {fileID: 5424041542442597781, guid: 3940673c23f3bd541a6ada6200bee5f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.6547
       objectReference: {fileID: 0}

@@ -5,26 +5,26 @@ using UnityEngine;
 public class WaterMove : MonoBehaviour
 {
     [SerializeField] float Max_lenght_Wave;
-    float original_scale_X;
-    float cur_scale_x;
+    float original_scale_Y;
+    float cur_scale_y;
     [SerializeField] float speed_wave = 0.5f;
     
     // Start is called before the first frame update
     void Start()
     {
-        original_scale_X = gameObject.transform.localScale.x;
-        cur_scale_x = original_scale_X;
+        original_scale_Y = gameObject.transform.localScale.y;
+        cur_scale_y = original_scale_Y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(cur_scale_x < original_scale_X - Max_lenght_Wave || cur_scale_x > original_scale_X + Max_lenght_Wave)
+        if(cur_scale_y < original_scale_Y - Max_lenght_Wave || cur_scale_y > original_scale_Y + Max_lenght_Wave)
         {
             speed_wave *= -1;
         }
-        cur_scale_x += speed_wave * Time.deltaTime;
-        transform.localScale =  new Vector2(cur_scale_x, transform.localScale.y);
+        cur_scale_y += speed_wave * Time.deltaTime;
+        transform.localScale =  new Vector2(transform.localScale.x, cur_scale_y);
 
     }
 }

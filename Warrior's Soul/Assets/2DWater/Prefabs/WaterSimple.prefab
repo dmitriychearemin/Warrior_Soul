@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 270394267970809003}
   - component: {fileID: 270394267970809002}
   - component: {fileID: 270394267970809005}
-  - component: {fileID: 270394267970809004}
   - component: {fileID: 270394267970809007}
+  - component: {fileID: 7936683332403077204}
   m_Layer: 4
   m_Name: WaterSimple
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,9 +29,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270394267970809006}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.88, y: 7.2695, z: -1}
-  m_LocalScale: {x: 0.54398304, y: 3.5, z: 1}
+  m_LocalScale: {x: 3.9159248, y: 47.120266, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,9 +52,9 @@ MonoBehaviour:
   splashInfluence: 0.5
   waveHeight: 0.25
   hasConstantWaves: 1
-  waveAmplitude: 0.03
-  waveSpeed: 4
-  waveStep: 2
+  waveAmplitude: 0.02
+  waveSpeed: 1.65
+  waveStep: 12
   numSprings: 20
   spacing: 1
   springConstant: 0.02
@@ -171,7 +171,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 43bee363a00a02240b6edcbe6f5f6299, type: 2}
+  - {fileID: 2100000, guid: 31d1d79f61d87bb47a4ba70a3808eab4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -193,25 +193,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!253 &270394267970809004
-BuoyancyEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270394267970809006}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 640
-  m_SurfaceLevel: 1
-  m_Density: 2
-  m_LinearDrag: 5
-  m_AngularDrag: 5
-  m_FlowAngle: 0
-  m_FlowMagnitude: 0
-  m_FlowVariation: 0
 --- !u!61 &270394267970809007
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -257,3 +238,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 19, y: 0.99999994}
   m_EdgeRadius: 0
+--- !u!114 &7936683332403077204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270394267970809006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf6043f44a8cbd14cb14f473a7720316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Max_lenght_Wave: 3
+  speed_wave: 2

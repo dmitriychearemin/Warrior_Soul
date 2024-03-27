@@ -9,8 +9,8 @@ public class Tracks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (count_cycles>=30000* Time.deltaTime)
-            StartCoroutine(FadeTracks());
+        /*if (count_cycles>=30000* Time.deltaTime)
+            StartCoroutine(FadeTracks());*?
         
         count_cycles++;
         
@@ -39,4 +39,15 @@ public class Tracks : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Water")
+        {
+            print("Destroy");
+            StartCoroutine(FadeTracks());
+        }
+    }
+
+
 }
