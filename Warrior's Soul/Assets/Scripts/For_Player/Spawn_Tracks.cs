@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class Spawn_Tracks : MonoBehaviour
 {
-    [SerializeField] private GameObject SpawnTracks;
     [SerializeField] private GameObject Sand_Track;
     [SerializeField] private GameObject Grace_Track;
     [SerializeField] private Player player;
     private Character character;
 
     private int trackCount = 0;
-    private readonly Queue<GameObject> tracks = new();
+    private readonly List<GameObject> tracks = new();
 
     private bool can_track = true;
     private float cooldown_track = 0;
     private float lifeTimer = 0f;
 
-    private readonly float lifeTimeTrack = 60f; // Для будущего создания лайфтайма объектов
+    private readonly float lifeTimeTrack = 30f; // Для будущего создания лайфтайма объектов
     private const float dissapearTime = 5f;
 
     private void Awake()
@@ -30,20 +29,29 @@ public class Spawn_Tracks : MonoBehaviour
         if(!can_track)
         {
             cooldown_track += Time.deltaTime;
-            if (cooldown_track >= 0.43f )
+            if (cooldown_track >= 0.43f)
             {
                 can_track = true;
                 cooldown_track = 0;
             }
         }
 
-        if (trackCount >= 45 || lifeTimer >= lifeTimeTrack)
+        if (trackCount >= 45 || (lifeTimer >= lifeTimeTrack && trackCount > 0))
+            TrackDestroy(tracks[0]);
+        else if (lifeTimer >= lifeTimeTrack)
+            lifeTimer = 0;
+        lifeTimer += Time.deltaTime;
+    }
+
+    public void TrackDestroy(GameObject obj)
+    {
+        if (tracks.Contains(obj))
         {
-            StartCoroutine(FadeTracks(tracks.Dequeue()));
+            tracks.Remove(obj);
+            StartCoroutine(FadeTracks(obj));
             lifeTimer = 0;
             trackCount--;
         }
-        lifeTimer += Time.deltaTime;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -53,45 +61,47 @@ public class Spawn_Tracks : MonoBehaviour
             can_track = false;
             var viewSide = character.ViewSide;
             var cur_pos = new Vector3(
-                SpawnTracks.transform.position.x, SpawnTracks.transform.position.y, 1f);
+                gameObject.transform.position.x, gameObject.transform.position.y, 1f);
+            GameObject obj = null;
 
             switch (viewSide)
             {
                 case ViewSide.Left:
-                    tracks.Enqueue(
-                        Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 180))));
+                    tracks.Add(
+                        obj = Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 180))));
                     break;
                 case ViewSide.Right:
-                    tracks.Enqueue(
-                        Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 0))));
+                    tracks.Add(
+                        obj = Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 0))));
                     break;
                 case ViewSide.OnScreen:
-                    tracks.Enqueue(
-                        Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 90))));
+                    tracks.Add(
+                        obj = Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 90))));
                     break;
                 case ViewSide.OnMe:
-                    tracks.Enqueue(
-                        Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 270))));
+                    tracks.Add(
+                        obj = Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 270))));
                     break;
                 case ViewSide.Down_Right:
-                    tracks.Enqueue(
-                        Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 315))));
+                    tracks.Add(
+                        obj = Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 315))));
                     break;
                 case ViewSide.Up_Right:
-                    tracks.Enqueue(
-                        Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 45))));
+                    tracks.Add(
+                        obj = Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 45))));
                     break;
                 case ViewSide.Up_Left:
-                    tracks.Enqueue(
-                        Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 135))));
+                    tracks.Add(
+                        obj = Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 135))));
                     break;
                 case ViewSide.Down_Left:
-                    tracks.Enqueue(
-                        Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 225))));
+                    tracks.Add(
+                        obj = Instantiate(Sand_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 225))));
                     break;
             }
+            var track = obj.GetComponent<Tracks>();
+            track.Parent = this;
             trackCount++;
-
         }
 
         if (collision.transform.CompareTag("Grace") && can_track)
@@ -99,45 +109,44 @@ public class Spawn_Tracks : MonoBehaviour
             can_track = false;
             var viewSide = character.ViewSide;
             var cur_pos = new Vector3(
-                SpawnTracks.transform.position.x, SpawnTracks.transform.position.y, 1f);
+                gameObject.transform.position.x, gameObject.transform.position.y, 1f);
 
             switch (viewSide)
             {
                 case ViewSide.Left:
-                    tracks.Enqueue(
+                    tracks.Add(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 180))));
                     break;
                 case ViewSide.Right:
-                    tracks.Enqueue(
+                    tracks.Add(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 0))));
                     break;
                 case ViewSide.OnScreen:
-                    tracks.Enqueue(
+                    tracks.Add(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 90))));
                     break;
                 case ViewSide.OnMe:
-                    tracks.Enqueue(
+                    tracks.Add(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 270))));
                     break;
                 case ViewSide.Down_Right:
-                    tracks.Enqueue(
+                    tracks.Add(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 315))));
                     break;
                 case ViewSide.Up_Right:
-                    tracks.Enqueue(
+                    tracks.Add(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 45))));
                     break;
                 case ViewSide.Up_Left:
-                    tracks.Enqueue(
+                    tracks.Add(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 135))));
                     break;
                 case ViewSide.Down_Left:
-                    tracks.Enqueue(
+                    tracks.Add(
                         Instantiate(Grace_Track, cur_pos, Quaternion.Euler(new Vector3(0, 0, 225))));
                     break;
             }
             trackCount++;
-
         }
     }
 
@@ -152,8 +161,6 @@ public class Spawn_Tracks : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         Destroy(obj);
-        StopCoroutine(FadeTracks(obj));
+        yield break;
     }
-
-
 }
