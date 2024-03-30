@@ -14,7 +14,6 @@ public class AI_For_Move_Atack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //PlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -30,8 +29,6 @@ public class AI_For_Move_Atack : MonoBehaviour
         
         if (agent.remainingDistance > agent.stoppingDistance)
             enemy.Animate(transform.position, agent.steeringTarget);
-        //Debug.Log((float)Math.Atan2(PlayerTransform.position.y - transform.position.y, 
-        //    PlayerTransform.position.x - transform.position.x) * (float)(180 / Math.PI));
 
         //if (Vector2.Distance(transform.position, PlayerTransform.position) > enemy.Stopping_Distance)
         //{
@@ -57,5 +54,11 @@ public class AI_For_Move_Atack : MonoBehaviour
         //}
 
 
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && enemy.Type == NPC.AI_Type.Enemy)
+            agent.SetDestination(collision.transform.position);   
     }
 }

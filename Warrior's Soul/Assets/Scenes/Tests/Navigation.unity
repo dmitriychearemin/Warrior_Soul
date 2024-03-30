@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93cc113f9bf881c43939a8948a60db86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Type>k__BackingField: 0
+  <Type>k__BackingField: 1
   speed: 5
   <Visibility_radius>k__BackingField: 10
   <Stopping_Distance>k__BackingField: 10
@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847ccb8be067cc141a36782f48500d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveCamera: {fileID: 0}
 --- !u!212 &49218788
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -365,8 +366,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.47520292
-  m_Speed: 6
-  m_Acceleration: 6
+  m_Speed: 4
+  m_Acceleration: 4
   avoidancePriority: 50
   m_AngularSpeed: 50
   m_StoppingDistance: 0
@@ -523,6 +524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 392388523}
+  - component: {fileID: 392388524}
   m_Layer: 0
   m_Name: Visibility_Radius
   m_TagString: Untagged
@@ -545,6 +547,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 49218789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &392388524
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392388522}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 6.32
 --- !u!1 &459062190
 GameObject:
   m_ObjectHideFlags: 0

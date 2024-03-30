@@ -91,7 +91,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca64ad057f55dd49981d7d7514c5555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnTracks: {fileID: 105412500908903146}
   Sand_Track: {fileID: 4854082033429241252, guid: 34e82192bed4dc94fbd762c59d95c78d, type: 3}
   Grace_Track: {fileID: 4979000576747295974, guid: dc6f534199e28e94694e64f5792668b0, type: 3}
   player: {fileID: 1075663873814742159}

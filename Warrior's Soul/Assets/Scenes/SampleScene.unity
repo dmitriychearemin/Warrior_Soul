@@ -22278,6 +22278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1814768288}
+  MaxTimeShaking: 0
 --- !u!1001 &520323090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87425,10 +87426,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1426972827915296883, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2258370627443732907, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.8
