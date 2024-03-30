@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8127404427878778919}
+  - component: {fileID: -6446686434371258126}
   m_Layer: 0
   m_Name: Up
   m_TagString: Untagged
@@ -42,6 +43,19 @@ Transform:
   - {fileID: 8722261847243296179}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6446686434371258126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58733493353258658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38139950b084dbd4b81e968210da0140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawner_Enemy: {fileID: 4188580722181012268, guid: e0c0daa820b7e064d9a01fa6aee15b25, type: 3}
 --- !u!1 &2935663745039515940
 GameObject:
   m_ObjectHideFlags: 0

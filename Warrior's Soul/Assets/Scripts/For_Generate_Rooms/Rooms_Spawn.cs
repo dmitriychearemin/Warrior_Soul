@@ -21,6 +21,7 @@ public class Rooms_Spawn : MonoBehaviour
     private bool Spawned = false;
     private int rand;
     private float waitTime = 3f;
+    public bool Spwned_Boss = false;
 
     private void Start()
     {
@@ -107,4 +108,6 @@ public class Rooms_Spawn : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
 }
