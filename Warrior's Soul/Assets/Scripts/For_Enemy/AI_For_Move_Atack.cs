@@ -56,9 +56,9 @@ public class AI_For_Move_Atack : MonoBehaviour
 
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && enemy.Type == NPC.AI_Type.Enemy)
-            agent.SetDestination(collision.transform.position);   
-    }
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Player") && enemy.Type == NPC.AI_Type.Enemy)
+    //        agent.SetDestination(collision.transform.position);   
+    //}
 }
