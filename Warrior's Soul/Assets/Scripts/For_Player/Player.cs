@@ -276,6 +276,15 @@ public class Player : Character
             _inventory.Add_Element_In_Cell(_nameobject,_sptriteobject);
         }
 
+        if(collision.tag == "Trigger_Enter_Room")
+        {
+
+            var Room = collision.gameObject.GetComponentInParent<Spawning_inside_Room>();
+            Destroy(collision.gameObject);
+            Room.Player_Inside_Room();
+            
+        }
+
 
     }
 
