@@ -37,7 +37,7 @@ public class AISensor : MonoBehaviour
         Targets.Clear();
         Collider[] targetsInView = Physics.OverlapSphere(transform.position,
             Distance, targetMask);
-
+        Debug.Log(targetsInView[0]);
         for (int i = 0; i < targetsInView.Length; i++)
         {
             Transform target = targetsInView[i].transform;
@@ -52,6 +52,7 @@ public class AISensor : MonoBehaviour
                 }
             }
         }
+        //Debug.Log(Targets[0]);
     }
 
     //Mesh CreateSprite()
@@ -136,7 +137,7 @@ public class AISensor : MonoBehaviour
         {
             angleInDegrees += transform.eulerAngles.y;
         }
-        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 
-            0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad),
+            Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), 0);
     }
 }
