@@ -74,7 +74,14 @@ public class Player : Character
     {
         if (horizontalInput != 0 || verticalInput != 0)
         {
-            FlipSprite(horizontalInput, verticalInput);
+            if (verticalInput > 0)
+            {
+                FlipSprite(-horizontalInput, verticalInput);
+            }
+            else{
+                FlipSprite(horizontalInput, verticalInput);
+            }
+            
             float speed = Speed_Walk 
                 * (InputHandler.RunTriggered && !stats.HoldShift ? 2 : 1);
             rb.velocity = speed * Time.deltaTime * new Vector2(horizontalInput, verticalInput);
@@ -128,16 +135,17 @@ public class Player : Character
         if (InputHandler.RunTriggered && !stats.HoldShift)
         {
             MoveState = MoveState.Run;
-            switch (ViewSide) 
+            animatorContoller.Play("Run_Right");
+            /*switch (ViewSide) 
             {
                 case ViewSide.Up_Left:
-                    animatorContoller.Play("Run_Up_Left");
+                    animatorContoller.Play("Run_Right");
                     break;
                 case ViewSide.Up_Right:
-                    animatorContoller.Play("Run_Up_Left");
+                    animatorContoller.Play("Run_Right");
                     break;
                 case ViewSide.OnMe:
-                    animatorContoller.Play("Run_Down");
+                    animatorContoller.Play("Run_Right");
                     break;
                 case ViewSide.Left:
                     animatorContoller.Play("Run_Right");
@@ -146,17 +154,17 @@ public class Player : Character
                     animatorContoller.Play("Run_Right");
                     break;
                 case ViewSide.Down_Left:
-                    animatorContoller.Play("Run_Down_Right");
+                    animatorContoller.Play("Run_Right");
                     break;
                 case ViewSide.Down_Right:
-                    animatorContoller.Play("Run_Down_Right");
+                    animatorContoller.Play("Run_Right");
                     break;
                 case ViewSide.OnScreen:
-                    animatorContoller.Play("Run_Up");
+                    animatorContoller.Play("Run_Right");
                     break;
                 default:
                     break;
-            }
+            }*/
             animationTime = walkDuration;
         }
         else if (input.AttackTriggered && !(horizontalInput != 0 || verticalInput != 0))
@@ -196,16 +204,17 @@ public class Player : Character
         else
         {
             MoveState = MoveState.Walk;
-            switch (ViewSide)
+            animatorContoller.Play("Walk_Right");
+            /*switch (ViewSide)
             {
                 case ViewSide.Up_Left:
-                    animatorContoller.Play("Walk_Up_Left");
+                    animatorContoller.Play("Walk_Right");
                     break;
                 case ViewSide.Up_Right:
-                    animatorContoller.Play("Walk_Up_Left");
+                    animatorContoller.Play("Walk_Right");
                     break;
                 case ViewSide.OnMe:
-                    animatorContoller.Play("Move_Down");
+                    animatorContoller.Play("Walk_Right");
                     break;
                 case ViewSide.Left:
                     animatorContoller.Play("Walk_Right");
@@ -214,17 +223,18 @@ public class Player : Character
                     animatorContoller.Play("Walk_Right");
                     break;
                 case ViewSide.Down_Left:
-                    animatorContoller.Play("Walk_Down_Right");
+                    animatorContoller.Play("Walk_Right");
                     break;
                 case ViewSide.Down_Right:
-                    animatorContoller.Play("Walk_Down_Right");
+                    animatorContoller.Play("Walk_Right");
                     break;
                 case ViewSide.OnScreen:
-                    animatorContoller.Play("Move_Up");
+                    animatorContoller.Play("Walk_Right");
                     break;
                 default:
                     break;
-            }
+            }*/
+
             animationTime = walkDuration;
         }
     }

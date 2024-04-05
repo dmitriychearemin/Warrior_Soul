@@ -111,15 +111,6 @@ public class Spawning_inside_Room : MonoBehaviour
     {
         Barriers.Add(barrier);
     }
-    public void Add_Enemies_In_List(GameObject enemy)
-    {
-        Enemies.Add(enemy);
-    }
-
-    public void Remove_Enemies_In_List(GameObject enemy)
-    {
-        Enemies.Remove(enemy);
-    }
 
     bool Check_Room_On_Enemies()
     {
@@ -127,7 +118,6 @@ public class Spawning_inside_Room : MonoBehaviour
         {
             if(obj.CompareTag("Enemy"))
             {
-                print("Enemy is");
                 return true;
             }
         }
