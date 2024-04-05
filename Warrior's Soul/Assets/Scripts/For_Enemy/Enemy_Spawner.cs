@@ -30,8 +30,6 @@ public class Enemy_Spawner : MonoBehaviour
         int rand = Random.Range(0, _Enemies_Variants.Enemies.Length);
         var enemy = Instantiate(_Enemies_Variants.Enemies[rand], transform.position, transform.rotation);
         enemy.transform.SetParent(transform.parent);
-        room.Add_Enemies_In_List(enemy);
-
     }
 
 }
