@@ -35,18 +35,19 @@ public class AISensor : MonoBehaviour
     void Scan()
     {
         Targets.Clear();
-        Collider[] targetsInView = Physics.OverlapSphere(transform.position,
-            Distance, targetMask);
+        Collider2D[] targetsInView = 
+            Physics2D.OverlapCircleAll(transform.position, Distance);
 
         for (int i = 0; i < targetsInView.Length; i++)
         {
             Transform target = targetsInView[i].transform;
-            Vector3 dirToTarget = (target.position - transform.position).normalized;
-            if (Vector3.Angle(transform.forward, dirToTarget) < Angle / 2)
+            Vector2 dirToTarget = (target.position - transform.position).normalized;
+            if (Vector2.Angle(transform.up, dirToTarget) < Angle / 2)
             {
-                float dstToTarget = Vector3.Distance(transform.position, target.position);
-
-                if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
+                float dstToTarget = Vector2.Distance(transform.position, target.position);
+                
+                if (!Physics.Raycast(transform.position, dirToTarget, 
+                        dstToTarget, obstacleMask))
                 {
                     Targets.Add(target);
                 }
@@ -130,13 +131,13 @@ public class AISensor : MonoBehaviour
     //    Handles.DrawWireArc()
     //}
 
-    public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
+    public Vector2 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
         if (!angleIsGlobal)
         {
             angleInDegrees += transform.eulerAngles.y;
         }
-        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 
-            0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+        return new Vector2(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad),
+            Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
 }
