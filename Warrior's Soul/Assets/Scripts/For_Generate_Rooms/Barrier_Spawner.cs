@@ -37,7 +37,7 @@ public class Barrier_Spawner : MonoBehaviour
         if (state == Barrier_State.Left)
         {
             Quaternion rotate = Quaternion.Euler(0, 0, 0);
-            Vector3 pos = new Vector3(Room_Pos.x - 6, Room_Pos.y, 0);
+            Vector3 pos = new Vector3(Room_Pos.x, Room_Pos.y, 0);
             var barrier = Instantiate(barrier_vertical, pos, rotate);
             room.Add_Barrier_In_List(barrier);
         
@@ -45,7 +45,7 @@ public class Barrier_Spawner : MonoBehaviour
         else if(state == Barrier_State.Up)
         {
             Quaternion rotate = Quaternion.Euler(0,0,90);
-            Vector3 pos = new Vector3(Room_Pos.x, Room_Pos.y-5, 0);
+            Vector3 pos = new Vector3(Room_Pos.x, Room_Pos.y, 0);
             
             var barrier = Instantiate(barrier_vertical, pos, rotate);
             room.Add_Barrier_In_List(barrier);
@@ -54,7 +54,7 @@ public class Barrier_Spawner : MonoBehaviour
         else if (state == Barrier_State.Right)
         {
             Quaternion rotate = Quaternion.Euler(0, 0, 0);
-            Vector3 pos = new Vector3(Room_Pos.x-5, Room_Pos.y, 0);
+            Vector3 pos = new Vector3(Room_Pos.x, Room_Pos.y, 0);
             
             var barrier = Instantiate(barrier_vertical, pos, rotate);
             room.Add_Barrier_In_List(barrier);
@@ -63,7 +63,7 @@ public class Barrier_Spawner : MonoBehaviour
         else if (state == Barrier_State.Down)
         {
             Quaternion rotate = Quaternion.Euler(0, 0, 90);
-            Vector3 pos = new Vector3(Room_Pos.x, Room_Pos.y-6, 0);
+            Vector3 pos = new Vector3(Room_Pos.x, Room_Pos.y, 0);
            
             var barrier = Instantiate(barrier_vertical, pos, rotate);
             room.Add_Barrier_In_List(barrier);
