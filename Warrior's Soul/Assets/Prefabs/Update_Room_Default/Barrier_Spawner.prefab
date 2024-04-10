@@ -44,6 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6da1f6dcc7ee245a1d27b01db54847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrier_vertical: {fileID: 3176427167413599252, guid: eb8e1aa67814fa9479d20419c3b8d60b, type: 3}
-  barrier_horizonal: {fileID: 3176427167413599252, guid: 37d3d7841e876e547b8a8d185c801235, type: 3}
-  vertical_barrier: 1
+  barrier_vertical: {fileID: 7746122731109405904, guid: d058ab38b6831dd4baaf35e2c18134ba, type: 3}
+  state: 0

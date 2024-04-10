@@ -22,7 +22,11 @@ public class Spawning_inside_Room : MonoBehaviour
     void Start()
     {
         Count_Enemy_in_Room = Random.Range(Min_Count_Enemies, Max_Count_Enemies) + lvl_Player;
-        Instantiate_Enemy_Spawner();
+        if(Spawner_Enemy != null)
+        {
+            Instantiate_Enemy_Spawner();
+        }
+        
     }
 
 
@@ -58,13 +62,14 @@ public class Spawning_inside_Room : MonoBehaviour
         bool spawn;
         int cur_count_spawner=0;
         int count_trying=0;
+
         while (cur_count_spawner < Max_Count_Enemies) {
             spawn = false;
             count_trying = 0;
             while (spawn == false)
             {
                 count_trying++;
-                Vector3 pos = new Vector3(Random.Range(transform.position.x + 20, transform.position.x - 20), Random.Range(transform.position.y + 10, transform.position.y - 10), 0);
+                Vector3 pos = new Vector3(Random.Range(transform.position.x + 15, transform.position.x - 15), Random.Range(transform.position.y + 9, transform.position.y - 9), 0);
                 var obj = Instantiate(Spawner_Enemy, transform);
                 obj.transform.position = pos;
                 Collider2D collider = obj.GetComponent<Collider2D>();
