@@ -18,9 +18,12 @@ public class Change_Door_To_Wall : MonoBehaviour
                 Instantiate(wall_block_Horizontal, transform.position, Quaternion.identity);
             }
             else {
-                Instantiate(wall_block_Vertical, transform.position, Quaternion.EulerRotation(0,0,1.57f));
+                Instantiate(wall_block_Vertical, transform.position, Quaternion.identity);
                 
             }
+
+
+
             can_spawn = false;
             Destroy(gameObject);
         }
