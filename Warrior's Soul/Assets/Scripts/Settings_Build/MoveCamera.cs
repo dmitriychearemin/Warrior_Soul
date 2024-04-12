@@ -1,22 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+//using System.Numerics;
 using UnityEngine;
 
 public class MoveCamera: MonoBehaviour
 {
     public GameObject player;
-    ConditionCamera conditionCamera = ConditionCamera.FolowPlyer;
+    public CharacterStats Character;
+    ConditionCamera conditionCamera = ConditionCamera.Stay;
     [SerializeField] float MaxTimeShaking;
     float TimeShaking = 0;
+    float distance_to_move = 3f;
+    float default_speed = 4.5f;
+    float cur_speed = 0;
+    float max_speed = 6.5f;
+    
+
+
     enum ConditionCamera
     {
-        FolowPlyer,
+        Stay,
+        FolowPlayer,
         Shake
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        Character = player.GetComponent<CharacterStats>();
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
+        cur_speed = default_speed;
         
     }
 
@@ -24,7 +37,13 @@ public class MoveCamera: MonoBehaviour
     void Update()
     {
 
-        if (conditionCamera == ConditionCamera.FolowPlyer)
+        if (Vector2.Distance(transform.position, player.transform.position) >= distance_to_move)
+        {
+            conditionCamera = ConditionCamera.FolowPlayer;
+        }
+
+
+        if (conditionCamera == ConditionCamera.FolowPlayer)
         {
             Folow_to_Player();
         }
@@ -39,7 +58,7 @@ public class MoveCamera: MonoBehaviour
         if(TimeShaking > MaxTimeShaking)
         {
             TimeShaking = 0;
-            conditionCamera = ConditionCamera.FolowPlyer;
+            conditionCamera = ConditionCamera.FolowPlayer;
         }
 
     }
@@ -47,8 +66,23 @@ public class MoveCamera: MonoBehaviour
 
     void Folow_to_Player()
     {
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -1);
-
+      
+        if(Character.character.MoveState == MoveState.Run )
+        {
+            cur_speed = max_speed;
+        }
+        else
+        {
+            cur_speed = default_speed;
+        }
+        print(cur_speed);
+        Vector3 needpos = new Vector3(player.transform.position.x, player.transform.position.y, -10);
+        transform.position = Vector3.MoveTowards(transform.position, needpos, cur_speed* Time.deltaTime);
+        if(Vector3.Distance(transform.position,player.transform.position)<= -transform.position.z + 0.2f)
+        {
+            cur_speed = default_speed;
+            //conditionCamera = ConditionCamera.Stay;
+        }
     }
 
 
@@ -59,7 +93,18 @@ public class MoveCamera: MonoBehaviour
         float Y_axis_Offset = Random.Range(-500, 500) / 488;
         transform.position = new Vector3(StartPos.x + X_axis_Offset, StartPos.y + Y_axis_Offset,StartPos.z);
         conditionCamera = ConditionCamera.Shake;
-       
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        /*if(collision.tag == "Player")
+        {
+            if(conditionCamera == ConditionCamera.FolowPlayer)
+            {
+                conditionCamera = ConditionCamera.Stay;
+                
+            }
+        }*/
     }
 
 }

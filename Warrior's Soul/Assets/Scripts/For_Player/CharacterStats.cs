@@ -11,7 +11,7 @@ public class CharacterStats : MonoBehaviour
     public event OnStaminaUpdate StaminaUpdate;
     public event OnHPUpdate HPUpdate;
 
-    private Character character;
+    public Character character;
 
     [Header("Stats")]
     public float MaxHP = 100;
