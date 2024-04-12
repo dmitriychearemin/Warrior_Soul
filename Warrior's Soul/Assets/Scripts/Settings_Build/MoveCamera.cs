@@ -10,10 +10,10 @@ public class MoveCamera: MonoBehaviour
     ConditionCamera conditionCamera = ConditionCamera.Stay;
     [SerializeField] float MaxTimeShaking;
     float TimeShaking = 0;
-    float distance_to_move = 3f;
+    float distance_to_move = 2.2f;
     float default_speed = 4.5f;
     float cur_speed = 0;
-    float max_speed = 6.5f;
+    float max_speed = 7f;
     
 
 
@@ -81,7 +81,7 @@ public class MoveCamera: MonoBehaviour
         if(Vector3.Distance(transform.position,player.transform.position)<= -transform.position.z + 0.2f)
         {
             cur_speed = default_speed;
-            //conditionCamera = ConditionCamera.Stay;
+            conditionCamera = ConditionCamera.Stay;
         }
     }
 
