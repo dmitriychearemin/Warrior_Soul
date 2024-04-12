@@ -27,7 +27,7 @@ public class AISensor : MonoBehaviour
         scanTimer -= Time.deltaTime;
         if (scanTimer <= 0) 
         {
-            scanTimer = 0.2f;
+            scanTimer = scanInterval;
             Scan();
         }
     }
@@ -46,8 +46,8 @@ public class AISensor : MonoBehaviour
             {
                 float dstToTarget = Vector2.Distance(transform.position, target.position);
                 
-                if (!Physics.Raycast(transform.position, dirToTarget, 
-                        dstToTarget, obstacleMask))
+                if (Physics2D.Raycast(transform.position, dirToTarget, 
+                        dstToTarget, targetMask))
                 {
                     Targets.Add(target);
                 }
