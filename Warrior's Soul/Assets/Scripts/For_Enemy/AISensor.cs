@@ -1,24 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class AISensor : MonoBehaviour
 {
     [field: SerializeField] public float Distance { get; private set; } = 10;
     [field: SerializeField] public float Angle { get; private set; } = 30;
-    [SerializeField] private Color color = Color.red;
 
     public List<Transform> Targets { get; private set; } = new();
 
     public LayerMask targetMask, obstacleMask;
-    private float scanInterval = 0.2f;
+    private readonly float scanInterval = 0.2f;
     private float scanTimer = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    public float meshResolution;
+    public int edgeResolveIterations;
+    public float edgeDstThreshold;
+
+    public MeshFilter viewMeshFilter;
+    Mesh viewMesh;
+
+    private void Awake()
     {
-        
+        viewMesh = new()
+        {
+            name = "View Mesh"
+        };
+        viewMeshFilter.mesh = viewMesh;
     }
 
     // Update is called once per frame
@@ -30,6 +38,11 @@ public class AISensor : MonoBehaviour
             scanTimer = scanInterval;
             Scan();
         }
+    }
+
+    void LateUpdate()
+    {
+        DrawFieldOfView();
     }
 
     void Scan()
@@ -55,81 +68,142 @@ public class AISensor : MonoBehaviour
         }
     }
 
-    //Mesh CreateSprite()
-    //{
-    //    Mesh mesh = new();
-    //    int numTriangles = 8;
-    //    int numVertices = numTriangles * 3;
+    void DrawFieldOfView()
+    {
+        int stepCount = Mathf.RoundToInt(Angle * meshResolution);
+        float stepAngleSize = Angle / stepCount;
+        List<Vector3> viewPoints = new();
+        ViewCastInfo oldViewCast = new();
 
-    //    Vector3[] vertices = new Vector3[numVertices];
-    //    int[] triangles = new int[numVertices];
+        for (int i = 0; i <= stepCount; i++)
+        {
+            float angle = transform.eulerAngles.y - Angle / 2 + stepAngleSize * i;
+            ViewCastInfo newViewCast = ViewCast(angle);
 
-    //    Vector3 bottomCenter = Vector3.zero;
-    //    Vector3 bottomLeft = Quaternion.Euler(0, 0, -angle) * Vector3.up * distance;
-    //    Vector3 bottomRight = Quaternion.Euler(0, 0, angle) * Vector3.up * distance;
+            if (i > 0)
+            {
+                bool edgeDstThresholdExceeded = 
+                    Mathf.Abs(oldViewCast.Dst - newViewCast.Dst) > edgeDstThreshold;
+                if (oldViewCast.Hit != newViewCast.Hit 
+                    || (oldViewCast.Hit && newViewCast.Hit && edgeDstThresholdExceeded))
+                {
+                    EdgeInfo edge = FindEdge(oldViewCast, newViewCast);
+                    if (edge.PointA != Vector3.zero)
+                    {
+                        viewPoints.Add(edge.PointA);
+                    }
+                    if (edge.PointB != Vector3.zero)
+                    {
+                        viewPoints.Add(edge.PointB);
+                    }
+                }
 
-    //    Vector3 topCenter = bottomCenter + Vector3.forward;
-    //    Vector3 topLeft = bottomLeft + Vector3.forward;
-    //    Vector3 topRight = bottomRight + Vector3.forward;
+            }
 
-    //    int vert = 0;
+            viewPoints.Add(newViewCast.Point);
+            oldViewCast = newViewCast;
+        }
 
-    //    vertices[vert++] = bottomCenter;
-    //    vertices[vert++] = bottomLeft;
-    //    vertices[vert++] = topLeft;
+        int vertexCount = viewPoints.Count + 1;
+        Vector3[] vertices = new Vector3[vertexCount];
+        int[] triangles = new int[(vertexCount - 2) * 3];
 
-    //    vertices[vert++] = topLeft;
-    //    vertices[vert++] = topCenter;
-    //    vertices[vert++] = bottomCenter;
+        vertices[0] = Vector3.zero;
+        for (int i = 0; i < vertexCount - 1; i++)
+        {
+            vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
 
-    //    // right
-    //    vertices[vert++] = bottomCenter;
-    //    vertices[vert++] = topCenter;
-    //    vertices[vert++] = topRight;
+            if (i < vertexCount - 2)
+            {
+                triangles[i * 3] = 0;
+                triangles[i * 3 + 1] = i + 1;
+                triangles[i * 3 + 2] = i + 2;
+            }
+        }
 
-    //    vertices[vert++] = topRight;
-    //    vertices[vert++] = bottomRight;
-    //    vertices[vert++] = bottomCenter;
+        viewMesh.Clear();
 
-    //    // far
-    //    vertices[vert++] = bottomLeft;
-    //    vertices[vert++] = bottomRight;
-    //    vertices[vert++] = topRight;
+        viewMesh.vertices = vertices;
+        viewMesh.triangles = triangles;
+        viewMesh.RecalculateNormals();
+    }
 
-    //    vertices[vert++] = topRight;
-    //    vertices[vert++] = topLeft;
-    //    vertices[vert++] = bottomLeft;
+    EdgeInfo FindEdge(ViewCastInfo minViewCast, ViewCastInfo maxViewCast)
+    {
+        float minAngle = minViewCast.Angle;
+        float maxAngle = maxViewCast.Angle;
+        Vector3 minPoint = Vector3.zero;
+        Vector3 maxPoint = Vector3.zero;
 
-    //    // top
-    //    vertices[vert++] = topCenter;
-    //    vertices[vert++] = topLeft;
-    //    vertices[vert++] = topRight;
+        for (int i = 0; i < edgeResolveIterations; i++)
+        {
+            float angle = (minAngle + maxAngle) / 2;
+            ViewCastInfo newViewCast = ViewCast(angle);
 
-    //    // bottom
-    //    vertices[vert++] = bottomCenter;
-    //    vertices[vert++] = bottomRight;
-    //    vertices[vert++] = bottomLeft;
+            bool edgeDstThresholdExceeded = 
+                Mathf.Abs(minViewCast.Dst - newViewCast.Dst) > edgeDstThreshold;
+            if (newViewCast.Hit == minViewCast.Hit && !edgeDstThresholdExceeded)
+            {
+                minAngle = angle;
+                minPoint = newViewCast.Point;
+            }
+            else
+            {
+                maxAngle = angle;
+                maxPoint = newViewCast.Point;
+            }
+        }
 
-    //    for (int i = 0; i < numVertices; i++)
-    //        triangles[i] = i;
+        return new EdgeInfo(minPoint, maxPoint);
+    }
 
-    //    mesh.vertices = vertices;
-    //    mesh.triangles = triangles;
-    //    mesh.RecalculateNormals();
 
-    //    return mesh;
-    //}
+    ViewCastInfo ViewCast(float globalAngle)
+    {
+        Vector3 dir = DirFromAngle(globalAngle, true);
+        RaycastHit hit;
 
-    //private void OnValidate()
-    //{
-    //    mesh = CreateSprite();
-    //}
+        if (Physics.Raycast(transform.position, dir, out hit, Distance, obstacleMask))
+        {
+            return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
+        }
+        else
+        {
+            return new ViewCastInfo(false, transform.position + dir * Distance,
+                Distance, globalAngle);
+        }
+    }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Handles.color = color;
-    //    Handles.DrawWireArc()
-    //}
+    public class ViewCastInfo
+    {
+        public bool Hit { get; }
+        public Vector3 Point { get; }
+        public float Dst { get; }
+        public float Angle { get; }
+
+        public ViewCastInfo(bool _hit, Vector3 _point, float _dst, float _angle)
+        {
+            Hit = _hit;
+            Point = _point;
+            Dst = _dst;
+            Angle = _angle;
+        }
+
+        public ViewCastInfo()
+        {}
+    }
+
+    public class EdgeInfo
+    {
+        public Vector3 PointA { get; }
+        public Vector3 PointB { get; }
+
+        public EdgeInfo(Vector3 _pointA, Vector3 _pointB)
+        {
+            PointA = _pointA;
+            PointB = _pointB;
+        }
+    }
 
     public Vector2 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
