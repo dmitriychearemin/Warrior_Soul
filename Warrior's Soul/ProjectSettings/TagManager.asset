@@ -21,6 +21,8 @@ TagManager:
   - Attack
   - Loot_Item
   - Water
+  - Dungeons_Objects
+  - Trigger_Enter_Room
   layers:
   - Default
   - TransparentFX

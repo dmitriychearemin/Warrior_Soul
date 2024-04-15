@@ -21,6 +21,7 @@ public class Rooms_Spawn : MonoBehaviour
     private bool Spawned = false;
     private int rand;
     private float waitTime = 3f;
+    public bool Spwned_Boss = false;
 
     private void Start()
     {
@@ -38,7 +39,7 @@ public class Rooms_Spawn : MonoBehaviour
         if (Spawned==false) {
             if(direction == Direction.Up)
             {
-                if (variants.Counts_Room <= 2)
+                if (variants.Counts_Room <= variants.Max_Rooms/3)
                 {
                     rand = Random.Range(1, variants.Rooms_Up.Length);
                 }
@@ -51,7 +52,7 @@ public class Rooms_Spawn : MonoBehaviour
 
             else if (direction == Direction.Down)
             {
-                if (variants.Counts_Room <= 2)
+                if (variants.Counts_Room <= variants.Max_Rooms / 3)
                 {
                     rand = Random.Range(1, variants.Rooms_Down.Length);
                 }
@@ -65,7 +66,7 @@ public class Rooms_Spawn : MonoBehaviour
 
             else if (direction == Direction.Left)
             {
-                if (variants.Counts_Room <= 2)
+                if (variants.Counts_Room <= variants.Max_Rooms / 3)
                 {
                     rand = Random.Range(1, variants.Rooms_Left.Length);
                 }
@@ -79,7 +80,7 @@ public class Rooms_Spawn : MonoBehaviour
 
             else if (direction == Direction.Right)
             {
-                if (variants.Counts_Room <= 2)
+                if (variants.Counts_Room <= variants.Max_Rooms / 3)
                 {
                     rand = Random.Range(1, variants.Rooms_Right.Length);
                 }
@@ -107,4 +108,6 @@ public class Rooms_Spawn : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
 }
