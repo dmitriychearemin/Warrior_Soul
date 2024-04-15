@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 9175469520115956901}
   - component: {fileID: 7815643445698364601}
   - component: {fileID: 6229980411283702290}
-  - component: {fileID: 5839525867905083423}
   m_Layer: 5
   m_Name: Default_Weapon_Cell
   m_TagString: Untagged
@@ -121,18 +120,3 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5839525867905083423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7124892031638296418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faadc852a6a134b4d843808fa73991e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _namefield: {fileID: 0}
-  _iconField: {fileID: 7815643445698364601}
-  _count_items: {fileID: 0}

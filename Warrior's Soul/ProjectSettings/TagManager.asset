@@ -23,6 +23,8 @@ TagManager:
   - Water
   - Dungeons_Objects
   - Trigger_Enter_Room
+  - Weapon
+  - Quick_access_items
   layers:
   - Default
   - TransparentFX

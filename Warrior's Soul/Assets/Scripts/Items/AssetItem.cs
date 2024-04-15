@@ -12,14 +12,15 @@ public class AssetItem: ScriptableObject
     public string Name => _name;
     public Sprite UIICON => _UIIcon;
 
-
-   // string IItem.Name { get => _name; set => _name}
-   // Sprite IItem.UIICON { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public string Tag => tag;
+    // string IItem.Name { get => _name; set => _name}
+    // Sprite IItem.UIICON { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public int count_Element = 1;
 
-    [SerializeField] public string _name;
-    [SerializeField] public Sprite _UIIcon;
+    public string _name;
+    public string tag;
+    public Sprite _UIIcon;
 
 
 }

@@ -833,7 +833,8 @@ PrefabInstance:
       propertyPath: _container
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8350007140475933657, guid: eff366bb21444964e91145da636f9dba, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4684997050211339857, guid: eff366bb21444964e91145da636f9dba, type: 3}
     m_AddedGameObjects:

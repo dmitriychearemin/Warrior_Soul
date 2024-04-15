@@ -11,15 +11,28 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     [SerializeField] public Text _namefield;
     [SerializeField] private Image _iconField;
     [SerializeField] public Text _count_items;
-
+    [SerializeField] public Text obj_tag;
     private Transform _dragingParrent;
+    private Transform inventory_container;
+    private Transform _weapon_container_Parrent;
+    private Transform _quick_container_Parrent;
     private Transform _originalparent;
+    private OnContainer onContainer = OnContainer.Inventory;
 
-    public void Init(Transform draggingparent)
+    enum OnContainer
+    {
+        Inventory,
+        Quick_Access,
+        Weapon
+    }
+
+    public void Init(Transform draggingparent, Transform weapon_container, Transform quick_container)
     {
         _dragingParrent = draggingparent;
         _originalparent = transform.parent;
-        
+        inventory_container = _originalparent;
+        _quick_container_Parrent = quick_container;
+        _weapon_container_Parrent = weapon_container;
     }
 
     public void Render(AssetItem item)
@@ -28,6 +41,7 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         _namefield.text = item.Name;
         _iconField.sprite = item.UIICON;
         _count_items.text = item.count_Element.ToString();
+        obj_tag.text = item.Tag;
 
     }
 
@@ -55,7 +69,24 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
 
         int closestindex = 0;
 
-        for(int i =0; i< _originalparent.transform.childCount; i++)
+        switch (onContainer) {
+            case OnContainer.Inventory:
+                _originalparent = inventory_container;
+                break;
+            case OnContainer.Quick_Access:
+                _originalparent = _quick_container_Parrent;
+                break;
+
+            case OnContainer.Weapon:
+                _originalparent = _weapon_container_Parrent;
+                break;
+
+            default:
+                print("Данный контейнер отсутствует");
+                break;
+        }
+
+        for (int i =0; i< _originalparent.transform.childCount; i++)
         {
          
 
@@ -70,5 +101,29 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         transform.SetSiblingIndex(closestindex);
        
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Weapon")
+        {
+            if (obj_tag.text == "Weapon")
+            {
+                onContainer = OnContainer.Weapon;
+            }
+        }
+
+        if (collision.tag == "Quick_access_items")
+        {
+            if (obj_tag.text == "Quick_access_items") { 
+            onContainer = OnContainer.Quick_Access;
+            }
+        }
+
+        else
+        {
+            onContainer = OnContainer.Inventory;
+        }
+    }
+
 }
 
