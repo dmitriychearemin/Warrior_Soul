@@ -161,11 +161,24 @@ public class AISensor : MonoBehaviour
     ViewCastInfo ViewCast(float globalAngle)
     {
         Vector3 dir = DirFromAngle(globalAngle, true);
-        RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, dir, out hit, Distance, obstacleMask))
+        ContactFilter2D filter = new();
+        filter.SetLayerMask(obstacleMask);
+        //filter.SetDepth(0, Distance);
+        //filter.SetNormalAngle(0, globalAngle);
+        //filter.NoFilter();
+
+        RaycastHit2D[] result = new RaycastHit2D[1];
+
+        //Physics2D.Raycast(transform.position, dir, filter, result);
+        if (Physics2D.Raycast(transform.position, dir, filter, result) > 0)
         {
-            return new ViewCastInfo(true, hit.point, hit.distance, globalAngle);
+            Debug.Log("got");
+            if (result[0].distance <= Distance)
+                return new ViewCastInfo(true, result[0].point, result[0].distance, globalAngle);
+            else
+                return new ViewCastInfo(false, transform.position + dir * Distance,
+                Distance, globalAngle);
         }
         else
         {
