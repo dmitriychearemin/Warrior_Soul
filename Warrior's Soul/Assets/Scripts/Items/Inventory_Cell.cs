@@ -11,7 +11,7 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     [SerializeField] public Text _namefield;
     [SerializeField] private Image _iconField;
     [SerializeField] public Text _count_items;
-    [SerializeField] public Text obj_tag;
+    String obj_tag;
     private Transform _dragingParrent;
     private Transform inventory_container;
     private Transform _weapon_container_Parrent;
@@ -41,7 +41,7 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         _namefield.text = item.Name;
         _iconField.sprite = item.UIICON;
         _count_items.text = item.count_Element.ToString();
-        obj_tag.text = item.Tag;
+        obj_tag = item.Tag;
 
     }
 
@@ -73,6 +73,7 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
             case OnContainer.Inventory:
                 _originalparent = inventory_container;
                 break;
+
             case OnContainer.Quick_Access:
                 _originalparent = _quick_container_Parrent;
                 break;
@@ -102,20 +103,20 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
        
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == "Weapon")
+        if (collision.name == "For_Weapons")
         {
-            if (obj_tag.text == "Weapon")
+            if (obj_tag == "Weapon")
             {
                 onContainer = OnContainer.Weapon;
             }
         }
-
-        if (collision.tag == "Quick_access_items")
+        else if (collision.name == "For_quick_access_cells")
         {
-            if (obj_tag.text == "Quick_access_items") { 
-            onContainer = OnContainer.Quick_Access;
+            if (obj_tag == "Quick_access_items")
+            {
+                onContainer = OnContainer.Quick_Access;
             }
         }
 
