@@ -11,15 +11,45 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     [SerializeField] public Text _namefield;
     [SerializeField] private Image _iconField;
     [SerializeField] public Text _count_items;
-
+    [SerializeField] GameObject _input_field;
+    String obj_tag;
     private Transform _dragingParrent;
+    private Transform inventory_container;
+    private Transform _weapon_container_Parrent;
+    private Transform _quick_container_Parrent;
     private Transform _originalparent;
+    private OnContainer onContainer = OnContainer.Inventory;
+    bool _doubleclick = false;
+    float timer_before_second_click=0;
+    int count_separate_elements = 0;
 
-    public void Init(Transform draggingparent)
+    enum OnContainer
+    {
+        Inventory,
+        Quick_Access,
+        Weapon
+    }
+
+    private void Update()
+    {
+        if (timer_before_second_click > 0)
+        {
+            timer_before_second_click += 22 *Time.deltaTime;
+            if(timer_before_second_click > 20)
+            {
+                timer_before_second_click = 0;
+                _doubleclick = false;
+            }
+        }
+    }
+
+    public void Init(Transform draggingparent, Transform weapon_container, Transform quick_container)
     {
         _dragingParrent = draggingparent;
         _originalparent = transform.parent;
-        
+        inventory_container = _originalparent;
+        _quick_container_Parrent = quick_container;
+        _weapon_container_Parrent = weapon_container;
     }
 
     public void Render(AssetItem item)
@@ -28,20 +58,43 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         _namefield.text = item.Name;
         _iconField.sprite = item.UIICON;
         _count_items.text = item.count_Element.ToString();
+        obj_tag = item.Tag;
 
-    }
-
-    void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
-    {
-        transform.parent = _dragingParrent;
-        
     }
 
     public Text getName()
     {
         return _namefield;
     }
+    public void Click()
+    {
+        if (timer_before_second_click <= 20 & timer_before_second_click > 0)
+        {
+            _doubleclick = true;
+            Instantiate_Input_field();
+        }
+        timer_before_second_click++;
+        
+    }
 
+    void Instantiate_Input_field()
+    {
+        var field = Instantiate(_input_field, transform);
+        field.transform.parent = _dragingParrent;
+        For_Input_Fields script_field = field.GetComponent<For_Input_Fields>();
+        script_field.Set_Cell_For_Separate(gameObject);
+    }
+
+    public void Get_Count_Separate_Item(int count)
+    {
+        count_separate_elements = count;
+        
+    }
+
+    void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
+    {
+        transform.parent = _dragingParrent; 
+    }
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -55,7 +108,25 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
 
         int closestindex = 0;
 
-        for(int i =0; i< _originalparent.transform.childCount; i++)
+        switch (onContainer) {
+            case OnContainer.Inventory:
+                _originalparent = inventory_container;
+                break;
+
+            case OnContainer.Quick_Access:
+                _originalparent = _quick_container_Parrent;
+                break;
+
+            case OnContainer.Weapon:
+                _originalparent = _weapon_container_Parrent;
+                break;
+
+            default:
+                print("Данный контейнер отсутствует");
+                break;
+        }
+
+        for (int i =0; i< _originalparent.transform.childCount; i++)
         {
          
 
@@ -70,5 +141,29 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         transform.SetSiblingIndex(closestindex);
        
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.name == "For_Weapons")
+        {
+            if (obj_tag == "Weapon")
+            {
+                onContainer = OnContainer.Weapon;
+            }
+        }
+        else if (collision.name == "For_quick_access_cells")
+        {
+            if (obj_tag == "Quick_access_items")
+            {
+                onContainer = OnContainer.Quick_Access;
+            }
+        }
+
+        else
+        {
+            onContainer = OnContainer.Inventory;
+        }
+    }
+
 }
 

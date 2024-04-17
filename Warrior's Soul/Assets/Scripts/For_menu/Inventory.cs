@@ -18,7 +18,8 @@ public class Inventory: MonoBehaviour
     [SerializeField] private Inventory_Cell _inventory_Cell_Template;
     [SerializeField] private Transform _container;
     [SerializeField] private Transform _draggingparent;
-
+    [SerializeField] private Transform _container_quick;
+    [SerializeField] private Transform _container_weapons;
     bool _menu_active = false;
 
     private void Start()
@@ -67,7 +68,8 @@ public class Inventory: MonoBehaviour
         }
     }
 
-    public void Add_Element_In_Cell(String name, Sprite sprite){
+    public void Add_Element_In_Cell(String name, Sprite sprite, String tag)
+    {
 
         bool need_New_Cell = true;
         for (int i = 0; i < _container.childCount; i++)
@@ -93,23 +95,26 @@ public class Inventory: MonoBehaviour
 
         if (need_New_Cell)
         {
-            Create_New_Cell(name, sprite);
+            Create_New_Cell(name, sprite, tag);
         }
     }
 
-    public void Create_New_Cell(String name, Sprite sprite)
+    public void Create_New_Cell(String name, Sprite sprite, String tag)
     {
         AssetItem _assetitem = new AssetItem();
         _assetitem._name = name;
         _assetitem._UIIcon = sprite;
+        _assetitem.tag = tag;
         Items.Add(_assetitem); 
         var cell = Instantiate(_inventory_Cell_Template, _container);
-        cell.Init(_draggingparent);
+        cell.Init(_draggingparent, _container_weapons, _container_quick);
         cell.Render(Items[Items.Count - 1]);
         
     }
 
-    
+    public void Separate_Item()
+    {
 
+    }
 
 }

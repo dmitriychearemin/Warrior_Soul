@@ -22278,6 +22278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1814768288}
+  Character: {fileID: 0}
   MaxTimeShaking: 0
 --- !u!1001 &520323090
 PrefabInstance:
@@ -87427,12 +87428,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2258370627443732907, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 16.408022
+      objectReference: {fileID: 0}
+    - target: {fileID: 2258370627443732907, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 15.485283
+      objectReference: {fileID: 0}
+    - target: {fileID: 2258370627443732907, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8
+      value: -5.07
       objectReference: {fileID: 0}
     - target: {fileID: 2258370627443732907, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.1
+      value: -14.26
       objectReference: {fileID: 0}
     - target: {fileID: 2258370627443732907, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -87511,7 +87520,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 610998743}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 308758168439114029, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6064702493452717854, guid: 1b7f01454f6bb8946b202f89d1d9abfc, type: 3}

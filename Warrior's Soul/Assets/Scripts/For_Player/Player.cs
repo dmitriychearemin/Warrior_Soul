@@ -278,12 +278,13 @@ public class Player : Character
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Loot_Item")
+        if(collision.tag == "Loot_Item" || collision.tag == "Weapon" || collision.tag == "Quick_access_items")
         {
 
             string _nameobject = collision.gameObject.name;
             Sprite _sptriteobject = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
-            _inventory.Add_Element_In_Cell(_nameobject,_sptriteobject);
+            string tag = collision.gameObject.tag;
+            _inventory.Add_Element_In_Cell(_nameobject, _sptriteobject, tag);
         }
 
         if(collision.tag == "Trigger_Enter_Room")
