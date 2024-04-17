@@ -11,6 +11,7 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     [SerializeField] public Text _namefield;
     [SerializeField] private Image _iconField;
     [SerializeField] public Text _count_items;
+    [SerializeField] GameObject _input_field;
     String obj_tag;
     private Transform _dragingParrent;
     private Transform inventory_container;
@@ -18,12 +19,28 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     private Transform _quick_container_Parrent;
     private Transform _originalparent;
     private OnContainer onContainer = OnContainer.Inventory;
+    bool _doubleclick = false;
+    float timer_before_second_click=0;
+
 
     enum OnContainer
     {
         Inventory,
         Quick_Access,
         Weapon
+    }
+
+    private void Update()
+    {
+        if (timer_before_second_click > 0)
+        {
+            timer_before_second_click += 22 *Time.deltaTime;
+            if(timer_before_second_click > 20)
+            {
+                timer_before_second_click = 0;
+                _doubleclick = false;
+            }
+        }
     }
 
     public void Init(Transform draggingparent, Transform weapon_container, Transform quick_container)
@@ -45,17 +62,32 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
 
     }
 
-    void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
-    {
-        transform.parent = _dragingParrent;
-        
-    }
-
     public Text getName()
     {
         return _namefield;
     }
+    public void Click()
+    {
+        if (timer_before_second_click <= 20 & timer_before_second_click > 0)
+        {
+            _doubleclick = true;
+            Separation_Inv_Cells();
+        }
+        timer_before_second_click++;
+        
+    }
 
+    void Separation_Inv_Cells()
+    {
+        int count_separate_elements = 0;
+        var field = Instantiate(_input_field, transform).GetComponent<For_Input_Fields>();
+        
+    }
+
+    void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
+    {
+        transform.parent = _dragingParrent; 
+    }
 
     public void OnDrag(PointerEventData eventData)
     {
