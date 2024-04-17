@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class For_Input_Fields : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class For_Input_Fields : MonoBehaviour
     private string text;
     TMP_InputField inputField;
     Inventory_Cell _inventory_Cell;
+    [SerializeField]Text for_alert;
     bool It_work = false;
 
 
@@ -48,7 +50,16 @@ public class For_Input_Fields : MonoBehaviour
 
         else
         {
-
+            var alert = Instantiate(for_alert, transform.parent);
+            if (number <= 0)
+            {
+                alert.GetComponent<Text>().text = "Too few items selected";
+            }
+            else
+            {
+                alert.GetComponent<Text>().text = "There are not that many items in the cell";
+            }
+           
         }
 
         It_work = true;
