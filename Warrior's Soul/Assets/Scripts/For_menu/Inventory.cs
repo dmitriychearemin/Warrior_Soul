@@ -112,7 +112,9 @@ public class Inventory: MonoBehaviour
         
     }
 
-    
+    public void Separate_Item()
+    {
 
+    }
 
 }

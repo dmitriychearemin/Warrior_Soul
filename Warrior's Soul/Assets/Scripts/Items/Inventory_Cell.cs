@@ -21,7 +21,7 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     private OnContainer onContainer = OnContainer.Inventory;
     bool _doubleclick = false;
     float timer_before_second_click=0;
-
+    int count_separate_elements = 0;
 
     enum OnContainer
     {
@@ -71,16 +71,23 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         if (timer_before_second_click <= 20 & timer_before_second_click > 0)
         {
             _doubleclick = true;
-            Separation_Inv_Cells();
+            Instantiate_Input_field();
         }
         timer_before_second_click++;
         
     }
 
-    void Separation_Inv_Cells()
+    void Instantiate_Input_field()
     {
-        int count_separate_elements = 0;
-        var field = Instantiate(_input_field, transform).GetComponent<For_Input_Fields>();
+        var field = Instantiate(_input_field, transform);
+        field.transform.parent = _dragingParrent;
+        For_Input_Fields script_field = field.GetComponent<For_Input_Fields>();
+        script_field.Set_Cell_For_Separate(gameObject);
+    }
+
+    public void Get_Count_Separate_Item(int count)
+    {
+        count_separate_elements = count;
         
     }
 
