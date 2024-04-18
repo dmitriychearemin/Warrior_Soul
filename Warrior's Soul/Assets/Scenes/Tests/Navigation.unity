@@ -538,6 +538,7 @@ MonoBehaviour:
   edgeResolveIterations: 4
   edgeDstThreshold: 0.5
   viewMeshFilter: {fileID: 392388526}
+  character: {fileID: 49218785}
 --- !u!23 &392388525
 MeshRenderer:
   m_ObjectHideFlags: 0

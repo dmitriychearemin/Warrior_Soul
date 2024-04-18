@@ -20,8 +20,15 @@ public class AISensor : MonoBehaviour
     public MeshFilter viewMeshFilter;
     Mesh viewMesh;
 
+    [SerializeField]private Character character;
+    //private new Transform transform;
+    private Vector3 Default_State;
+
     private void Awake()
     {
+        Default_State = new Vector3(transform.localScale.x, 
+            transform.localScale.y, transform.localScale.z);
+        //transform = GetComponent<Transform>();
         viewMesh = new()
         {
             name = "View Mesh"
@@ -74,6 +81,48 @@ public class AISensor : MonoBehaviour
         float stepAngleSize = Angle / stepCount;
         List<Vector3> viewPoints = new();
         ViewCastInfo oldViewCast = new();
+
+        switch (character.ViewSide)
+        {
+            case ViewSide.Left:
+                transform.localScale = Default_State;
+                transform.localScale = new Vector3(-transform.localScale.x,
+                        transform.localScale.y, transform.localScale.z);
+                transform.localEulerAngles = new Vector3(0, 90, 0);
+                break;
+            case ViewSide.Up_Left:
+                transform.localScale = Default_State;
+                transform.localScale = new Vector3(-transform.localScale.x,
+                        transform.localScale.y, transform.localScale.z);
+                transform.localEulerAngles = new Vector3(0, 45, 0);
+                break;
+            case ViewSide.Down_Left:
+                transform.localScale = Default_State;
+                transform.localScale = new Vector3(-transform.localScale.x,
+                        transform.localScale.y, transform.localScale.z);
+                transform.localEulerAngles = new Vector3(0, 135, 0);
+                break;
+            case ViewSide.Up_Right:
+                transform.localScale = Default_State;
+                transform.localEulerAngles = new Vector3(0, 45, 0);
+                break;
+            case ViewSide.Down_Right:
+                transform.localScale = Default_State;
+                transform.localEulerAngles = new Vector3(0, 135, 0);
+                break;
+            case ViewSide.Right:
+                transform.localScale = Default_State;
+                transform.localEulerAngles = new Vector3(0, 90, 0);
+                break;
+            case ViewSide.OnScreen:
+                transform.localScale = Default_State;
+                transform.localEulerAngles = new Vector3(0, 0, 0);
+                break;
+            case ViewSide.OnMe:
+                transform.localScale = Default_State;
+                transform.localEulerAngles = new Vector3(0, 180, 0);
+                break;
+        }
 
         for (int i = 0; i <= stepCount; i++)
         {
