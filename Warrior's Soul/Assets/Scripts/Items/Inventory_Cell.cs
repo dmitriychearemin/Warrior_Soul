@@ -12,22 +12,24 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     [SerializeField] private Image _iconField;
     [SerializeField] public Text _count_items;
     [SerializeField] GameObject _input_field;
+    public GameObject cur_field;
+    GameObject Merg_cell;
     String obj_tag;
+    Inventory _inventory;
     private Transform _dragingParrent;
     private Transform inventory_container;
     private Transform _weapon_container_Parrent;
     private Transform _quick_container_Parrent;
     private Transform _originalparent;
     private OnContainer onContainer = OnContainer.Inventory;
-    bool _doubleclick = false;
     float timer_before_second_click=0;
-    int count_separate_elements = 0;
-
+    bool merging = false;
     enum OnContainer
     {
         Inventory,
         Quick_Access,
-        Weapon
+        Weapon,
+        Same_cell
     }
 
     private void Update()
@@ -38,24 +40,26 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
             if(timer_before_second_click > 20)
             {
                 timer_before_second_click = 0;
-                _doubleclick = false;
             }
         }
     }
 
-    public void Init(Transform draggingparent, Transform weapon_container, Transform quick_container)
+    public void Init(Transform draggingparent, Transform weapon_container, Transform quick_container, Inventory inventory)
     {
         _dragingParrent = draggingparent;
         _originalparent = transform.parent;
         inventory_container = _originalparent;
         _quick_container_Parrent = quick_container;
         _weapon_container_Parrent = weapon_container;
+        _inventory = inventory;
+
     }
 
     public void Render(AssetItem item)
     {
       
         _namefield.text = item.Name;
+        gameObject.name = _namefield.text; 
         _iconField.sprite = item.UIICON;
         _count_items.text = item.count_Element.ToString();
         obj_tag = item.Tag;
@@ -70,7 +74,6 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     {
         if (timer_before_second_click <= 20 & timer_before_second_click > 0)
         {
-            _doubleclick = true;
             Instantiate_Input_field();
         }
         timer_before_second_click++;
@@ -79,16 +82,15 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
 
     void Instantiate_Input_field()
     {
-        var field = Instantiate(_input_field, transform);
-        field.transform.parent = _dragingParrent;
-        For_Input_Fields script_field = field.GetComponent<For_Input_Fields>();
+        cur_field = Instantiate(_input_field, transform);
+        cur_field.transform.parent = _dragingParrent;
+        For_Input_Fields script_field = cur_field.GetComponent<For_Input_Fields>();
         script_field.Set_Cell_For_Separate(gameObject);
     }
 
     public void Get_Count_Separate_Item(int count)
     {
-        count_separate_elements = count;
-        
+        _inventory.Separate_Item(count,this);
     }
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
@@ -119,11 +121,18 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
 
             case OnContainer.Weapon:
                 _originalparent = _weapon_container_Parrent;
-                break;
+                break;           
 
             default:
                 print("Данный контейнер отсутствует");
                 break;
+        }
+
+        if(merging == true)
+        {
+            _inventory.Merging_Items(this, gameObject, Merg_cell);
+            merging = false;
+            Merg_cell = null;
         }
 
         for (int i =0; i< _originalparent.transform.childCount; i++)
@@ -159,10 +168,19 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
             }
         }
 
+        else if(collision.name == name)
+        {
+            merging = true;
+            Merg_cell = collision.gameObject;
+            
+        }
+
         else
         {
             onContainer = OnContainer.Inventory;
         }
+
+
     }
 
 }
