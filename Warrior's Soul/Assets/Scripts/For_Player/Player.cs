@@ -17,7 +17,6 @@ public class Player : Character
     [SerializeField]private Transform attackCollider;
 
     private InputHandler input;
-    //private new Transform transform;
     private Rigidbody2D rb;
     private Animator animatorContoller;
 
@@ -25,7 +24,6 @@ public class Player : Character
     private const float walkDuration = 0.08f; 
     private const float attackDuration = 1.2f;
 
-    //private Vector3 Default_State;
     bool _menuactive = true;
 
     GameObject inventory;
@@ -74,13 +72,7 @@ public class Player : Character
     {
         if (horizontalInput != 0 || verticalInput != 0)
         {
-            if (verticalInput > 0)
-            {
-                FlipSprite(-horizontalInput, verticalInput);
-            }
-            else{
-                FlipSprite(horizontalInput, verticalInput);
-            }
+            FlipSprite(horizontalInput, verticalInput);
             
             float speed = Speed_Walk 
                 * (InputHandler.RunTriggered && !stats.HoldShift ? 2 : 1);
@@ -136,35 +128,7 @@ public class Player : Character
         {
             MoveState = MoveState.Run;
             animatorContoller.Play("Run_Right");
-            /*switch (ViewSide) 
-            {
-                case ViewSide.Up_Left:
-                    animatorContoller.Play("Run_Right");
-                    break;
-                case ViewSide.Up_Right:
-                    animatorContoller.Play("Run_Right");
-                    break;
-                case ViewSide.OnMe:
-                    animatorContoller.Play("Run_Right");
-                    break;
-                case ViewSide.Left:
-                    animatorContoller.Play("Run_Right");
-                    break;
-                case ViewSide.Right:
-                    animatorContoller.Play("Run_Right");
-                    break;
-                case ViewSide.Down_Left:
-                    animatorContoller.Play("Run_Right");
-                    break;
-                case ViewSide.Down_Right:
-                    animatorContoller.Play("Run_Right");
-                    break;
-                case ViewSide.OnScreen:
-                    animatorContoller.Play("Run_Right");
-                    break;
-                default:
-                    break;
-            }*/
+
             animationTime = walkDuration;
         }
         else if (input.AttackTriggered && !(horizontalInput != 0 || verticalInput != 0))
@@ -205,35 +169,6 @@ public class Player : Character
         {
             MoveState = MoveState.Walk;
             animatorContoller.Play("Walk_Right");
-            /*switch (ViewSide)
-            {
-                case ViewSide.Up_Left:
-                    animatorContoller.Play("Walk_Right");
-                    break;
-                case ViewSide.Up_Right:
-                    animatorContoller.Play("Walk_Right");
-                    break;
-                case ViewSide.OnMe:
-                    animatorContoller.Play("Walk_Right");
-                    break;
-                case ViewSide.Left:
-                    animatorContoller.Play("Walk_Right");
-                    break;
-                case ViewSide.Right:
-                    animatorContoller.Play("Walk_Right");
-                    break;
-                case ViewSide.Down_Left:
-                    animatorContoller.Play("Walk_Right");
-                    break;
-                case ViewSide.Down_Right:
-                    animatorContoller.Play("Walk_Right");
-                    break;
-                case ViewSide.OnScreen:
-                    animatorContoller.Play("Walk_Right");
-                    break;
-                default:
-                    break;
-            }*/
 
             animationTime = walkDuration;
         }

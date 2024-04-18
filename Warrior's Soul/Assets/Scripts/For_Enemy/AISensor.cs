@@ -173,7 +173,6 @@ public class AISensor : MonoBehaviour
         //Physics2D.Raycast(transform.position, dir, filter, result);
         if (Physics2D.Raycast(transform.position, dir, filter, result) > 0)
         {
-            Debug.Log("got");
             if (result[0].distance <= Distance)
                 return new ViewCastInfo(true, result[0].point, result[0].distance, globalAngle);
             else

@@ -80,35 +80,36 @@ public class NPC : Character
         if (runTriggered)
         {
             MoveState = MoveState.Run;
-            switch (ViewSide)
-            {
-                case ViewSide.Up_Left:
-                    animatorContoller.Play("Run_Up_Left");
-                    break;
-                case ViewSide.Up_Right:
-                    animatorContoller.Play("Run_Up_Left");
-                    break;
-                case ViewSide.OnMe:
-                    animatorContoller.Play("Run_Down");
-                    break;
-                case ViewSide.Left:
-                    animatorContoller.Play("Run_Right");
-                    break;
-                case ViewSide.Right:
-                    animatorContoller.Play("Run_Right");
-                    break;
-                case ViewSide.Down_Left:
-                    animatorContoller.Play("Run_Down_Right");
-                    break;
-                case ViewSide.Down_Right:
-                    animatorContoller.Play("Run_Down_Right");
-                    break;
-                case ViewSide.OnScreen:
-                    animatorContoller.Play("Run_Up");
-                    break;
-                default:
-                    break;
-            }
+            animatorContoller.Play("Run_Right");
+            //switch (ViewSide)
+            //{
+            //    case ViewSide.Up_Left:
+            //        animatorContoller.Play("Run_Up_Left");
+            //        break;
+            //    case ViewSide.Up_Right:
+            //        animatorContoller.Play("Run_Up_Left");
+            //        break;
+            //    case ViewSide.OnMe:
+            //        animatorContoller.Play("Run_Down");
+            //        break;
+            //    case ViewSide.Left:
+            //        animatorContoller.Play("Run_Right");
+            //        break;
+            //    case ViewSide.Right:
+            //        animatorContoller.Play("Run_Right");
+            //        break;
+            //    case ViewSide.Down_Left:
+            //        animatorContoller.Play("Run_Down_Right");
+            //        break;
+            //    case ViewSide.Down_Right:
+            //        animatorContoller.Play("Run_Down_Right");
+            //        break;
+            //    case ViewSide.OnScreen:
+            //        animatorContoller.Play("Run_Up");
+            //        break;
+            //    default:
+            //        break;
+            //}
             animationTime = walkDuration;
         }
         else if (attackTriggered)
@@ -148,35 +149,36 @@ public class NPC : Character
         else
         {
             MoveState = MoveState.Walk;
-            switch (ViewSide)
-            {
-                case ViewSide.Up_Left:
-                    animatorContoller.Play("Walk_Up_Left");
-                    break;
-                case ViewSide.Up_Right:
-                    animatorContoller.Play("Walk_Up_Left");
-                    break;
-                case ViewSide.OnMe:
-                    animatorContoller.Play("Move_Down");
-                    break;
-                case ViewSide.Left:
-                    animatorContoller.Play("Walk_Right");
-                    break;
-                case ViewSide.Right:
-                    animatorContoller.Play("Walk_Right");
-                    break;
-                case ViewSide.Down_Left:
-                    animatorContoller.Play("Walk_Down_Right");
-                    break;
-                case ViewSide.Down_Right:
-                    animatorContoller.Play("Walk_Down_Right");
-                    break;
-                case ViewSide.OnScreen:
-                    animatorContoller.Play("Move_Up");
-                    break;
-                default:
-                    break;
-            }
+            animatorContoller.Play("Walk_Right");
+            //switch (ViewSide)
+            //{
+            //    case ViewSide.Up_Left:
+            //        animatorContoller.Play("Walk_Up_Left");
+            //        break;
+            //    case ViewSide.Up_Right:
+            //        animatorContoller.Play("Walk_Up_Left");
+            //        break;
+            //    case ViewSide.OnMe:
+            //        animatorContoller.Play("Move_Down");
+            //        break;
+            //    case ViewSide.Left:
+            //        animatorContoller.Play("Walk_Right");
+            //        break;
+            //    case ViewSide.Right:
+            //        animatorContoller.Play("Walk_Right");
+            //        break;
+            //    case ViewSide.Down_Left:
+            //        animatorContoller.Play("Walk_Down_Right");
+            //        break;
+            //    case ViewSide.Down_Right:
+            //        animatorContoller.Play("Walk_Down_Right");
+            //        break;
+            //    case ViewSide.OnScreen:
+            //        animatorContoller.Play("Move_Up");
+            //        break;
+            //    default:
+            //        break;
+            //}
             animationTime = walkDuration;
         }
     }
