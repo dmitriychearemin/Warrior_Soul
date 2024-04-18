@@ -10,8 +10,9 @@ using System;
 using UnityEditor;
 using static UnityEditor.Progress;
 using UnityEngine.UIElements;
+using System.Linq;
 
-public class Inventory: MonoBehaviour
+public class Inventory : MonoBehaviour
 {
 
     [SerializeField] private List<AssetItem> Items = new List<AssetItem>();
@@ -76,9 +77,9 @@ public class Inventory: MonoBehaviour
         {
 
             _inventory_Cell_Template = _container.GetChild(i).GetComponent<Inventory_Cell>();
-            if (_inventory_Cell_Template._namefield.text == name)  
+            if (_inventory_Cell_Template._namefield.text == name)
             {
-                for(int j=0; j< Items.Count; j++)
+                for (int j = 0; j < Items.Count; j++)
                 {
                     if (Items[j].Name == name)
                     {
@@ -86,37 +87,51 @@ public class Inventory: MonoBehaviour
                         Update_Count_Item_In_Cell(i, Items[j]);
                         need_New_Cell = false;
                     }
-                    
+
                 }
-               
+
             }
-            
+
         }
 
         if (need_New_Cell)
         {
-            Create_New_Cell(name, sprite, tag);
+            Create_New_Cell(name, sprite, tag, 1);
         }
     }
 
-    public void Create_New_Cell(String name, Sprite sprite, String tag)
+    public void Create_New_Cell(String name, Sprite sprite, String tag, int count)
     {
         AssetItem _assetitem = new AssetItem();
         _assetitem._name = name;
         _assetitem._UIIcon = sprite;
         _assetitem.tag = tag;
-        Items.Add(_assetitem); 
+        _assetitem.count_Element = count;
+        Items.Add(_assetitem);
         var cell = Instantiate(_inventory_Cell_Template, _container);
-        cell.Init(_draggingparent, _container_weapons, _container_quick);
+        cell.Init(_draggingparent, _container_weapons, _container_quick, this);
         cell.Render(Items[Items.Count - 1]);
-        
+
     }
 
-    public void Separate_Item()
+    public void Separate_Item(int Count_items, Inventory_Cell inv_cell)
     {
+        if (inv_cell != null)
+        {
+            foreach (AssetItem item in Items.ToList())
+            {
+                if (item._name == inv_cell._namefield.text && item.count_Element == int.Parse(inv_cell._count_items.text))
+                {
+                    int new_count_items = int.Parse(inv_cell._count_items.text) - Count_items;
+                    item.count_Element = new_count_items;
+                    inv_cell._count_items.text = new_count_items.ToString();
+                    Create_New_Cell(item._name, item._UIIcon, item.tag, Count_items);
+                    break;
+                }
+            }
+        }
 
     }
-
 
     public void Merging_Items(Inventory_Cell inv_cell, GameObject cell, GameObject merg_cell)
     {
@@ -149,4 +164,6 @@ public class Inventory: MonoBehaviour
             }
         }
     }
+
+
 }
