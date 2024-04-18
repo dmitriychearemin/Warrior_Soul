@@ -116,44 +116,51 @@ public class Inventory : MonoBehaviour
 
     public void Separate_Item(int Count_items, Inventory_Cell inv_cell)
     {
-        foreach (AssetItem item in Items.ToList())
+        if (inv_cell != null)
         {
-            if (item._name == inv_cell._namefield.text && item.count_Element == int.Parse(inv_cell._count_items.text))
+            foreach (AssetItem item in Items.ToList())
             {
-                int new_count_items = int.Parse(inv_cell._count_items.text) - Count_items;
-                item.count_Element = new_count_items;
-                inv_cell._count_items.text = new_count_items.ToString();
-                Create_New_Cell(item._name, item._UIIcon, item.tag, Count_items);
-                break;
+                if (item._name == inv_cell._namefield.text && item.count_Element == int.Parse(inv_cell._count_items.text))
+                {
+                    int new_count_items = int.Parse(inv_cell._count_items.text) - Count_items;
+                    item.count_Element = new_count_items;
+                    inv_cell._count_items.text = new_count_items.ToString();
+                    Create_New_Cell(item._name, item._UIIcon, item.tag, Count_items);
+                    break;
+                }
             }
         }
+
     }
 
     public void Merging_Items(Inventory_Cell inv_cell, GameObject cell, GameObject merg_cell)
     {
-        Inventory_Cell inv_merg_cell = merg_cell.GetComponent<Inventory_Cell>();
-        foreach (AssetItem item in Items.ToList())
+        if (cell != null & merg_cell != null)
         {
-            if (item._name == inv_merg_cell._namefield.text && item.count_Element == int.Parse(inv_merg_cell._count_items.text))
+            Inventory_Cell inv_merg_cell = merg_cell.GetComponent<Inventory_Cell>();
+            foreach (AssetItem item in Items.ToList())
             {
-                int new_count_items = int.Parse(inv_cell._count_items.text) + int.Parse(inv_merg_cell._count_items.text);
-                
-                foreach (AssetItem itm in Items.ToList())
+                if (item._name == inv_merg_cell._namefield.text && item.count_Element == int.Parse(inv_merg_cell._count_items.text))
                 {
-                    if (itm._name == inv_cell._namefield.text && itm.count_Element == int.Parse(inv_cell._count_items.text))
-                    {
-                        Items.Remove(itm);
-                    }
-                }
+                    int new_count_items = int.Parse(inv_cell._count_items.text) + int.Parse(inv_merg_cell._count_items.text);
 
-                item.count_Element = new_count_items;
-                inv_merg_cell._count_items.text = new_count_items.ToString();
-                if (inv_cell.cur_field)
-                {
-                    Destroy(inv_cell.cur_field);
+                    foreach (AssetItem itm in Items.ToList())
+                    {
+                        if (itm._name == inv_cell._namefield.text && itm.count_Element == int.Parse(inv_cell._count_items.text))
+                        {
+                            Items.Remove(itm);
+                        }
+                    }
+
+                    item.count_Element = new_count_items;
+                    inv_merg_cell._count_items.text = new_count_items.ToString();
+                    if (inv_cell.cur_field)
+                    {
+                        Destroy(inv_cell.cur_field);
+                    }
+                    Destroy(cell);
+                    break;
                 }
-                Destroy(cell);
-                break;
             }
         }
     }
