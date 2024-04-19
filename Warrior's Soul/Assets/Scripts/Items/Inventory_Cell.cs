@@ -21,15 +21,20 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     private Transform _weapon_container_Parrent;
     private Transform _quick_container_Parrent;
     private Transform _originalparent;
+    private Transform _last_parent;
     private OnContainer onContainer = OnContainer.Inventory;
     float timer_before_second_click=0;
     bool merging = false;
+
+
     enum OnContainer
     {
         Inventory,
         Quick_Access,
         Weapon,
-        Same_cell
+        Drop,
+        Destroy
+
     }
 
     private void Update()
@@ -74,7 +79,11 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     {
         if (timer_before_second_click <= 20 & timer_before_second_click > 0)
         {
-            Instantiate_Input_field();
+            if(transform.parent == inventory_container)
+            {
+                Instantiate_Input_field();
+            }
+            
         }
         timer_before_second_click++;
         
@@ -109,7 +118,7 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     {
 
         int closestindex = 0;
-
+        _last_parent = _originalparent;
         switch (onContainer) {
             case OnContainer.Inventory:
                 _originalparent = inventory_container;
@@ -121,14 +130,28 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
 
             case OnContainer.Weapon:
                 _originalparent = _weapon_container_Parrent;
-                break;           
+                break;
+
+            case OnContainer.Drop:
+                if(transform.parent == inventory_container)
+                {
+
+                }
+                break;
+
+            case OnContainer.Destroy:
+                if (transform.parent == inventory_container)
+                {
+
+                }
+                break;
 
             default:
                 print("Данный контейнер отсутствует");
                 break;
         }
 
-        if(merging == true)
+        if(merging == true &&_last_parent == inventory_container)
         {
             _inventory.Merging_Items(this, gameObject, Merg_cell);
             merging = false;
@@ -173,15 +196,30 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
             merging = true;
             Merg_cell = collision.gameObject;
             
+            
         }
 
-        else
+        else if(collision.name == "Drop_Item")
+        {
+            onContainer = OnContainer.Drop;
+        }
+
+        else if (collision.name == "Delete_Item")
+        {
+            onContainer = OnContainer.Destroy;
+        }
+
+        else if(collision.name  == "Content")
         {
             onContainer = OnContainer.Inventory;
         }
 
+        
+
 
     }
+
+
 
 }
 
