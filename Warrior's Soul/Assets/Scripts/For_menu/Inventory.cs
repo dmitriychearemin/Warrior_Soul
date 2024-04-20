@@ -21,6 +21,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform _draggingparent;
     [SerializeField] private Transform _container_quick;
     [SerializeField] private Transform _container_weapons;
+    [SerializeField] private GameObject _AssetItem;
+    [SerializeField] private Transform player;
     bool _menu_active = false;
 
     private void Start()
@@ -142,7 +144,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void Remove_Item_In_List(Inventory_Cell cell, int opredelitel) {
+    public void Remove_Item_In_List(Inventory_Cell cell, GameObject cell_in_container, int opredelitel) {
 
         AssetItem item = Search_Item_In_List(Items, cell);
 
@@ -151,7 +153,7 @@ public class Inventory : MonoBehaviour
         switch (opredelitel){
 
             case 0:  // Для дропа предмета
-
+                Drop_Item(cell);
                 break;
 
             case 1:  // Для полного удаления  
@@ -161,8 +163,31 @@ public class Inventory : MonoBehaviour
             default:
                 break;
         }
+        Destroy(cell_in_container);
+
     }
 
+    void Drop_Item(Inventory_Cell cell)
+    {
+        _AssetItem.name = cell._namefield.text;
+        _AssetItem.tag = cell.obj_tag;
+        SpriteRenderer spriteRenderer = _AssetItem.GetComponent<SpriteRenderer>();
+        _AssetItem.GetComponent<SpriteRenderer>().sprite = cell._iconField.sprite;
+        _AssetItem.GetComponent<Take_Item>()._name_Item = cell._namefield.text;
+        Vector2 pos_for_drop = new Vector2(player.position.x, player.position.y-4);
+        
+        for(int i=0; i< int.Parse(cell._count_items.text); i++)
+        {
+            Instantiate(_AssetItem, pos_for_drop, transform.rotation);
+        }
+
+    }
+
+    
+    void Check_On_True_Destroying()  // Проверка, точно ли человек хочет удалить элемент безвозвратно
+    {
+
+    }
 
 
 

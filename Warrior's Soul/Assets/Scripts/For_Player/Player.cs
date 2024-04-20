@@ -280,11 +280,15 @@ public class Player : Character
     {
         if(collision.tag == "Loot_Item" || collision.tag == "Weapon" || collision.tag == "Quick_access_items")
         {
-
-            string _nameobject = collision.gameObject.name;
-            Sprite _sptriteobject = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
-            string tag = collision.gameObject.tag;
-            _inventory.Add_Element_In_Cell(_nameobject, _sptriteobject, tag);
+            if(collision.GetComponent<Take_Item>().Time_living > 2)
+            {
+                string _nameobject = collision.gameObject.name;
+                Sprite _sptriteobject = collision.gameObject.GetComponent<SpriteRenderer>().sprite;
+                string tag = collision.gameObject.tag;
+                _inventory.Add_Element_In_Cell(_nameobject, _sptriteobject, tag);
+                Destroy(collision.gameObject);
+            }
+          
         }
 
         if(collision.tag == "Trigger_Enter_Room")

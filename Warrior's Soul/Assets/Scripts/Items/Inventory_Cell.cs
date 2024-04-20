@@ -9,12 +9,12 @@ using UnityEngine.UI;
 public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
     [SerializeField] public Text _namefield;
-    [SerializeField] private Image _iconField;
+    [SerializeField] public Image _iconField;
     [SerializeField] public Text _count_items;
     [SerializeField] GameObject _input_field;
     public GameObject cur_field;
     GameObject Merg_cell;
-    String obj_tag;
+    public String obj_tag;
     Inventory _inventory;
     private Transform _dragingParrent;
     private Transform inventory_container;
@@ -133,14 +133,15 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
                 break;
 
             case OnContainer.Drop:
-                if(transform.parent == inventory_container)
+                if(_last_parent == inventory_container)
                 {
-
+                    _inventory.Remove_Item_In_List(this, gameObject, 0);
+                    
                 }
                 break;
 
             case OnContainer.Destroy:
-                if (transform.parent == inventory_container)
+                if (_last_parent == inventory_container)
                 {
 
                 }
@@ -151,7 +152,7 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
                 break;
         }
 
-        if(merging == true &&_last_parent == inventory_container)
+        if(merging == true && _last_parent == inventory_container)
         {
             _inventory.Merging_Items(this, gameObject, Merg_cell);
             merging = false;
@@ -202,6 +203,7 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         else if(collision.name == "Drop_Item")
         {
             onContainer = OnContainer.Drop;
+            
         }
 
         else if (collision.name == "Delete_Item")
