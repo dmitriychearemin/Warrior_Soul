@@ -174,7 +174,7 @@ public class Inventory : MonoBehaviour
         SpriteRenderer spriteRenderer = _AssetItem.GetComponent<SpriteRenderer>();
         _AssetItem.GetComponent<SpriteRenderer>().sprite = cell._iconField.sprite;
         _AssetItem.GetComponent<Take_Item>()._name_Item = cell._namefield.text;
-        Vector2 pos_for_drop = new Vector2(player.position.x, player.position.y-4);
+        Vector2 pos_for_drop = new Vector2(player.position.x, player.position.y-2);
         
         for(int i=0; i< int.Parse(cell._count_items.text); i++)
         {

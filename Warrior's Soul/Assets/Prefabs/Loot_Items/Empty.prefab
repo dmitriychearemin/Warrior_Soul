@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name_Item: Coin
   _speed_item: 4
+  Time_living: 0
 --- !u!50 &1641574274265084625
 Rigidbody2D:
   serializedVersion: 4
