@@ -143,7 +143,7 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
             case OnContainer.Destroy:
                 if (_last_parent == inventory_container)
                 {
-
+                    _inventory.Remove_Item_In_List(this, gameObject, 1);
                 }
                 break;
 

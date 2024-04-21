@@ -717,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2805543269527099388, guid: c860dd8279ca94e42816ea65286010b3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -54.621292
+      value: -54.621277
       objectReference: {fileID: 0}
     - target: {fileID: 2805543269527099388, guid: c860dd8279ca94e42816ea65286010b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2868,7 +2868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050475635775823178, guid: 64575ca9a7e61ce4883f45f94e75443d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 289.46
+      value: 292.11
       objectReference: {fileID: 0}
     - target: {fileID: 4050475635775823178, guid: 64575ca9a7e61ce4883f45f94e75443d, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2904,7 +2904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050475635775823178, guid: 64575ca9a7e61ce4883f45f94e75443d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 799
+      value: 800.33
       objectReference: {fileID: 0}
     - target: {fileID: 4050475635775823178, guid: 64575ca9a7e61ce4883f45f94e75443d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3331,7 +3331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5834821121628245450, guid: eff366bb21444964e91145da636f9dba, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -24.09999
+      value: -24.099976
       objectReference: {fileID: 0}
     - target: {fileID: 5834821121628245450, guid: eff366bb21444964e91145da636f9dba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3362,6 +3362,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1863787435}
     - target: {fileID: 8350007140475933657, guid: eff366bb21444964e91145da636f9dba, type: 3}
+      propertyPath: Agrement
+      value: 
+      objectReference: {fileID: 6012224466641638278, guid: 74e56948f70637f40b848365eaefff9f, type: 3}
+    - target: {fileID: 8350007140475933657, guid: eff366bb21444964e91145da636f9dba, type: 3}
       propertyPath: AssetItem
       value: 
       objectReference: {fileID: 4458117057718111679, guid: c2b5d1fb2291063429d505635c677243, type: 3}
@@ -3381,6 +3385,10 @@ PrefabInstance:
       propertyPath: _container_weapons
       value: 
       objectReference: {fileID: 1024417694}
+    - target: {fileID: 8350007140475933657, guid: eff366bb21444964e91145da636f9dba, type: 3}
+      propertyPath: _inventory_Cell_Template
+      value: 
+      objectReference: {fileID: 7124892031638296418, guid: 7f6804510a583204d911d1afb7f37ca7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

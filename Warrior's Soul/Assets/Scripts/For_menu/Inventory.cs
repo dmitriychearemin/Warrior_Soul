@@ -16,14 +16,19 @@ public class Inventory : MonoBehaviour
 {
 
     [SerializeField] private List<AssetItem> Items = new List<AssetItem>();
-    [SerializeField] private Inventory_Cell _inventory_Cell_Template;
+    [SerializeField] private GameObject _inventory_Cell_Template;
+    [SerializeField] private GameObject Agrement;
     [SerializeField] private Transform _container;
     [SerializeField] private Transform _draggingparent;
     [SerializeField] private Transform _container_quick;
     [SerializeField] private Transform _container_weapons;
     [SerializeField] private GameObject _AssetItem;
     [SerializeField] private Transform player;
-    bool _menu_active = false;
+    
+
+    AssetItem _del_item;
+    GameObject _del_cell;
+
 
     private void Start()
     {
@@ -53,13 +58,14 @@ public class Inventory : MonoBehaviour
 
     public void Add_Element_In_Cell(String name, Sprite sprite, String tag)
     {
-
+       
         bool need_New_Cell = true;
         for (int i = 0; i < _container.childCount; i++)
         {
-
-            _inventory_Cell_Template = _container.GetChild(i).GetComponent<Inventory_Cell>();
-            if (_inventory_Cell_Template._namefield.text == name)
+            
+            var _inventory_Cell = _container.GetChild(i).GetComponent<Inventory_Cell>();
+           
+            if (_inventory_Cell._namefield.text == name)
             {
                 for (int j = 0; j < Items.Count; j++)
                 {
@@ -71,13 +77,12 @@ public class Inventory : MonoBehaviour
                     }
 
                 }
-
             }
-
         }
 
         if (need_New_Cell)
         {
+            
             Create_New_Cell(name, sprite, tag, 1);
         }
     }
@@ -91,8 +96,9 @@ public class Inventory : MonoBehaviour
         _assetitem.count_Element = count;
         Items.Add(_assetitem);
         var cell = Instantiate(_inventory_Cell_Template, _container);
-        cell.Init(_draggingparent, _container_weapons, _container_quick, this);
-        cell.Render(Items[Items.Count - 1]);
+       
+        cell.GetComponent<Inventory_Cell>().Init(_draggingparent, _container_weapons, _container_quick, this);
+        cell.GetComponent<Inventory_Cell>().Render(Items[Items.Count - 1]);
 
     }
 
@@ -146,25 +152,30 @@ public class Inventory : MonoBehaviour
 
     public void Remove_Item_In_List(Inventory_Cell cell, GameObject cell_in_container, int opredelitel) {
 
-        AssetItem item = Search_Item_In_List(Items, cell);
+        if(cell_in_container!= null)
+        {
+            AssetItem item = Search_Item_In_List(Items, cell);
 
-        Items.Remove(item);
+            switch (opredelitel)
+            {
 
-        switch (opredelitel){
+                case 0:  // Для дропа предмета
+                    Drop_Item(cell);
+                    Items.Remove(item);
+                    Destroy(cell_in_container);
+                    break;
 
-            case 0:  // Для дропа предмета
-                Drop_Item(cell);
-                break;
+                case 1:  // Для полного удаления  
+                    var agr = Instantiate(Agrement, _draggingparent);
+                    _del_item = item;
+                    _del_cell = cell_in_container;
+                    agr.GetComponent<For_Agreement>().Get_Component_Inventory(this);
+                    break;
 
-            case 1:  // Для полного удаления  
-
-                break;
-
-            default:
-                break;
-        }
-        Destroy(cell_in_container);
-
+                default:
+                    break;
+            }          
+        }           
     }
 
     void Drop_Item(Inventory_Cell cell)
@@ -174,7 +185,7 @@ public class Inventory : MonoBehaviour
         SpriteRenderer spriteRenderer = _AssetItem.GetComponent<SpriteRenderer>();
         _AssetItem.GetComponent<SpriteRenderer>().sprite = cell._iconField.sprite;
         _AssetItem.GetComponent<Take_Item>()._name_Item = cell._namefield.text;
-        Vector2 pos_for_drop = new Vector2(player.position.x, player.position.y-2);
+        Vector2 pos_for_drop = new Vector2(player.position.x, player.position.y+1);
         
         for(int i=0; i< int.Parse(cell._count_items.text); i++)
         {
@@ -184,9 +195,19 @@ public class Inventory : MonoBehaviour
     }
 
     
-    void Check_On_True_Destroying()  // Проверка, точно ли человек хочет удалить элемент безвозвратно
+    public void Check_On_True_Destroying(bool agree)  // Проверка, точно ли человек хочет удалить элемент безвозвратно
     {
+        switch (agree)
+        {
+            case true:
+                Items.Remove(_del_item);
+                Destroy(_del_cell);
+                break;
 
+            default:
+
+                break;
+        } 
     }
 
 

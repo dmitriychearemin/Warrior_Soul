@@ -17,7 +17,7 @@ public class Take_Item : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         _rigidbody = GetComponent<Rigidbody2D>();
         Vector2 _direction = new Vector2(Random.Range(-2,2), Random.Range(-2, 2));
-        _rigidbody.AddForce(new Vector2(Random.Range (-100f, 100f),(Random.Range(-100f, 100f))));
+        _rigidbody.AddForce(new Vector2(Random.Range (-100f, 100f),(Random.Range(0, 100f))));
         
     }
 
@@ -47,6 +47,14 @@ public class Take_Item : MonoBehaviour
     void ChangeName()
     {
         gameObject.name = gameObject.name.Replace("(Clone)", "").Trim();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Block_Wall" || collision.tag == "Loby_Portal")
+        {
+            _rigidbody.velocity = new Vector2(0,0);
+        }
     }
 
 }
