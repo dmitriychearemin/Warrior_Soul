@@ -29,7 +29,8 @@ public class Spawn_Loot : MonoBehaviour
         for(int i=0; i < _current_count_loot; i++)
         {
             int rand = Random.Range(0, _loot_variant._Loot_Items.Length);
-            Instantiate(_loot_variant._Loot_Items[rand], transform.position, transform.rotation);
+            Vector2 pos_spawn = new Vector2(transform.position.x, transform.position.y + 0.5f);
+            Instantiate(_loot_variant._Loot_Items[rand], pos_spawn, transform.rotation);
             
         }
 

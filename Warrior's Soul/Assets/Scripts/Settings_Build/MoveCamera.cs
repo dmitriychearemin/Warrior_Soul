@@ -75,7 +75,7 @@ public class MoveCamera: MonoBehaviour
         {
             cur_speed = default_speed;
         }
-        print(cur_speed);
+        
         Vector3 needpos = new Vector3(player.transform.position.x, player.transform.position.y, -10);
         transform.position = Vector3.MoveTowards(transform.position, needpos, cur_speed* Time.deltaTime);
         if(Vector3.Distance(transform.position,player.transform.position)<= -transform.position.z + 0.2f)
