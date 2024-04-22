@@ -117,6 +117,11 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     public void OnEndDrag(PointerEventData eventData)
     {
 
+        if(cur_field != null && onContainer != OnContainer.Inventory)
+        {
+            Destroy(cur_field);
+        }
+
         int closestindex = 0;
         _last_parent = _originalparent;
         switch (onContainer) {
@@ -126,17 +131,18 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
 
             case OnContainer.Quick_Access:
                 _originalparent = _quick_container_Parrent;
+            
                 break;
 
             case OnContainer.Weapon:
                 _originalparent = _weapon_container_Parrent;
+               
                 break;
 
             case OnContainer.Drop:
                 if(_last_parent == inventory_container)
                 {
                     _inventory.Remove_Item_In_List(this, gameObject, 0);
-                    
                 }
                 break;
 

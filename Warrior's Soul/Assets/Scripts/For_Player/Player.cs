@@ -44,7 +44,7 @@ public class Player : Character
     {
         input = InputHandler.Instance;
         EnemyAttack.EnemyDamage += TakeDamage;
-        inventory = GameObject.Find("Inventory");
+        inventory = GameObject.Find("General_Inventory");
     }
 
     private void OnDestroy()
