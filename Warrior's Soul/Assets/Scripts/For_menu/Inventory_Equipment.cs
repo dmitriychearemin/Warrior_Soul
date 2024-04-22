@@ -18,8 +18,6 @@ public class Inventory_Equipment: MonoBehaviour
     [SerializeField] private List<AssetItem> Quick_Items = new List<AssetItem>();
 
     [SerializeField] private Inventory_Cell _inventory_Cell_Template;
-    [SerializeField] private GameObject default_quick_cell;
-    [SerializeField] private GameObject default_Weapon_cell;
     [SerializeField] private Transform _container_quick_cell;
     [SerializeField] private Transform _container_weapons_cell;
     [SerializeField] private Transform _draggingparent;

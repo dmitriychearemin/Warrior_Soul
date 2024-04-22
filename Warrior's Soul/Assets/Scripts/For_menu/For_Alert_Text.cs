@@ -9,7 +9,5 @@ public class For_Alert_Text : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, 5);
-    }
-
-    
+    }   
 }

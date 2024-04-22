@@ -146,6 +146,7 @@ public class Inventory : MonoBehaviour
             {
                 Destroy(inv_cell.cur_field);
             }
+
             Destroy(cell);         
         }
     }
