@@ -7,8 +7,9 @@ using UnityEngine;
 public class Player : Character
 {
     [SerializeField]private float Default_Speed = 250f;
-
     [SerializeField] Inventory _inventory;
+    [SerializeField] GameObject Quick_Acess_Buttons;
+
 
     private float horizontalInput = 0, verticalInput = 0;
     private float halfScreenX = Screen.width / 2, halfScreenY = Screen.height / 2;
@@ -26,9 +27,12 @@ public class Player : Character
     private const float attackDuration = 1.2f;
 
     //private Vector3 Default_State;
-    bool _menuactive = true;
+    bool _menuactive = false;
 
     GameObject inventory;
+    Inventory_Equipment _inventory_Equipment;
+    Transform _quick_buttons;
+
     private void Awake()
     {
         Speed_Walk = Default_Speed;
@@ -44,7 +48,11 @@ public class Player : Character
     {
         input = InputHandler.Instance;
         EnemyAttack.EnemyDamage += TakeDamage;
+        _inventory_Equipment = GameObject.Find("Inventory_Equipment").GetComponent<Inventory_Equipment>();
         inventory = GameObject.Find("General_Inventory");
+        _quick_buttons= GameObject.Find("Quick_Access_Button").transform;
+        inventory.SetActive(_menuactive);
+       
     }
 
     private void OnDestroy()
@@ -254,19 +262,19 @@ public class Player : Character
             animatorContoller.Play("Idol_Animation");
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab) && _menuactive == true)
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            inventory.SetActive(false);
-            Debug.Log("Turn_Off");
-            _menuactive = false;
+            Quick_Acess_Buttons.SetActive(_menuactive);
+            if (_menuactive == true && _quick_buttons != null)
+            {
+                _inventory_Equipment.Convert_Quick_Cell_To_Button(_quick_buttons);
+            }
+            inventory.SetActive(!_menuactive);
+            _menuactive = !_menuactive; 
         }
 
-        else if (Input.GetKeyDown(KeyCode.Tab) && _menuactive == false)
-        {
-            inventory.SetActive(true);
-            Debug.Log("Turn_On");
-            _menuactive = true;
-        }
+
+
     }
 
     public void DeadAnimation()
