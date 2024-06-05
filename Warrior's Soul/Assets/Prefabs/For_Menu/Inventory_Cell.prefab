@@ -343,6 +343,8 @@ MonoBehaviour:
   _iconField: {fileID: 7815643445698364601}
   _count_items: {fileID: 1346141691053346301}
   _input_field: {fileID: 5674470497177872619, guid: 6c59bfeab038020479cc014aa426d21b, type: 3}
+  cur_field: {fileID: 0}
+  obj_tag: 
 --- !u!61 &8443648751392812301
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -130,12 +130,20 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
                 break;
 
             case OnContainer.Quick_Access:
-                _originalparent = _quick_container_Parrent;
+                if (_quick_container_Parrent.childCount < 4)
+                {
+                    _originalparent = _quick_container_Parrent;
+                }
+                
             
                 break;
 
             case OnContainer.Weapon:
-                _originalparent = _weapon_container_Parrent;
+                if (_weapon_container_Parrent.childCount < 2)
+                {
+                    _originalparent = _weapon_container_Parrent;
+                }
+                    
                
                 break;
 
@@ -158,7 +166,7 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
                 break;
         }
 
-        if(merging == true && _last_parent == inventory_container)
+        if(merging == true && _last_parent == inventory_container && Merg_cell.GetComponentInParent<Transform>() == inventory_container)
         {
             _inventory.Merging_Items(this, gameObject, Merg_cell);
             merging = false;
@@ -202,8 +210,6 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         {
             merging = true;
             Merg_cell = collision.gameObject;
-            
-            
         }
 
         else if(collision.name == "Drop_Item")
@@ -221,13 +227,6 @@ public class Inventory_Cell: MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         {
             onContainer = OnContainer.Inventory;
         }
-
-        
-
-
     }
-
-
-
 }
 

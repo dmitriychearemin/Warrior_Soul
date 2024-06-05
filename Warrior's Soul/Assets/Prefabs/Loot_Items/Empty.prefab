@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1641574274265084625}
   m_Layer: 0
   m_Name: Empty
-  m_TagString: Weapon
+  m_TagString: Quick_access_items
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7514731424b72ae46ab3afcacbae1e46, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c04a6d911c73064c96435eb844bb51b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,7 +123,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 0.53333336, y: 0.53333336}
     newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a1990dfcc086184e8128f6c451fa93e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name_Item: Gun
+  _name_Item: Potion
   _speed_item: 4
   Time_living: 0
 --- !u!50 &1641574274265084625
